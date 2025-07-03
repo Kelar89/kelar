@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login - Kelar.my.id</title>
+    <style>
+        body { font-family: sans-serif; max-width: 400px; margin: auto; padding: 20px; text-align: center; }
+        input, button { width: 100%; padding: 12px; margin-bottom: 15px; box-sizing: border-box; }
+        button { background-color: #FF6600; color: white; border: none; cursor: pointer; font-size: 16px; }
+        button:disabled { background-color: #CCCCCC; cursor: not-allowed; }
+    </style>
+</head>
+<body>
+    <h1>Masuk ke Akun Anda</h1>
+    <p>Kami akan mengirimkan link login sekali pakai ke email Anda.</p>
+    <form name="login-form">
+        <input name="Email" type="email" placeholder="Masukkan alamat email Anda" required>
+        <button id="submitButton" type="submit">Kirim Link Login</button>
+    </form>
+    <p id="message" style="display:none; color: green;"></p>
+
+    <script>
+        const form = document.forms['login-form'];
+        const messageEl = document.getElementById('message');
+        const submitButton = document.getElementById('submitButton');
+        const scriptURL = 'URL_APPS_SCRIPT_ANDA'; // GANTI DENGAN URL YANG SAMA
+
+        form.addEventListener('submit', e => {
+            e.preventDefault();
+            
+            // --- PERBAIKAN UX DIMULAI DI SINI ---
+            submitButton.disabled = true;
+            submitButton.textContent = 'Mengirim...';
+            // --- AKHIR PERBAIKAN UX ---
+
+            const actionURL = scriptURL + '?action=login';
+            fetch(actionURL, { method: 'POST', body: new FormData(form)})
+                .then(response => {
+                    messageEl.textContent = "Berhasil! Silakan periksa email Anda untuk link login.";
+                    messageEl.style.display = 'block';
+                    form.reset();
+                    submitButton.disabled = false; // Aktifkan kembali tombol
+                    submitButton.textContent = 'Kirim Link Login'; // Kembalikan teks tombol
+                })
+                .catch(error => {
+                    console.error('Error!', error.message);
+                    submitButton.disabled = false; // Aktifkan kembali jika error
+                    submitButton.textContent = 'Kirim Link Login';
+                });
+        });
+    </script>
+</body>
+</html>

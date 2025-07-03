@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Pemesanan Layanan Kelar</title>
+    <style>
+        body { font-family: sans-serif; max-width: 600px; margin: auto; padding: 20px; }
+        input, select, button { width: 100%; padding: 10px; margin-bottom: 15px; box-sizing: border-box; }
+        button { background-color: #FF6600; color: white; border: none; cursor: pointer; font-size: 16px; }
+    </style>
+</head>
+<body>
+    <h1>Formulir Pemesanan Layanan</h1>
+    <form name="submit-to-google-sheet">
+        <label for="nama">Nama Lengkap:</label>
+        <input name="Nama_Klien" type="text" placeholder="Masukkan nama Anda" required>
+
+        <label for="email">Alamat Email:</label>
+        <input name="Email_Klien" type="email" placeholder="Masukkan email Anda" required>
+
+        <label for="layanan">Pilih Layanan:</label>
+        <select name="ID_Layanan" required>
+            <option value="CV-001">Jasa Pembuatan CV ATS</option>
+            <option value="CV-002">Jasa Edit CV Cepat</option>
+            <option value="GMB-001">Paket 10 Google Review</option>
+        </select>
+
+        <button type="submit">Kirim Pesanan</button>
+    </form>
+
+    <script>
+        const form = document.forms['submit-to-google-sheet']
+        form.addEventListener('submit', e => {
+            e.preventDefault()
+            fetch('https://script.google.com/macros/s/AKfycbz8HLT65ouAET7QI-lYE2FRxLj3iw24lj513jpu3s4VKWlGNQV7Qm4EPMQYZr1q8hQXVg/exec', { method: 'POST', body: new FormData(form)})
+                .then(response => alert("Terima kasih! Pesanan Anda telah berhasil dikirim."))
+                .catch(error => console.error('Error!', error.message))
+        })
+    </script>
+</body>
+</html>
