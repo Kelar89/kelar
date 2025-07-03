@@ -10,73 +10,37 @@
         input, button { width: 100%; padding: 12px; margin-bottom: 15px; box-sizing: border-box; }
         button { background-color: #FF6600; color: white; border: none; cursor: pointer; font-size: 16px; }
         button:disabled { background-color: #CCCCCC; cursor: not-allowed; }
-        #session-form { display: none; } /* Sembunyikan form kode sesi awalnya */
     </style>
 </head>
 <body>
-    <div id="email-section">
+    <div id="main-section">
         <h1>Masuk atau Daftar Akun</h1>
         <p class="description">Masukkan email Anda. Kami akan mengirimkan link untuk mendapatkan Kode Sesi Anda.</p>
         <form name="login-form">
             <input name="Email" type="email" placeholder="Masukkan alamat email Anda" required>
             <button id="submitButton" type="submit">Kirim Link</button>
         </form>
-        <p id="message" style="display:none; color: green;"></p>
-    </div>
-
-    <div id="session-section" style="display:none;">
-        <h1>Masukkan Kode Sesi</h1>
-        <p class="description">Salin kode yang ditampilkan di halaman "Login Berhasil" dan tempel di sini.</p>
-        <form name="session-form">
-            <input name="SessionCode" type="text" placeholder="Masukkan Kode Sesi Anda" required>
-            <button id="sessionSubmitButton" type="submit">Masuk ke Dashboard</button>
-        </form>
-        <p id="sessionMessage" style="color: red;"></p>
     </div>
 
     <script>
-        const emailForm = document.forms['login-form'];
-        const sessionForm = document.forms['session-form'];
+        const form = document.forms['login-form'];
         const scriptURL = 'URL_WEB_APP_ANDA_YANG_SUDAH_DIDEPLOY'; // GANTI DENGAN URL ANDA
 
-        // Handler untuk form email
-        emailForm.addEventListener('submit', e => {
+        form.addEventListener('submit', e => {
             e.preventDefault();
             const submitButton = document.getElementById('submitButton');
+            const userEmail = form.elements['Email'].value;
+
             submitButton.disabled = true;
             submitButton.textContent = 'Mengirim...';
-
-            fetch(scriptURL + '?action=requestToken', { method: 'POST', body: new FormData(emailForm)})
-                .then(response => response.json())
-                .then(data => {
-                    document.getElementById('message').textContent = "Berhasil! Silakan periksa email Anda.";
-                    document.getElementById('message').style.display = 'block';
-                    document.getElementById('session-section').style.display = 'block'; // Tampilkan form kode sesi
-                    submitButton.disabled = false;
-                    submitButton.textContent = 'Kirim Link';
-                })
-                .catch(error => console.error('Error!', error.message));
-        });
-
-        // Handler untuk form kode sesi
-        sessionForm.addEventListener('submit', e => {
-            e.preventDefault();
-            const sessionSubmitButton = document.getElementById('sessionSubmitButton');
-            sessionSubmitButton.disabled = true;
-            sessionSubmitButton.textContent = 'Memverifikasi...';
-
-            fetch(scriptURL + '?action=validateSessionCode', { method: 'POST', body: new FormData(sessionForm)})
-                .then(response => response.json())
-                .then(data => {
-                    if(data.result === 'success'){
-                        window.location.href = 'dashboard.html';
-                    } else {
-                        document.getElementById('sessionMessage').textContent = 'Error: ' + data.error;
-                        sessionSubmitButton.disabled = false;
-                        sessionSubmitButton.textContent = 'Masuk ke Dashboard';
-                    }
-                })
-                .catch(error => console.error('Error!', error.message));
+            
+            // --- LOGIKA BARU: MENGIRIM DENGAN GET REQUEST ---
+            const params = new URLSearchParams();
+            params.append('action', 'requestToken');
+            params.append('Email', userEmail);
+            
+            // Mengarahkan pengguna ke URL Apps Script dengan data sebagai parameter
+            window.location.href = scriptURL + '?' + params.toString();
         });
     </script>
 </body>
