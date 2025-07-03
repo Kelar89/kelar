@@ -1,17 +1,19 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Login - Kelar.my.id</title>
+    <title>Masuk / Daftar - Kelar.my.id</title>
     <style>
         body { font-family: sans-serif; max-width: 400px; margin: auto; padding: 20px; text-align: center; }
+        h1 { color: #003366; }
+        p.description { color: #6C757D; }
         input, button { width: 100%; padding: 12px; margin-bottom: 15px; box-sizing: border-box; }
         button { background-color: #FF6600; color: white; border: none; cursor: pointer; font-size: 16px; }
         button:disabled { background-color: #CCCCCC; cursor: not-allowed; }
     </style>
 </head>
 <body>
-    <h1>Masuk ke Akun Anda</h1>
-    <p>Kami akan mengirimkan link login sekali pakai ke email Anda.</p>
+    <h1>Masuk atau Daftar Akun</h1>
+    <p class="description">Masukkan email Anda. Jika Anda pengguna baru, kami akan membuatkan akun secara otomatis. Jika sudah terdaftar, Anda akan masuk ke akun Anda.</p>
     <form name="login-form">
         <input name="Email" type="email" placeholder="Masukkan alamat email Anda" required>
         <button id="submitButton" type="submit">Kirim Link Login</button>
@@ -22,15 +24,14 @@
         const form = document.forms['login-form'];
         const messageEl = document.getElementById('message');
         const submitButton = document.getElementById('submitButton');
-        const scriptURL = 'https://script.google.com/macros/s/AKfycbz8HLT65ouAET7QI-lYE2FRxLj3iw24lj513jpu3s4VKWlGNQV7Qm4EPMQYZr1q8hQXVg/exec'; // GANTI DENGAN URL YANG SAMA
+        // PASTIKAN URL INI ADALAH URL WEB APP ANDA
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbz8HLT65ouAETTQI-IYE2FRxLj3lw24Ij513jpu3s4VKWfGNQV7Qm4EPMQYZR1q8hQXVg/exec'; 
 
         form.addEventListener('submit', e => {
             e.preventDefault();
             
-            // --- PERBAIKAN UX DIMULAI DI SINI ---
             submitButton.disabled = true;
             submitButton.textContent = 'Mengirim...';
-            // --- AKHIR PERBAIKAN UX ---
 
             const actionURL = scriptURL + '?action=login';
             fetch(actionURL, { method: 'POST', body: new FormData(form)})
@@ -38,12 +39,12 @@
                     messageEl.textContent = "Berhasil! Silakan periksa email Anda untuk link login.";
                     messageEl.style.display = 'block';
                     form.reset();
-                    submitButton.disabled = false; // Aktifkan kembali tombol
-                    submitButton.textContent = 'Kirim Link Login'; // Kembalikan teks tombol
+                    submitButton.disabled = false;
+                    submitButton.textContent = 'Kirim Link Login';
                 })
                 .catch(error => {
                     console.error('Error!', error.message);
-                    submitButton.disabled = false; // Aktifkan kembali jika error
+                    submitButton.disabled = false;
                     submitButton.textContent = 'Kirim Link Login';
                 });
         });
