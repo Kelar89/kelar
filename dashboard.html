@@ -6,7 +6,7 @@
     <title>Dashboard Klien - Kelar.my.id</title>
     <style>
         body { font-family: sans-serif; margin: 0; background-color: #F8F9FA; color: #343A40; }
-        .container { max-width: 1024px; margin: auto; padding: 20px; }
+        .container { max-width: 960px; margin: auto; padding: 20px; }
         .header { display: flex; justify-content: space-between; align-items: center; padding: 15px 40px; background-color: #fff; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
         .header .logo img { max-height: 40px; }
         .header nav a { margin-left: 20px; text-decoration: none; color: #343A40; font-weight: bold; }
@@ -14,24 +14,46 @@
         .welcome-card h1 { margin: 0; font-size: 2em; }
         .welcome-card .points { font-size: 1.2em; opacity: 0.8; }
         .section-title { color: #003366; font-size: 1.8em; margin-bottom: 20px; border-bottom: 2px solid #DDDDDD; padding-bottom: 10px; }
-        .order-table { width: 100%; border-collapse: collapse; background-color: #fff; box-shadow: 0 2px 4px rgba(0,0,0,0.05); border-radius: 8px; overflow: hidden; }
-        .order-table th, .order-table td { padding: 15px; text-align: left; border-bottom: 1px solid #EEEEEE; }
-        .order-table th { background-color: #F8F9FA; }
-        .status { padding: 5px 10px; border-radius: 15px; font-size: 0.8em; font-weight: bold; color: #fff; }
-        .status.completed { background-color: #28A745; } /* Hijau */
-        .status.in-progress { background-color: #FFC107; } /* Kuning */
-        .status.pending { background-color: #6C757D; } /* Abu-abu */
+        
+        /* [BARU] Style untuk Order Card dan Progress Tracker */
+        .order-card {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+            margin-bottom: 20px;
+            overflow: hidden;
+        }
+        .order-header {
+            padding: 15px 20px;
+            background-color: #F8F9FA;
+            border-bottom: 1px solid #EEEEEE;
+            display: flex;
+            justify-content: space-between;
+        }
+        .order-header .order-id { font-weight: bold; }
+        .order-header .order-date { color: #6C757D; }
+        .order-body { padding: 20px; }
+        .order-body h3 { margin-top: 0; color: #003366; }
+        .progress-tracker { list-style: none; padding: 0; }
+        .progress-tracker li {
+            padding: 8px 0;
+            display: flex;
+            align-items: center;
+        }
+        .progress-tracker .status-icon {
+            margin-right: 15px;
+            font-size: 20px;
+        }
+        .status-icon.selesai { color: #28A745; }
+        .status-icon.proses { color: #FFC107; }
+        .status-icon.menunggu { color: #DDDDDD; }
+
     </style>
 </head>
 <body>
     <header class="header">
         <div class="logo"><a href="index.html"><img src="foto/logo.png" alt="Logo Kelar.my.id"></a></div>
-        <nav>
-            <a href="index.html">Home</a>
-            <a href="portofolio.html">Portofolio</a>
-            <a href="#">Dashboard</a>
-            <a href="#" id="logout-button">Logout</a>
-        </nav>
+        <nav><a href="index.html">Home</a><a href="portofolio.html">Portofolio</a><a href="#">Dashboard</a><a href="#" id="logout-button">Logout</a></nav>
     </header>
     <main class="container">
         <div id="loading-state">
@@ -43,33 +65,20 @@
                 <p class="points">Poin Rewards Anda: <strong id="points-balance">0</strong> Poin</p>
             </div>
             
-            <h2 class="section-title">Riwayat Pesanan Anda</h2>
-            <table class="order-table">
-                <thead>
-                    <tr>
-                        <th>ID Pesanan</th>
-                        <th>Tanggal</th>
-                        <th>Layanan</th>
-                        <th>Status</th>
-                    </tr>
-                </thead>
-                <tbody id="order-list">
-                    </tbody>
-            </table>
+            <h2 class="section-title">Pesanan Aktif Anda</h2>
+            <div id="order-list">
+                </div>
             <p id="no-orders" style="display:none; text-align:center; padding: 40px; background-color:#fff; border-radius:8px;">Anda belum memiliki riwayat pesanan.</p>
         </div>
     </main>
 
     <script>
-        // PASTIKAN URL INI ADALAH URL WEB APP ANDA YANG BENAR
-        const scriptURL = 'https://script.google.com/macros/s/AKfycbz8HLT65ouAET7QI-lYE2FRxLj3iw24lj513jpu3s4VKWlGNQV7Qm4EPMQYZr1q8hQXVg/exec';
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbz8HLT65ouAET7QI-lYE2FRxLj3iw24lj513jpu3s4VKWlGNQV7Qm4EPMQYZr1q8hQXVg/exec'; // GANTI DENGAN URL ANDA
 
         window.onload = function() {
+            // ... (logika fetch data tetap sama seperti sebelumnya)
             const clientId = localStorage.getItem('kelarClientId');
-            if (!clientId) {
-                window.location.href = 'Login.html';
-                return;
-            }
+            if (!clientId) { window.location.href = 'Login.html'; return; }
 
             const formData = new FormData();
             formData.append('action', 'getUserData');
@@ -85,14 +94,44 @@
                         const orderList = document.getElementById('order-list');
                         if (data.orders.length > 0) {
                             data.orders.forEach(order => {
-                                // Kolom: ID Pesanan, ID Klien, ID Layanan, Tanggal, Status
-                                let row = orderList.insertRow();
-                                row.innerHTML = `
-                                    <td>${order[0]}</td>
-                                    <td>${new Date(order[3]).toLocaleDateString('id-ID')}</td>
-                                    <td>${order[2]}</td>
-                                    <td><span class="status pending">${order[4]}</span></td>
+                                // [PEROMBAKAN TOTAL] Membuat Kartu Pesanan dengan Progress Tracker
+                                const orderId = order[0];
+                                const serviceName = order[2];
+                                const orderDate = new Date(order[3]).toLocaleDateString('id-ID', {day:'numeric', month:'long', year:'numeric'});
+
+                                let progressHtml = '<ul class="progress-tracker">';
+                                // Kolom Langkah1, Status1, dst. dimulai dari indeks 10
+                                for (let i = 10; i < order.length; i += 2) {
+                                    const step = order[i];
+                                    const status = order[i+1];
+                                    if (step) { // Hanya tampilkan jika nama langkahnya ada
+                                        let icon = '&#9203;'; // Jam Pasir (Menunggu)
+                                        let iconClass = 'menunggu';
+                                        if(status === 'Selesai') {
+                                            icon = '&#9989;'; // Centang Hijau
+                                            iconClass = 'selesai';
+                                        } else if (status === 'Dalam Proses') {
+                                            icon = '&#128337;'; // Jam (Proses)
+                                            iconClass = 'proses';
+                                        }
+                                        progressHtml += `<li><span class="status-icon ${iconClass}">${icon}</span> ${step}</li>`;
+                                    }
+                                }
+                                progressHtml += '</ul>';
+                                
+                                const orderCard = document.createElement('div');
+                                orderCard.className = 'order-card';
+                                orderCard.innerHTML = `
+                                    <div class="order-header">
+                                        <span class="order-id">${orderId}</span>
+                                        <span class="order-date">${orderDate}</span>
+                                    </div>
+                                    <div class="order-body">
+                                        <h3>${serviceName}</h3>
+                                        ${progressHtml}
+                                    </div>
                                 `;
+                                orderList.appendChild(orderCard);
                             });
                         } else {
                             document.getElementById('no-orders').style.display = 'block';
