@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Komponen Tentang Kami</title>
+    <style>
+        /* Anda bisa mengabaikan bagian style ini, karena nanti akan digabung ke file CSS utama */
+        body { font-family: sans-serif; background-color: #F8F9FA; padding: 40px 0; }
+        .container { max-width: 960px; margin: auto; padding: 0 20px; }
+        
+        .about-section {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+            background-color: #FFFFFF;
+            padding: 50px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        .about-photo {
+            flex-basis: 35%;
+        }
+        .about-photo img {
+            width: 100%;
+            border-radius: 50%; /* Membuat foto menjadi bulat */
+            border: 5px solid #003366; /* Bingkai dengan warna primer */
+        }
+        .about-text {
+            flex-basis: 65%;
+        }
+        .about-text h2 {
+            color: #003366;
+            font-size: 2em;
+            margin-top: 0;
+            margin-bottom: 15px;
+        }
+        .about-text p {
+            color: #343A40;
+            line-height: 1.6;
+            font-size: 1.1em;
+        }
+    </style>
+</head>
+<body>
+
+    <section class="about-section container">
+        <div class="about-photo">
+            <img src="https://via.placeholder.com/300x300.png?text=Foto+Anda" alt="Foto Pemilik Kelar.my.id">
+        </div>
+        <div class="about-text">
+            <h2>Bukan Sekadar Jasa, Kami adalah Mitra Anda.</h2>
+            <p>
+                "Kelar.my.id lahir dari satu keresahan sederhana: banyak profesional hebat dan bisnis potensial yang kesulitan menampilkan nilai terbaik mereka. Kami di sini bukan hanya untuk 'mengedit dokumen', kami di sini untuk menjadi mitra Anda dalam meraih kesuksesan. Setiap proyek yang kami kerjakan adalah sebuah komitmen untuk kualitas dan hasil. Mari kita wujudkan potensi terbaik Anda, bersama-sama."
+            </p>
+        </div>
+    </section>
+    </body>
+</html>
