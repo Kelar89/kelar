@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Biodata Karsih - A4</title>
+    <title>Biodata Karsih - Final A4</title>
     <style>
-        /* === GAYA UNTUK TAMPILAN LAYAR (SCREEN) === */
+        /* === GAYA UNTUK TAMPILAN LAYAR (SCREEN) - TIDAK BERUBAH === */
         body {
             font-family: Arial, sans-serif;
             background-color: #f0f0f0;
@@ -68,7 +68,7 @@
             width: 100%;
         }
         .right-column {
-            width: 536px; 
+            width: 336px; 
             flex-shrink: 0;
         }
         .right-column .full-photo {
@@ -90,33 +90,22 @@
             justify-content: space-between;
             align-items: center;
         }
-        .section-title span:first-child {
-            font-size: 12px;
-        }
-        .section-title span:last-child {
-            font-size: 14px;
-        }
         .label-col {
             font-weight: bold;
             background-color: #d9e2f3;
             width: 35%;
         }
-        .data-col {
+        .data-col, .food-table {
             font-weight: bold;
         }
         .arabic-col {
             font-weight: bold;
             text-align: right;
             background-color: #d9e2f3;
-            font-size: 14px;
-        }
-        .arabic-text {
-            font-size: 14px;
         }
         .food-table {
             font-size: 10px;
             text-align: center;
-            font-weight: bold;
         }
         .food-table td {
             padding: 2px;
@@ -132,18 +121,19 @@
             font-size: 14px;
             line-height: 1.5;
         }
-
-        /* === GAYA KHUSUS UNTUK CETAK (PRINT) A4 === */
+        
+        /* === GAYA KHUSUS UNTUK CETAK AGAR PAS 1 HALAMAN A4 === */
         @media print {
             @page {
                 size: A4;
-                margin: 20mm 15mm; /* Margin atas-bawah 2cm, kiri-kanan 1.5cm */
+                margin: 15mm; /* Margin dikecilkan menjadi 1.5cm */
             }
 
             body {
                 background-color: #ffffff;
                 padding: 0;
                 margin: 0;
+                font-size: 9pt; /* Ukuran font dasar diperkecil */
             }
 
             .container {
@@ -152,46 +142,52 @@
                 box-shadow: none;
                 padding: 0;
             }
+            
+            /* Mengurangi semua jarak vertikal */
+            .main-content, .section-title, div[style*="margin-top"] {
+                margin-top: 5px !important;
+            }
+            .header {
+                padding-bottom: 5px;
+            }
 
-            /* Ukuran font bisa disesuaikan agar terbaca jelas di kertas */
             td, th {
-                font-size: 10pt;
-                padding: 3px 5px;
-            }
-            .section-title span:first-child,
-            .food-table {
-                font-size: 9pt;
-            }
-            .section-title span:last-child,
-            .arabic-col, .arabic-text,
-            .experience-content {
-                font-size: 11pt;
-            }
-            .header h1 {
-                font-size: 30pt;
-            }
-
-            /* Menghindari halaman terpotong di tengah elemen */
-            table, tr, td, th, .section-title, .experience-content {
-                page-break-inside: avoid;
+                padding: 2px 4px; /* Padding di dalam sel tabel diperkecil */
             }
             
-            /* Penyesuaian ukuran foto saat cetak jika diperlukan */
+            .header h1 {
+                font-size: 28pt;
+                padding: 2px 8px;
+            }
+            
+            /* UKURAN FOTO DIPERKECIL SECARA SIGNIFIKAN UNTUK CETAK */
             .header-photo img {
-                width: 4cm; /* Contoh penyesuaian ukuran */
-                height: auto;
+                width: 3.5cm;
+                height: 4.0cm; /* Ukuran pas foto kecil */
+                border-width: 1px;
             }
-            .right-column .full-photo {
-                width: 7cm; /* Contoh penyesuaian ukuran */
-                height: auto;
-            }
-
-            /* Kolom kanan mungkin perlu sedikit lebih kecil untuk cetak */
+            
             .right-column {
-                width: 300px; /* Sedikit mengurangi lebar agar pas */
+                width: 7.5cm; /* Lebar kolom kanan disesuaikan dengan foto baru */
+            }
+            
+            .right-column .full-photo {
+                width: 7cm; 
+                height: 9cm; /* Foto besar diperkecil agar pas */
+                border-width: 3px;
+                margin-bottom: 5px;
+            }
+            
+            .experience-content {
+                padding: 4px 8px;
             }
 
-            /* Menghilangkan warna untuk hemat tinta */
+            /* Menghindari halaman terpotong */
+            table, tr, td, th, div {
+                page-break-inside: avoid !important;
+            }
+            
+            /* Memastikan warna latar belakang tetap tercetak jika diinginkan */
             .header h1, .label-col, .arabic-col, .section-title, .food-table .shaded {
                 -webkit-print-color-adjust: exact !important;
                 print-color-adjust: exact !important;
@@ -254,8 +250,7 @@
             </tbody></table>
 
             <div class="section-title">
-                <span>Passport Details</span>
-                <span class="arabic-text" dir="rtl">بيانات جواز السفر</span>
+                <span>Passport Details</span><span dir="rtl">بيانات جواز السفر</span>
             </div>
             <table>
                 <tbody><tr>
@@ -281,64 +276,41 @@
             </tbody></table>
 
             <div class="section-title">
-                <span>Details of Applicant</span>
-                <span class="arabic-text" dir="rtl">بيانات صاحب الطالب</span>
+                <span>Details of Applicant</span><span dir="rtl">بيانات صاحب الطالب</span>
             </div>
             <table>
                 <tbody><tr>
-                    <td class="label-col">Nationality</td>
-                    <td class="data-col">INDONESIA</td>
-                    <td class="arabic-col" dir="rtl">الجنسية</td>
+                    <td class="label-col">Nationality</td><td class="data-col">INDONESIA</td><td class="arabic-col" dir="rtl">الجنسية</td>
                 </tr>
                  <tr>
-                    <td class="label-col">Religion</td>
-                    <td class="data-col">ISLAM</td>
-                    <td class="arabic-col" dir="rtl">الديانة</td>
+                    <td class="label-col">Religion</td><td class="data-col">ISLAM</td><td class="arabic-col" dir="rtl">الديانة</td>
                 </tr>
                  <tr>
-                    <td class="label-col">Date of Birth</td>
-                    <td class="data-col">02-OCT-1980</td>
-                    <td class="arabic-col" dir="rtl">تاريخ الميلاد</td>
+                    <td class="label-col">Date of Birth</td><td class="data-col">02-OCT-1980</td><td class="arabic-col" dir="rtl">تاريخ الميلاد</td>
                 </tr>
                 <tr>
-                    <td class="label-col">Place of Birth</td>
-                    <td class="data-col">KARAWANG</td>
-                    <td class="arabic-col" dir="rtl">مكان الميلاد</td>
+                    <td class="label-col">Place of Birth</td><td class="data-col">KARAWANG</td><td class="arabic-col" dir="rtl">مكان الميلاد</td>
                 </tr>
                 <tr>
-                    <td class="label-col">Living Town</td>
-                    <td class="data-col">KARAWANG</td>
-                    <td class="arabic-col" dir="rtl">مكان السكن</td>
+                    <td class="label-col">Living Town</td><td class="data-col">KARAWANG</td><td class="arabic-col" dir="rtl">مكان السكن</td>
                 </tr>
                 <tr>
-                    <td class="label-col">Marital Status</td>
-                    <td class="data-col">MARRIED</td>
-                    <td class="arabic-col" dir="rtl">الحالة الإجتماعية</td>
+                    <td class="label-col">Marital Status</td><td class="data-col">MARRIED</td><td class="arabic-col" dir="rtl">الحالة الإجتماعية</td>
                 </tr>
                  <tr>
-                    <td class="label-col">No. of Children</td>
-                    <td class="data-col">2</td>
-                    <td class="arabic-col" dir="rtl">عدد الأطفال</td>
+                    <td class="label-col">No. of Children</td><td class="data-col">2</td><td class="arabic-col" dir="rtl">عدد الأطفال</td>
                 </tr>
                 <tr>
-                    <td class="label-col">Weight</td>
-                    <td class="data-col">57 KG</td>
-                    <td class="arabic-col" dir="rtl">الوزن</td>
+                    <td class="label-col">Weight</td><td class="data-col">57 KG</td><td class="arabic-col" dir="rtl">الوزن</td>
                 </tr>
                  <tr>
-                    <td class="label-col">Height</td>
-                    <td class="data-col">158 CM</td>
-                    <td class="arabic-col" dir="rtl">الطول</td>
+                    <td class="label-col">Height</td><td class="data-col">158 CM</td><td class="arabic-col" dir="rtl">الطول</td>
                 </tr>
                  <tr>
-                    <td class="label-col">Age</td>
-                    <td class="data-col">43 YEAR</td>
-                    <td class="arabic-col" dir="rtl">العمر</td>
+                    <td class="label-col">Age</td><td class="data-col">43 YEAR</td><td class="arabic-col" dir="rtl">العمر</td>
                 </tr>
                  <tr>
-                    <td class="label-col">Educational Qualification</td>
-                    <td class="data-col"></td>
-                    <td class="arabic-col" dir="rtl">الدرجة العلمية</td>
+                    <td class="label-col">Educational Qualification</td><td class="data-col"></td><td class="arabic-col" dir="rtl">الدرجة العلمية</td>
                 </tr>
             </tbody></table>
         </div>
@@ -346,82 +318,46 @@
         <div class="right-column">
              <img src="https://kelar.my.id/foto/Clara.png" alt="Applicant Full Photo" class="full-photo">
              <div class="section-title">
-                <span>Language</span>
-                <span class="arabic-text" dir="rtl">إجادة اللغات</span>
+                <span>Language</span><span dir="rtl">إجادة اللغات</span>
             </div>
             <table>
                 <thead>
                     <tr style="background-color: #d9e2f3; font-weight: bold;">
-                        <th style="font-size: 12px;">Language</th>
-                        <th style="font-size: 12px;">Arabic</th>
-                        <th style="font-size: 12px;">English</th>
-                        <th class="arabic-text" style="text-align: center;" dir="rtl">اللغات العربية</th>
+                        <th>Language</th><th>Arabic</th><th>English</th><th style="text-align: center;" dir="rtl">اللغات العربية</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td style="font-weight: bold;">Poor</td>
-                        <td style="text-align: center;"></td>
-                        <td style="text-align: center;"></td>
-                        <td class="arabic-col" dir="rtl">لاشيء</td>
+                        <td style="font-weight: bold;">Poor</td><td style="text-align: center;"></td><td style="text-align: center;"></td><td class="arabic-col" dir="rtl">لاشيء</td>
                     </tr>
                     <tr>
-                        <td style="font-weight: bold;">Fair</td>
-                        <td style="text-align: center;"></td>
-                        <td style="text-align: center;">✔</td>
-                        <td class="arabic-col" dir="rtl">وسط</td>
+                        <td style="font-weight: bold;">Fair</td><td style="text-align: center;"></td><td style="text-align: center;">✔</td><td class="arabic-col" dir="rtl">وسط</td>
                     </tr>
                     <tr>
-                        <td style="font-weight: bold;">Fluent</td>
-                        <td style="text-align: center;">✔</td>
-                        <td style="text-align: center;"></td>
-                        <td class="arabic-col" dir="rtl">ممتاز</td>
+                        <td style="font-weight: bold;">Fluent</td><td style="text-align: center;">✔</td><td style="text-align: center;"></td><td class="arabic-col" dir="rtl">ممتاز</td>
                     </tr>
                 </tbody>
             </table>
         </div>
     </div>
     
-    <div style="margin-top: 15px;">
+    <div style="margin-top: 5px;">
         <div class="section-title" style="text-align: left; justify-content: flex-start;">
             <span>ARABIAN MEALS / FOOD WHICH I CAN COOK ARE AS BELOW :</span>
         </div>
         <table class="food-table">
              <tbody><tr>
-                <td class="shaded">Sambosa</td>
-                <td>Saleq</td>
-                <td>Dajaj Bifferen</td>
-                <td class="shaded">Dajaj edam</td>
-                <td>Lahom Edam</td>
-                <td class="shaded">Salatah</td>
-                <td>Waraga Enab</td>
-                <td class="shaded">Briasl, Bekari</td>
-                <td>Kobeyah</td>
-                <td class="shaded">Roz Seyyadiya</td>
-                <td>Roz Slik, Adas</td>
-                <td class="shaded">Makaroni, Kebak</td>
+                <td class="shaded">Sambosa</td><td>Saleq</td><td>Dajaj Bifferen</td><td class="shaded">Dajaj edam</td><td>Lahom Edam</td><td class="shaded">Salatah</td><td>Waraga Enab</td><td class="shaded">Briasl, Bekari</td><td>Kobeyah</td><td class="shaded">Roz Seyyadiya</td><td>Roz Slik, Adas</td><td class="shaded">Makaroni, Kebak</td>
             </tr>
              <tr>
-                <td class="shaded"></td>
-                <td>Mahsi Filfil Romi</td>
-                <td>Hamburger / Pizza</td>
-                <td class="shaded">Fatayir</td>
-                <td>Cake, Tatela</td>
-                <td class="shaded"></td>
-                <td></td>
-                <td class="shaded"></td>
-                <td></td>
-                <td class="shaded"></td>
-                <td></td>
-                <td class="shaded"></td>
+                <td class="shaded"></td><td>Mahsi Filfil Romi</td><td>Hamburger / Pizza</td><td class="shaded">Fatayir</td><td>Cake, Tatela</td><td class="shaded"></td><td></td><td class="shaded"></td><td></td><td class="shaded"></td><td></td><td class="shaded"></td>
             </tr>
         </tbody></table>
     </div>
 
-    <div style="margin-top: 15px;">
+    <div style="margin-top: 5px;">
          <div class="section-title">
-            <span>EXPERIENCE :</span>
-            <span class="arabic-text" dir="rtl">العمل السابق</span>
+            <span>EXPERIENCE :</span><span dir="rtl">العمل السابق</span>
         </div>
         <div class="experience-content">
             - SAUDI 3 YEAR<br>
@@ -431,7 +367,7 @@
 </div>
 
 <script>
-    // Tidak ada JavaScript yang dibutuhkan untuk layout dan styling ini.
+    // Tidak ada JavaScript yang dibutuhkan.
 </script>
 
 </body>
