@@ -13,47 +13,26 @@
         .welcome-card { background-color: #003366; color: white; padding: 30px; border-radius: 12px; margin-bottom: 30px; }
         .welcome-card h1 { margin: 0; font-size: 2em; }
         .welcome-card .points { font-size: 1.2em; opacity: 0.8; }
+        .welcome-card .points a { color: white; text-decoration: underline; }
         .section-title { color: #003366; font-size: 1.8em; margin-bottom: 20px; border-bottom: 2px solid #DDDDDD; padding-bottom: 10px; }
-        
-        /* [BARU] Style untuk Order Card dan Progress Tracker */
-        .order-card {
-            background-color: #fff;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
-            margin-bottom: 20px;
-            overflow: hidden;
-        }
-        .order-header {
-            padding: 15px 20px;
-            background-color: #F8F9FA;
-            border-bottom: 1px solid #EEEEEE;
-            display: flex;
-            justify-content: space-between;
-        }
+        .order-card { background-color: #fff; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.08); margin-bottom: 20px; overflow: hidden; }
+        .order-header { padding: 15px 20px; background-color: #F8F9FA; border-bottom: 1px solid #EEEEEE; display: flex; justify-content: space-between; }
         .order-header .order-id { font-weight: bold; }
         .order-header .order-date { color: #6C757D; }
         .order-body { padding: 20px; }
         .order-body h3 { margin-top: 0; color: #003366; }
         .progress-tracker { list-style: none; padding: 0; }
-        .progress-tracker li {
-            padding: 8px 0;
-            display: flex;
-            align-items: center;
-        }
-        .progress-tracker .status-icon {
-            margin-right: 15px;
-            font-size: 20px;
-        }
+        .progress-tracker li { padding: 8px 0; display: flex; align-items: center; }
+        .progress-tracker .status-icon { margin-right: 15px; font-size: 20px; }
         .status-icon.selesai { color: #28A745; }
         .status-icon.proses { color: #FFC107; }
         .status-icon.menunggu { color: #DDDDDD; }
-
     </style>
 </head>
 <body>
     <header class="header">
         <div class="logo"><a href="index.html"><img src="foto/logo.png" alt="Logo Kelar.my.id"></a></div>
-        <nav><a href="index.html">Home</a><a href="portofolio.html">Portofolio</a><a href="#">Dashboard</a><a href="#" id="logout-button">Logout</a></nav>
+        <nav><a href="index.html">Home</a><a href="portofolio.html">Portofolio</a><a href="dashboard.html">Dashboard</a><a href="#" id="logout-button">Logout</a></nav>
     </header>
     <main class="container">
         <div id="loading-state">
@@ -62,7 +41,7 @@
         <div id="main-content" style="display:none;">
             <div class="welcome-card">
                 <h1 id="welcome-name">Selamat Datang!</h1>
-                <p class="points">Poin Rewards Anda: <a href="rewards.html" style="color:white; text-decoration:underline;"><strong id="points-balance">0</strong> Poin</a></p>
+                <p class="points">Poin Rewards Anda: <a href="rewards.html"><strong id="points-balance">0</strong> Poin</a></p>
             </div>
             
             <h2 class="section-title">Pesanan Aktif Anda</h2>
@@ -73,18 +52,23 @@
     </main>
 
     <script>
-        const scriptURL = 'https://script.google.com/macros/s/AKfycbz8HLT65ouAET7QI-lYE2FRxLj3iw24lj513jpu3s4VKWlGNQV7Qm4EPMQYZr1q8hQXVg/exec'; // GANTI DENGAN URL ANDA
+        // PASTIKAN URL INI BENAR
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbz8HLT65ouAETTQI-IYE2FRxLj3lw24lj513jpu3s4VKWlGNQV7Qm4EPMQYZR1q8hQXVg/exec';
 
         window.onload = function() {
-            // ... (logika fetch data tetap sama seperti sebelumnya)
             const clientId = localStorage.getItem('kelarClientId');
-            if (!clientId) { window.location.href = 'Login.html'; return; }
+            if (!clientId) {
+                window.location.href = 'Login.html';
+                return;
+            }
 
+            // --- [PERBAIKAN FINAL] ---
+            // Membuat FormData secara manual untuk memastikan format benar
             const formData = new FormData();
             formData.append('action', 'getUserData');
             formData.append('clientId', clientId);
 
-            fetch(scriptURL, { method: 'POST', mode: 'cors', body: formData })
+            fetch(scriptURL, { method: 'POST', body: formData })
                 .then(response => response.json())
                 .then(data => {
                     if (data.result === 'success') {
@@ -94,26 +78,19 @@
                         const orderList = document.getElementById('order-list');
                         if (data.orders.length > 0) {
                             data.orders.forEach(order => {
-                                // [PEROMBAKAN TOTAL] Membuat Kartu Pesanan dengan Progress Tracker
                                 const orderId = order[0];
                                 const serviceName = order[2];
                                 const orderDate = new Date(order[3]).toLocaleDateString('id-ID', {day:'numeric', month:'long', year:'numeric'});
 
                                 let progressHtml = '<ul class="progress-tracker">';
-                                // Kolom Langkah1, Status1, dst. dimulai dari indeks 10
                                 for (let i = 10; i < order.length; i += 2) {
                                     const step = order[i];
                                     const status = order[i+1];
-                                    if (step) { // Hanya tampilkan jika nama langkahnya ada
-                                        let icon = '&#9203;'; // Jam Pasir (Menunggu)
+                                    if (step) {
+                                        let icon = '&#9203;'; // Menunggu
                                         let iconClass = 'menunggu';
-                                        if(status === 'Selesai') {
-                                            icon = '&#9989;'; // Centang Hijau
-                                            iconClass = 'selesai';
-                                        } else if (status === 'Dalam Proses') {
-                                            icon = '&#128337;'; // Jam (Proses)
-                                            iconClass = 'proses';
-                                        }
+                                        if(status === 'Selesai') { icon = '&#9989;'; iconClass = 'selesai'; } 
+                                        else if (status === 'Dalam Proses') { icon = '&#128337;'; iconClass = 'proses'; }
                                         progressHtml += `<li><span class="status-icon ${iconClass}">${icon}</span> ${step}</li>`;
                                     }
                                 }
@@ -143,7 +120,7 @@
                     } else { throw new Error(data.error); }
                 })
                 .catch(err => {
-                    document.getElementById('loading-state').innerHTML = `<p>Gagal memuat data: ${err.message}. Coba login kembali.</p>`;
+                    document.getElementById('loading-state').innerHTML = `<p>Gagal memuat data. ${err.message}. Coba login kembali.</p>`;
                 });
         };
         
