@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kelar.my.id - Jasa Profesional untuk Kebutuhan Digital Anda</title>
-    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
     <style>
         body { font-family: sans-serif; margin: 0; color: #343A40; background-color: #FFFFFF; }
         .container { max-width: 960px; margin: auto; padding: 0 20px; }
@@ -14,10 +13,6 @@
         .section { padding: 80px 0; }
         .section-title { text-align: center; color: #003366; font-size: 2.2em; margin-bottom: 10px; }
         .section-subtitle { text-align: center; color: #6C757D; font-size: 1.1em; margin-bottom: 60px; }
-        .social-proof { text-align: center; background-color: #F8F9FA; padding: 40px 20px; }
-        .proof-item { display: inline-block; margin: 0 20px; color: #003366; }
-        .proof-item .count { font-size: 2.5em; font-weight: bold; }
-        .proof-item .label { color: #6C757D; }
         .about-section { display: flex; align-items: center; gap: 50px; background-color: #F8F9FA; padding: 60px; border-radius: 12px; }
         .about-photo { flex-basis: 35%; }
         .about-photo img { width: 100%; border-radius: 50%; }
@@ -27,13 +22,48 @@
         .footer-cta { background-color: #003366; color: white; padding: 80px 20px; text-align: center; }
         .footer-cta h2 { font-size: 2.2em; }
         .cta-button { display: inline-block; background-color: #FF6600; color: white; padding: 15px 30px; text-decoration: none; font-weight: bold; border-radius: 8px; font-size: 1.2em; margin-top: 20px; }
-        .whatsapp-float { position: fixed; bottom: 30px; right: 30px; background-color: #25D366; color: white; width: 60px; height: 60px; border-radius: 50%; text-align: center; font-size: 30px; box-shadow: 2px 2px 6px rgba(0,0,0,0.4); z-index: 100; display: flex; align-items: center; justify-content: center; text-decoration: none; }
-        /* -- [BARU] Style untuk Testimonial Slider -- */
-        .testimonial-section { padding: 80px 0; background-color: #F8F9FA; }
-        .swiper-slide { background: #fff; border-radius: 12px; padding: 30px; box-shadow: 0 4px 20px rgba(0,0,0,0.05); text-align: center; }
-        .swiper-slide p { font-style: italic; }
-        .swiper-slide .author { font-weight: bold; color: #003366; margin-top: 20px; }
-        .swiper-slide .service { font-size: 0.9em; color: #6C757D; }
+        
+        /* -- [BARU] Style untuk Testimonial Grid -- */
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr); /* 4 kolom */
+            gap: 30px;
+        }
+        .testimonial-card {
+            background-color: #FFFFFF;
+            border-top: 5px solid #003366;
+            padding: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            border-radius: 8px;
+            text-align: left;
+        }
+        .testimonial-card img {
+            width: 100%;
+            border-radius: 8px;
+            margin-bottom: 15px;
+        }
+        .testimonial-card p {
+            font-size: 0.9em;
+            line-height: 1.5;
+            margin: 0 0 15px 0;
+        }
+        .testimonial-card .author {
+            font-weight: bold;
+            color: #003366;
+        }
+        .testimonial-card .degree {
+            font-size: 0.8em;
+            color: #6C757D;
+        }
+        /* Responsif untuk layar kecil */
+        @media (max-width: 960px) {
+            .testimonial-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+        @media (max-width: 600px) {
+            .testimonial-grid { grid-template-columns: 1fr; }
+            .about-section { flex-direction: column; text-align: center; }
+        }
+
     </style>
 </head>
 <body>
@@ -44,127 +74,50 @@
     </header>
 
     <main>
-        <section class="social-proof">
-            <div class="proof-item">
-                <div class="count" data-target="10">0</div>
-                <div class="label">Klien Puas</div>
-            </div>
-            <div class="proof-item">
-                <div class="count" data-target="50">0</div>
-                <div class="label">Proyek Selesai</div>
-            </div>
-            <div class="proof-item">
-                <div class="count" data-target="30">0</div>
-                <div class="label">Detik Respon Cepat</div>
+        <section id="testimonials" class="section container">
+            <h2 class="section-title">Kata Mereka yang Sudah Diterima Kerja 🥰</h2>
+            <div class="testimonial-grid">
+                <div class="testimonial-card">
+                    <img src="https://via.placeholder.com/300x200.png?text=Foto+Fatimah" alt="Foto Fatimah Azzahra">
+                    <p>"Jujur, awalnya bingung banget mau isi CV apa selain data kuliah. Tim Kelar.my.id bantu saya menerjemahkan pengalaman praktikum jadi poin-poin skill yang menjual."</p>
+                    <div class="author">Fatimah Azzahra, S.Si</div>
+                </div>
+                <div class="testimonial-card">
+                    <img src="https://via.placeholder.com/300x200.png?text=Foto+Nadia" alt="Foto Nadia Fitriani">
+                    <p>"CV saya awalnya cuma berisi pengalaman praktikum. Tim Kelar mengubahnya jadi poin-poin skill yang profesional dan 'menjual'. Hasilnya? Langsung tembus jadi Staff Quality Control."</p>
+                    <div class="author">Nadia Fitriani, S.Kom</div>
+                </div>
+                <div class="testimonial-card">
+                    <img src="https://via.placeholder.com/300x200.png?text=Foto+Clara" alt="Foto Clara Sutanto">
+                    <p>"Awalnya ragu, tapi hasilnya di luar ekspektasi. Super rapi, detail, dan tidak ada kesalahan ketik. Profesionalismenya terasa banget. Pilihan yang tepat."</p>
+                    <div class="author">Clara Sutanto, S.E</div>
+                </div>
+                <div class="testimonial-card">
+                    <img src="https://via.placeholder.com/300x200.png?text=Foto+Amanda" alt="Foto Amanda Larasati">
+                    <p>"Butuh CV yang 'kekinian' untuk industri startup. Desainnya modern, prosesnya cepat, dan portofolio online saya jadi highlight utama. Nggak perlu cari lagi."</p>
+                    <div class="author">Amanda Larasati, Designer</div>
+                </div>
             </div>
         </section>
-
-        <section id="testimonials" class="testimonial-section">
+        
+        <section id="about" class="section">
             <div class="container">
-                <h2 class="section-title">Apa Kata Mereka yang Telah "Kelar"</h2>
-                <p class="section-subtitle">Kami biarkan hasil dan kepuasan klien yang berbicara.</p>
-                <div class="swiper">
-                    <div class="swiper-wrapper">
-                        <div class="swiper-slide">
-                            <p>"Luar biasa! Setelah CV-nya jadi, saya langsung dapat 3 panggilan interview di minggu yang sama. Benar-benar mengubah peruntungan saya."</p>
-                            <div class="author">Adinda Putri</div>
-                            <div class="service">Klien Jasa CV ATS</div>
-                        </div>
-                        <div class="swiper-slide">
-                            <p>"Sebagai pemilik kedai kopi, reputasi itu nomor satu. Paket review dari Kelar.my.id membantu kedai saya jadi pilihan utama di Google Maps."</p>
-                            <div class="author">Bambang Hartono</div>
-                            <div class="service">Klien Jasa Google Review</div>
-                        </div>
-                        <div class="swiper-slide">
-                            <p>"Tesis saya yang berantakan disulap jadi dokumen yang rapi dan profesional dalam semalam. Penyelamat di saat-saat terakhir. Terima kasih banyak!"</p>
-                            <div class="author">Citra Lestari</div>
-                            <div class="service">Klien Jasa Edit Dokumen</div>
-                        </div>
-                        <div class="swiper-slide">
-                            <p>"Desainnya modern dan elegan. Saya jadi jauh lebih percaya diri untuk melamar ke startup-startup kreatif."</p>
-                            <div class="author">David Wijaya</div>
-                            <div class="service">Klien Jasa CV Modern</div>
-                        </div>
-                        <div class="swiper-slide">
-                            <p>"Akhirnya lolos screening ATS! Sudah berkali-kali gagal, ternyata memang format CV berpengaruh besar. Servisnya sangat membantu."</p>
-                            <div class="author">Fajar Nugraha</div>
-                            <div class="service">Klien Jasa CV ATS</div>
-                        </div>
+                <div class="about-section">
+                    <div class="about-photo"><img src="https://via.placeholder.com/300x300.png?text=Foto+Anda" alt="Foto Pemilik Kelar.my.id"></div>
+                    <div class="about-text">
+                        <h2>Bukan Sekadar Jasa, Kami adalah Mitra Anda.</h2>
+                        <p>"Kelar.my.id lahir dari satu keresahan sederhana: banyak profesional hebat dan bisnis potensial yang kesulitan menampilkan nilai terbaik mereka."</p>
                     </div>
                 </div>
             </div>
         </section>
-
-        <section id="about" class="section container">
-             <div class="about-section">
-                <div class="about-photo"><img src="https://via.placeholder.com/300x300.png?text=Foto+Anda" alt="Foto Pemilik Kelar.my.id"></div>
-                <div class="about-text">
-                    <h2>Bukan Sekadar Jasa, Kami adalah Mitra Anda.</h2>
-                    <p>"Kelar.my.id lahir dari satu keresahan sederhana: banyak profesional hebat dan bisnis potensial yang kesulitan menampilkan nilai terbaik mereka."</p>
-                </div>
-            </div>
-        </section>
     </main>
-
-    <a href="https://wa.me/6285894448143?text=Halo%20kak,%20saya%20mau%20bertanya%20tentang%20layanan%20di%20kelar.my.id" class="whatsapp-float" target="_blank">
-        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" viewBox="0 0 16 16"><path d="M13.601 2.326A7.854 7.854 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c0 1.399.366 2.76 1.057 3.965L0 16l4.204-1.102a7.933 7.933 0 0 0 3.79.965h.004c4.368 0 7.926-3.558 7.93-7.93A7.898 7.898 0 0 0 13.6 2.326zM7.994 14.521a6.573 6.573 0 0 1-3.356-.92l-.24-.144-2.494.654.666-2.433-.156-.251a6.56 6.56 0 0 1-1.007-3.505c0-3.626 2.957-6.584 6.591-6.584a6.56 6.56 0 0 1 4.66 1.931 6.557 6.557 0 0 1 1.928 4.66c-.004 3.639-2.961 6.592-6.592 6.592zm3.615-4.934c-.197-.099-1.17-.578-1.353-.646-.182-.065-.315-.099-.445.099-.133.197-.513.646-.627.775-.114.133-.232.148-.43.05-.197-.1-.836-.308-1.592-.985-.59-.525-.985-1.175-1.103-1.372-.114-.198-.011-.304.088-.403.087-.088.197-.232.296-.346.1-.114.133-.198.198-.33.065-.134.034-.248-.015-.347-.05-.099-.445-1.076-.612-1.47-.16-.389-.323-.335-.445-.34-.114-.007-.247-.007-.38-.007a.729.729 0 0 0-.529.247c-.182.198-.691.677-.691 1.654 0 .977.71 1.916.81 2.049.098.133 1.394 2.132 3.383 2.992.47.205.84.326 1.129.418.475.152.904.129 1.246.08.38-.058 1.171-.48 1.338-1.176.164-.696.164-1.284.114-1.372-.05-.086-.182-.133-.38-.232z"/></svg>
-    </a>
-
+    
     <footer class="footer-cta">
-        <div class="container">
-            <h2>Masih Ragu atau Punya Pertanyaan? 😉</h2>
-            <p>Jangan biarkan kebingungan menghalangi impianmu. Ngobrol dulu dengan kami, GRATIS tanpa komitmen.</p>
-            <a href="Login.html" class="cta-button">Pesan Layanan atau Masuk ke Akun Anda</a>
-        </div>
+        <h2>Masih Ragu atau Punya Pertanyaan? 😉</h2>
+        <p>Jangan biarkan kebingungan menghalangi impianmu. Ngobrol dulu dengan kami, GRATIS tanpa komitmen.</p>
+        <a href="Login.html" class="cta-button">Pesan Layanan atau Masuk ke Akun Anda</a>
     </footer>
 
-    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
-    <script>
-        // Inisialisasi Testimonial Slider
-        const swiper = new Swiper('.swiper', {
-            loop: true,
-            autoplay: {
-                delay: 4000,
-                disableOnInteraction: false,
-            },
-            slidesPerView: 1,
-            spaceBetween: 30,
-        });
-
-        // Animasi Counter
-        const counters = document.querySelectorAll('.count');
-        const speed = 200; // Semakin besar angkanya, semakin lambat
-
-        const animateCounters = () => {
-            counters.forEach(counter => {
-                const updateCount = () => {
-                    const target = +counter.getAttribute('data-target');
-                    const count = +counter.innerText;
-                    const increment = target / speed;
-
-                    if (count < target) {
-                        counter.innerText = Math.ceil(count + increment);
-                        setTimeout(updateCount, 10);
-                    } else {
-                        counter.innerText = target + '+';
-                    }
-                };
-                updateCount();
-            });
-        };
-        
-        // Jalankan animasi saat section terlihat
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    animateCounters();
-                    observer.unobserve(entry.target);
-                }
-            });
-        }, { threshold: 0.5 });
-
-        observer.observe(document.querySelector('.social-proof'));
-
-    </script>
 </body>
 </html>
