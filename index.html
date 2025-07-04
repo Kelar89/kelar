@@ -5,38 +5,44 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kelar.my.id - Jasa Profesional untuk Kebutuhan Digital Anda</title>
     <style>
-        /* CSS tetap sama seperti sebelumnya, tidak ada perubahan */
         body { font-family: sans-serif; margin: 0; color: #343A40; background-color: #FFFFFF; }
         .container { max-width: 960px; margin: auto; padding: 0 20px; }
         .header { display: flex; justify-content: space-between; align-items: center; padding: 15px 40px; background-color: #fff; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
         .header .logo img { max-height: 40px; }
         .header nav a { margin-left: 20px; text-decoration: none; color: #343A40; font-weight: bold; }
-        .hero { background-color: #003366; color: white; padding: 100px 20px; text-align: center; }
-        .hero h1 { font-size: 2.8em; margin-bottom: 10px; }
+        .hero { background-color: #003366; color: white; padding: 80px 20px; text-align: center; }
+        .hero .hero-logo { max-width: 300px; margin-bottom: 20px; }
         .hero p { font-size: 1.3em; color: #DDDDDD; }
         .section { padding: 80px 0; }
-        .section-title { text-align: center; color: #003366; font-size: 2.2em; margin-bottom: 10px; }
-        .section-subtitle { text-align: center; color: #6C757D; font-size: 1.1em; margin-bottom: 60px; }
-        .testimonial-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 30px; }
-        .testimonial-card { text-align: center; }
-        .testimonial-card img { width: 80px; height: 80px; border-radius: 50%; margin-bottom: 15px; object-fit: cover; }
-        .testimonial-card p { font-size: 0.9em; font-style: italic; margin: 0 0 15px 0; }
-        .testimonial-card .author { font-weight: bold; color: #003366; }
-        .about-section { display: flex; align-items: center; gap: 50px; background-color: #F8F9FA; padding: 60px; border-radius: 12px; }
-        .about-photo { flex-basis: 35%; }
-        .about-photo img { width: 100%; border-radius: 50%; }
-        .about-text { flex-basis: 65%; }
-        .about-text h2 { color: #003366; font-size: 2em; margin-top: 0; }
-        .about-text p { line-height: 1.6; }
+        .section-title { text-align: center; color: #003366; font-size: 2.2em; margin-bottom: 60px; }
+        
+        /* [BARU] Style untuk How It Works Section */
+        .how-it-works-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: flex-start; }
+        .how-it-works-item { text-align: center; }
+        .how-it-works-item img { max-width: 100%; border-radius: 8px; margin-bottom: 15px; }
+        .how-it-works-item h3 { color: #003366; }
+        .how-it-works-item p { font-size: 1em; line-height: 1.5; color: #6C757D; }
+
+        /* [BARU] Style untuk Testimonial Grid v2 */
+        .testimonial-grid-v2 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 30px; }
+        .testimonial-card-v2 { text-align: left; }
+        .testimonial-card-v2 img { width: 100%; border-radius: 8px; margin-bottom: 15px; aspect-ratio: 1 / 1; object-fit: cover; }
+        .testimonial-card-v2 p { font-size: 0.9em; line-height: 1.5; margin: 0 0 15px 0; font-style: italic; }
+        .testimonial-card-v2 .author { font-weight: bold; color: #003366; }
+
         .footer-cta { background-color: #003366; color: white; padding: 80px 0; }
-        .footer-container { display: flex; align-items: center; gap: 50px; }
-        .footer-image { flex-basis: 40%; }
+        .footer-container { display: flex; align-items: center; justify-content: center; gap: 50px; }
+        .footer-image { flex-basis: 30%; max-width: 250px; /* [PERBAIKAN] Ukuran dikecilkan */ }
         .footer-image img { max-width: 100%; }
-        .footer-text { flex-basis: 60%; text-align: left;}
+        .footer-text { flex-basis: 50%; text-align: left;}
         .footer-text h2 { font-size: 2.2em; margin-top: 0; }
         .cta-button { display: inline-block; background-color: #FF6600; color: white; padding: 15px 30px; text-decoration: none; font-weight: bold; border-radius: 8px; font-size: 1.2em; margin-top: 20px; }
-        @media (max-width: 960px) { .testimonial-grid { grid-template-columns: repeat(2, 1fr); } .header nav { display: none; } }
-        @media (max-width: 600px) { .testimonial-grid { grid-template-columns: 1fr; } .footer-container { flex-direction: column; text-align: center;} .footer-text{text-align: center;} }
+        
+        .whatsapp-float { position: fixed; bottom: 30px; right: 30px; background-color: #25D366; color: white; width: 60px; height: 60px; border-radius: 50%; text-align: center; font-size: 30px; box-shadow: 2px 2px 6px rgba(0,0,0,0.4); z-index: 100; display: flex; align-items: center; justify-content: center; text-decoration: none; }
+        
+        @media (max-width: 960px) { .testimonial-grid-v2 { grid-template-columns: repeat(2, 1fr); } }
+        @media (max-width: 768px) { .how-it-works-grid { grid-template-columns: 1fr; } }
+        @media (max-width: 600px) { .testimonial-grid-v2 { grid-template-columns: 1fr; } .footer-container { flex-direction: column; text-align: center; } .footer-text{ text-align: center; } }
     </style>
 </head>
 <body>
@@ -54,51 +60,58 @@
     </header>
 
     <header class="hero">
-        <h1>Capek... ribet ngurus ini-itu?</h1>
+        <img src="foto/logo.png" alt="Logo Kelar.my.id" class="hero-logo">
         <p>Di sini semua urusanmu AutoBeres! Praktis, cepat dan tinggal santai. 😎✨</p>
     </header>
 
     <main>
-        <section id="testimonials" class="section container">
-            <h2 class="section-title">Kata Mereka yang Sudah Diterima Kerja 🥰</h2>
-            <div class="testimonial-grid">
-                <div class="testimonial-card">
-                    <img src="foto/Fatimah.png" alt="Foto Fatimah Azzahra">
-                    <p>"Tim Kelar bantu saya menerjemahkan pengalaman praktikum jadi poin-poin skill yang menjual."</p>
-                    <div class="author">Fatimah Azzahra, S.Si</div>
+        <section id="how-it-works" class="section container">
+            <div class="how-it-works-grid">
+                <div class="how-it-works-item">
+                    <img src="foto/ilustrasidiskusi.jpg" alt="Konsultasi">
+                    <h3>Konsultasi</h3>
+                    <p>Kami akan diskusi denganmu untuk memahami ceritamu, menggali potensimu, dan memastikan CV-mu benar-benar 'kamu banget'.</p>
                 </div>
-                <div class="testimonial-card">
-                    <img src="foto/Nadia.png" alt="Foto Nadia Fitriani">
-                    <p>"Hasilnya? Langsung tembus jadi Staff Quality Control. Terima kasih banyak!"</p>
-                    <div class="author">Nadia Fitriani, S.Kom</div>
-                </div>
-                <div class="testimonial-card">
-                    <img src="foto/Clara.png" alt="Foto Clara Sutanto">
-                    <p>"Awalnya ragu, tapi hasilnya di luar ekspektasi. Profesionalismenya terasa banget."</p>
-                    <div class="author">Clara Sutanto, S.E</div>
-                </div>
-                <div class="testimonial-card">
-                    <img src="foto/Amanda.png" alt="Foto Amanda Larasati">
-                    <p>"Desainnya modern, prosesnya cepat, dan portofolio online saya jadi highlight utama."</p>
-                    <div class="author">Amanda Larasati, Designer</div>
+                <div class="how-it-works-item">
+                    <img src="foto/langkah-langkah.jpg" alt="Proses Cepat dan Mudah">
+                    <h3>Cepat & Mudah</h3>
+                    <p>Alur kerja kami jelas. Cukup isi form, lakukan pembayaran, dan CV impianmu akan selesai dalam 24 Jam kerja. Tanpa ribet.</p>
                 </div>
             </div>
         </section>
-        
-        <section id="about" class="section" style="background-color: #F8F9FA;">
+
+        <section id="testimonials" class="section" style="background-color: #F8F9FA;">
             <div class="container">
-                 <div class="about-section">
-                    <div class="about-photo">
-                        <img src="foto/ilustrasidiskusi.jpg" alt="Ilustrasi Diskusi">
+                <h2 class="section-title">Kata Mereka yang Sudah Diterima Kerja 🥰</h2>
+                <div class="testimonial-grid-v2">
+                    <div class="testimonial-card-v2">
+                        <img src="foto/Fatimah.png" alt="Foto Fatimah Azzahra">
+                        <p>"Jujur, awalnya bingung banget mau isi CV. Tim Kelar bantu saya menerjemahkan pengalaman praktikum jadi poin-poin skill yang menjual."</p>
+                        <div class="author">Fatimah Azzahra, S.Si</div>
                     </div>
-                    <div class="about-text">
-                        <h2>Bukan Sekadar Jasa, Kami adalah Mitra Anda.</h2>
-                        <p>"Kelar.my.id lahir dari satu keresahan sederhana: banyak profesional hebat dan bisnis potensial yang kesulitan menampilkan nilai terbaik mereka."</p>
+                    <div class="testimonial-card-v2">
+                        <img src="foto/Nadia.png" alt="Foto Nadia Fitriani">
+                        <p>"CV saya awalnya cuma pengalaman praktikum. Tim Kelar mengubahnya jadi poin 'menjual'. Hasilnya? Langsung tembus jadi Staff Quality Control."</p>
+                        <div class="author">Nadia Fitriani, S.Kom</div>
+                    </div>
+                    <div class="testimonial-card-v2">
+                        <img src="foto/Clara.png" alt="Foto Clara Sutanto">
+                        <p>"Awalnya ragu, tapi hasilnya di luar ekspektasi. Super rapi, detail, dan profesionalismenya terasa banget."</p>
+                        <div class="author">Clara Sutanto, S.E</div>
+                    </div>
+                    <div class="testimonial-card-v2">
+                        <img src="foto/Amanda.png" alt="Foto Amanda Larasati">
+                        <p>"Desainnya modern, prosesnya cepat, dan portofolio online saya jadi highlight utama."</p>
+                        <div class="author">Amanda Larasati, Designer</div>
                     </div>
                 </div>
             </div>
         </section>
     </main>
+    
+    <a href="https://wa.me/6285894448143?text=Halo%20kak,%20saya%20mau%20bertanya%20tentang%20layanan%20di%20kelar.my.id" class="whatsapp-float" target="_blank">
+        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" viewBox="0 0 16 16"><path d="M13.601 2.326A7.854 7.854 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c0 1.399.366 2.76 1.057 3.965L0 16l4.204-1.102a7.933 7.933 0 0 0 3.79.965h.004c4.368 0 7.926-3.558 7.93-7.93A7.898 7.898 0 0 0 13.6 2.326zM7.994 14.521a6.573 6.573 0 0 1-3.356-.92l-.24-.144-2.494.654.666-2.433-.156-.251a6.56 6.56 0 0 1-1.007-3.505c0-3.626 2.957-6.584 6.591-6.584a6.56 6.56 0 0 1 4.66 1.931 6.557 6.557 0 0 1 1.928 4.66c-.004 3.639-2.961 6.592-6.592 6.592zm3.615-4.934c-.197-.099-1.17-.578-1.353-.646-.182-.065-.315-.099-.445.099-.133.197-.513.646-.627.775-.114.133-.232.148-.43.05-.197-.1-.836-.308-1.592-.985-.59-.525-.985-1.175-1.103-1.372-.114-.198-.011-.304.088-.403.087-.088.197-.232.296-.346.1-.114.133-.198.198-.33.065-.134.034-.248-.015-.347-.05-.099-.445-1.076-.612-1.47-.16-.389-.323-.335-.445-.34-.114-.007-.247-.007-.38-.007a.729.729 0 0 0-.529.247c-.182.198-.691.677-.691 1.654 0 .977.71 1.916.81 2.049.098.133 1.394 2.132 3.383 2.992.47.205.84.326 1.129.418.475.152.904.129 1.246.08.38-.058 1.171-.48 1.338-1.176.164-.696.164-1.284.114-1.372-.05-.086-.182-.133-.38-.232z"/></svg>
+    </a>
 
     <footer class="footer-cta">
         <div class="container footer-container">
@@ -107,9 +120,11 @@
             </div>
             <div class="footer-text">
                 <h2>Masih Ragu atau Punya Pertanyaan? 😉</h2>
-                <a href="https://wa.me/6285894448143?text=Halo%20kak,%20saya%20mau%20bertanya%20tentang%20layanan%20di%20kelar.my.id" class="cta-button">Ngobrol via WhatsApp</a>
+                <p>Jangan biarkan kebingungan menghalangi impianmu. Ngobrol dulu dengan kami, GRATIS tanpa komitmen.</p>
+                <a href="Login.html" class="cta-button">Pesan Layanan atau Masuk ke Akun Anda</a>
             </div>
         </div>
     </footer>
+
 </body>
 </html>
