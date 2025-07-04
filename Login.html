@@ -4,17 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Masuk / Daftar - Kelar.my.id</title>
-    <style>
-        body { font-family: sans-serif; max-width: 400px; margin: 20px auto; padding: 20px; text-align: center; color: #333; }
-        h1 { color: #003366; }
-        p.description { color: #6C757D; }
-        form { margin-top: 20px; }
-        input, button { width: 100%; padding: 12px; margin-bottom: 15px; box-sizing: border-box; font-size: 16px; border-radius: 8px; border: 1px solid #ccc; }
-        button { background-color: #FF6600; color: white; border: none; cursor: pointer; font-weight: bold; }
-        button:disabled { background-color: #CCCCCC; cursor: not-allowed; }
-        #session-section { display: none; }
-        #message, #sessionMessage { margin-top: 15px; font-weight: bold; }
-    </style>
+    <style>/* Kode CSS tetap sama */ body{font-family:sans-serif;max-width:400px;margin:auto;padding:20px;text-align:center;color:#333}h1{color:#003366}p.description{color:#6c757d}form{margin-top:20px}input,button{width:100%;padding:12px;margin-bottom:15px;box-sizing:border-box;font-size:16px;border-radius:8px;border:1px solid #ccc}button{background-color:#ff6600;color:#fff;border:none;cursor:pointer;font-weight:700}button:disabled{background-color:#ccc;cursor:not-allowed}#session-section{display:none}#message,#sessionMessage{margin-top:15px;font-weight:700}</style>
 </head>
 <body>
     <div id="email-section">
@@ -26,7 +16,6 @@
         </form>
         <p id="message" style="display:none;"></p>
     </div>
-
     <div id="session-section">
         <h1>Masukkan Kode Sesi</h1>
         <p class="description">Link telah dikirim. Buka email Anda, klik link, lalu salin Kode Sesi yang muncul dan tempel di sini.</p>
@@ -36,40 +25,38 @@
         </form>
         <p id="sessionMessage" style="color: red;"></p>
     </div>
-
     <script>
         const emailForm = document.forms['login-form'];
         const sessionForm = document.forms['session-form'];
-        // PASTIKAN ANDA MENGGANTI INI DENGAN URL WEB APP ANDA YANG BENAR
-        const scriptURL = 'https://script.google.com/macros/s/AKfycbz8HLT65ouAET7QI-lYE2FRxLj3iw24lj513jpu3s4VKWlGNQV7Qm4EPMQYZr1q8hQXVg/exec';
+        // PASTIKAN URL INI BENAR
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbz8HLT65ouAETTQI-IYE2FRxLj3lw24Ij513jpu3s4VKWfGNQV7Qm4EPMQYZR1q8hQXVg/exec';
 
         emailForm.addEventListener('submit', e => {
             e.preventDefault();
             const submitButton = document.getElementById('submitButton');
             const messageEl = document.getElementById('message');
-
             submitButton.disabled = true;
             submitButton.textContent = 'Mengirim...';
             
             let formData = new FormData(emailForm);
             formData.append('action', 'requestToken');
 
-            fetch(scriptURL, { method: 'POST', mode: 'cors', body: formData})
+            fetch(scriptURL, { method: 'POST', body: formData})
                 .then(response => response.json())
                 .then(data => {
                     if (data.result === 'success') {
                         messageEl.textContent = "Berhasil! Link telah dikirim. Silakan periksa email Anda.";
                         messageEl.style.color = 'green';
                         messageEl.style.display = 'block';
-                        document.getElementById('session-section').style.display = 'block';
+                        document.getElementById('email-section').style.display = 'none'; // Sembunyikan form email
+                        document.getElementById('session-section').style.display = 'block'; // Tampilkan form kode sesi
                     } else { throw new Error(data.error || 'Terjadi kesalahan.'); }
                 })
                 .catch(error => {
                     messageEl.textContent = 'Error: ' + error.message;
                     messageEl.style.color = 'red';
                     messageEl.style.display = 'block';
-                })
-                .finally(() => {
+                }).finally(() => {
                     submitButton.disabled = false;
                     submitButton.textContent = 'Kirim Link';
                 });
@@ -86,10 +73,12 @@
             let formData = new FormData(sessionForm);
             formData.append('action', 'validateSessionCode');
 
-            fetch(scriptURL, { method: 'POST', mode: 'cors', body: formData})
+            fetch(scriptURL, { method: 'POST', body: formData})
                 .then(response => response.json())
                 .then(data => {
-                    if (data.result === 'success') {
+                    if (data.result === 'success' && data.clientId) {
+                        // [PERBAIKAN KRUSIAL] Simpan ID Klien sebelum redirect
+                        localStorage.setItem('kelarClientId', data.clientId);
                         window.location.href = 'dashboard.html';
                     } else { throw new Error(data.error || 'Kode Sesi tidak valid.'); }
                 })
