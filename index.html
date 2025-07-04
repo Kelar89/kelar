@@ -22,48 +22,38 @@
         .footer-cta { background-color: #003366; color: white; padding: 80px 20px; text-align: center; }
         .footer-cta h2 { font-size: 2.2em; }
         .cta-button { display: inline-block; background-color: #FF6600; color: white; padding: 15px 30px; text-decoration: none; font-weight: bold; border-radius: 8px; font-size: 1.2em; margin-top: 20px; }
+        .testimonial-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 30px; }
+        .testimonial-card { background-color: #FFFFFF; border-top: 5px solid #003366; padding: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.08); border-radius: 8px; text-align: left; }
+        .testimonial-card img { width: 100%; border-radius: 8px; margin-bottom: 15px; }
+        .testimonial-card p { font-size: 0.9em; line-height: 1.5; margin: 0 0 15px 0; }
+        .testimonial-card .author { font-weight: bold; color: #003366; }
+        .testimonial-card .degree { font-size: 0.8em; color: #6C757D; }
         
-        /* -- [BARU] Style untuk Testimonial Grid -- */
-        .testimonial-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr); /* 4 kolom */
-            gap: 30px;
+        /* -- KODE YANG DIKEMBALIKAN: Floating WhatsApp Button -- */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background-color: #25D366;
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            text-align: center;
+            font-size: 30px;
+            box-shadow: 2px 2px 6px rgba(0,0,0,0.4);
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
         }
-        .testimonial-card {
-            background-color: #FFFFFF;
-            border-top: 5px solid #003366;
-            padding: 20px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
-            border-radius: 8px;
-            text-align: left;
-        }
-        .testimonial-card img {
-            width: 100%;
-            border-radius: 8px;
-            margin-bottom: 15px;
-        }
-        .testimonial-card p {
-            font-size: 0.9em;
-            line-height: 1.5;
-            margin: 0 0 15px 0;
-        }
-        .testimonial-card .author {
-            font-weight: bold;
-            color: #003366;
-        }
-        .testimonial-card .degree {
-            font-size: 0.8em;
-            color: #6C757D;
-        }
-        /* Responsif untuk layar kecil */
-        @media (max-width: 960px) {
-            .testimonial-grid { grid-template-columns: repeat(2, 1fr); }
-        }
+
+        @media (max-width: 960px) { .testimonial-grid { grid-template-columns: repeat(2, 1fr); } }
         @media (max-width: 600px) {
             .testimonial-grid { grid-template-columns: 1fr; }
             .about-section { flex-direction: column; text-align: center; }
         }
-
     </style>
 </head>
 <body>
@@ -77,26 +67,10 @@
         <section id="testimonials" class="section container">
             <h2 class="section-title">Kata Mereka yang Sudah Diterima Kerja 🥰</h2>
             <div class="testimonial-grid">
-                <div class="testimonial-card">
-                    <img src="https://via.placeholder.com/300x200.png?text=Foto+Fatimah" alt="Foto Fatimah Azzahra">
-                    <p>"Jujur, awalnya bingung banget mau isi CV apa selain data kuliah. Tim Kelar.my.id bantu saya menerjemahkan pengalaman praktikum jadi poin-poin skill yang menjual."</p>
-                    <div class="author">Fatimah Azzahra, S.Si</div>
-                </div>
-                <div class="testimonial-card">
-                    <img src="https://via.placeholder.com/300x200.png?text=Foto+Nadia" alt="Foto Nadia Fitriani">
-                    <p>"CV saya awalnya cuma berisi pengalaman praktikum. Tim Kelar mengubahnya jadi poin-poin skill yang profesional dan 'menjual'. Hasilnya? Langsung tembus jadi Staff Quality Control."</p>
-                    <div class="author">Nadia Fitriani, S.Kom</div>
-                </div>
-                <div class="testimonial-card">
-                    <img src="https://via.placeholder.com/300x200.png?text=Foto+Clara" alt="Foto Clara Sutanto">
-                    <p>"Awalnya ragu, tapi hasilnya di luar ekspektasi. Super rapi, detail, dan tidak ada kesalahan ketik. Profesionalismenya terasa banget. Pilihan yang tepat."</p>
-                    <div class="author">Clara Sutanto, S.E</div>
-                </div>
-                <div class="testimonial-card">
-                    <img src="https://via.placeholder.com/300x200.png?text=Foto+Amanda" alt="Foto Amanda Larasati">
-                    <p>"Butuh CV yang 'kekinian' untuk industri startup. Desainnya modern, prosesnya cepat, dan portofolio online saya jadi highlight utama. Nggak perlu cari lagi."</p>
-                    <div class="author">Amanda Larasati, Designer</div>
-                </div>
+                <div class="testimonial-card"><img src="https://via.placeholder.com/300x200.png?text=Foto+Fatimah" alt="Foto Fatimah"><p>"Jujur, awalnya bingung banget mau isi CV. Tim Kelar bantu saya menerjemahkan pengalaman jadi poin-poin skill yang menjual."</p><div class="author">Fatimah Azzahra, S.Si</div></div>
+                <div class="testimonial-card"><img src="https://via.placeholder.com/300x200.png?text=Foto+Nadia" alt="Foto Nadia"><p>"CV saya awalnya cuma pengalaman praktikum. Tim Kelar mengubahnya jadi poin 'menjual'. Hasilnya? Langsung tembus jadi Staff Quality Control."</p><div class="author">Nadia Fitriani, S.Kom</div></div>
+                <div class="testimonial-card"><img src="https://via.placeholder.com/300x200.png?text=Foto+Clara" alt="Foto Clara"><p>"Awalnya ragu, tapi hasilnya di luar ekspektasi. Super rapi, detail, dan profesionalismenya terasa banget. Pilihan yang tepat."</p><div class="author">Clara Sutanto, S.E</div></div>
+                <div class="testimonial-card"><img src="https://via.placeholder.com/300x200.png?text=Foto+Amanda" alt="Foto Amanda"><p>"Butuh CV 'kekinian' untuk startup. Desainnya modern dan prosesnya cepat. Nggak perlu cari lagi, di sini tempatnya."</p><div class="author">Amanda Larasati, Designer</div></div>
             </div>
         </section>
         
@@ -113,10 +87,16 @@
         </section>
     </main>
     
+    <a href="https://wa.me/6285894448143?text=Halo%20kak,%20saya%20mau%20bertanya%20tentang%20layanan%20di%20kelar.my.id" class="whatsapp-float" target="_blank">
+        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-whatsapp" viewBox="0 0 16 16"><path d="M13.601 2.326A7.854 7.854 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c0 1.399.366 2.76 1.057 3.965L0 16l4.204-1.102a7.933 7.933 0 0 0 3.79.965h.004c4.368 0 7.926-3.558 7.93-7.93A7.898 7.898 0 0 0 13.6 2.326zM7.994 14.521a6.573 6.573 0 0 1-3.356-.92l-.24-.144-2.494.654.666-2.433-.156-.251a6.56 6.56 0 0 1-1.007-3.505c0-3.626 2.957-6.584 6.591-6.584a6.56 6.56 0 0 1 4.66 1.931 6.557 6.557 0 0 1 1.928 4.66c-.004 3.639-2.961 6.592-6.592 6.592zm3.615-4.934c-.197-.099-1.17-.578-1.353-.646-.182-.065-.315-.099-.445.099-.133.197-.513.646-.627.775-.114.133-.232.148-.43.05-.197-.1-.836-.308-1.592-.985-.59-.525-.985-1.175-1.103-1.372-.114-.198-.011-.304.088-.403.087-.088.197-.232.296-.346.1-.114.133-.198.198-.33.065-.134.034-.248-.015-.347-.05-.099-.445-1.076-.612-1.47-.16-.389-.323-.335-.445-.34-.114-.007-.247-.007-.38-.007a.729.729 0 0 0-.529.247c-.182.198-.691.677-.691 1.654 0 .977.71 1.916.81 2.049.098.133 1.394 2.132 3.383 2.992.47.205.84.326 1.129.418.475.152.904.129 1.246.08.38-.058 1.171-.48 1.338-1.176.164-.696.164-1.284.114-1.372-.05-.086-.182-.133-.38-.232z"/></svg>
+    </a>
+
     <footer class="footer-cta">
-        <h2>Masih Ragu atau Punya Pertanyaan? 😉</h2>
-        <p>Jangan biarkan kebingungan menghalangi impianmu. Ngobrol dulu dengan kami, GRATIS tanpa komitmen.</p>
-        <a href="Login.html" class="cta-button">Pesan Layanan atau Masuk ke Akun Anda</a>
+        <div class="container">
+            <h2>Masih Ragu atau Punya Pertanyaan? 😉</h2>
+            <p>Jangan biarkan kebingungan menghalangi impianmu. Ngobrol dulu dengan kami, GRATIS tanpa komitmen.</p>
+            <a href="Login.html" class="cta-button">Pesan Layanan atau Masuk ke Akun Anda</a>
+        </div>
     </footer>
 
 </body>
