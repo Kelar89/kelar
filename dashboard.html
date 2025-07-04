@@ -43,84 +43,60 @@
                 <h1 id="welcome-name">Selamat Datang!</h1>
                 <p class="points">Poin Rewards Anda: <a href="rewards.html"><strong id="points-balance">0</strong> Poin</a></p>
             </div>
-            
             <h2 class="section-title">Pesanan Aktif Anda</h2>
-            <div id="order-list">
-                </div>
+            <div id="order-list"></div>
             <p id="no-orders" style="display:none; text-align:center; padding: 40px; background-color:#fff; border-radius:8px;">Anda belum memiliki riwayat pesanan.</p>
         </div>
     </main>
 
     <script>
-        // PASTIKAN URL INI BENAR
-        const scriptURL = 'https://script.google.com/macros/s/AKfycbz8HLT65ouAETTQI-IYE2FRxLj3lw24lj513jpu3s4VKWlGNQV7Qm4EPMQYZR1q8hQXVg/exec';
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbz8HLT65ouAETTQI-IYE2FRxLj3lw24lj513jpu3s4VKWlGNQV7Qm4EPMQYZR1q8hQXVg/exec'; // URL ANDA
 
         window.onload = function() {
             const clientId = localStorage.getItem('kelarClientId');
-            if (!clientId) {
-                window.location.href = 'Login.html';
-                return;
-            }
+            if (!clientId) { window.location.href = 'Login.html'; return; }
 
-            // --- [PERBAIKAN FINAL] ---
-            // Membuat FormData secara manual untuk memastikan format benar
-            const formData = new FormData();
-            formData.append('action', 'getUserData');
-            formData.append('clientId', clientId);
+            // [PERBAIKAN FINAL] Menggunakan GET request dengan parameter di URL
+            const params = new URLSearchParams({
+                action: 'getUserData',
+                clientId: clientId
+            });
+            const finalUrl = scriptURL + '?' + params.toString();
 
-            fetch(scriptURL, { method: 'POST', body: formData })
+            fetch(finalUrl) // Fetch tanpa method POST
                 .then(response => response.json())
                 .then(data => {
                     if (data.result === 'success') {
                         document.getElementById('welcome-name').innerText = 'Selamat Datang, ' + (data.client.nama || data.client.email.split('@')[0]) + '!';
                         document.getElementById('points-balance').innerText = data.client.poin;
-
                         const orderList = document.getElementById('order-list');
                         if (data.orders.length > 0) {
                             data.orders.forEach(order => {
-                                const orderId = order[0];
-                                const serviceName = order[2];
-                                const orderDate = new Date(order[3]).toLocaleDateString('id-ID', {day:'numeric', month:'long', year:'numeric'});
-
-                                let progressHtml = '<ul class="progress-tracker">';
-                                for (let i = 10; i < order.length; i += 2) {
-                                    const step = order[i];
-                                    const status = order[i+1];
-                                    if (step) {
-                                        let icon = '&#9203;'; // Menunggu
-                                        let iconClass = 'menunggu';
-                                        if(status === 'Selesai') { icon = '&#9989;'; iconClass = 'selesai'; } 
-                                        else if (status === 'Dalam Proses') { icon = '&#128337;'; iconClass = 'proses'; }
-                                        progressHtml += `<li><span class="status-icon ${iconClass}">${icon}</span> ${step}</li>`;
+                                const orderId=order[0], serviceName=order[2], orderDate=new Date(order[3]).toLocaleDateString('id-ID',{day:'numeric',month:'long',year:'numeric'});
+                                let progressHtml='<ul class="progress-tracker">';
+                                for(let i=10;i<order.length;i+=2){
+                                    const step=order[i],status=order[i+1];
+                                    if(step){
+                                        let icon='&#9203;',iconClass='menunggu';
+                                        if(status==='Selesai'){icon='&#9989;';iconClass='selesai'}
+                                        else if(status==='Dalam Proses'){icon='&#128337;';iconClass='proses'}
+                                        progressHtml+=`<li><span class="status-icon ${iconClass}">${icon}</span> ${step}</li>`
                                     }
                                 }
-                                progressHtml += '</ul>';
-                                
-                                const orderCard = document.createElement('div');
-                                orderCard.className = 'order-card';
-                                orderCard.innerHTML = `
-                                    <div class="order-header">
-                                        <span class="order-id">${orderId}</span>
-                                        <span class="order-date">${orderDate}</span>
-                                    </div>
-                                    <div class="order-body">
-                                        <h3>${serviceName}</h3>
-                                        ${progressHtml}
-                                    </div>
-                                `;
-                                orderList.appendChild(orderCard);
-                            });
-                        } else {
-                            document.getElementById('no-orders').style.display = 'block';
-                        }
+                                progressHtml+='</ul>';
+                                const orderCard=document.createElement('div');
+                                orderCard.className='order-card';
+                                orderCard.innerHTML=`<div class="order-header"><span class="order-id">${orderId}</span><span class="order-date">${orderDate}</span></div><div class="order-body"><h3>${serviceName}</h3>${progressHtml}</div>`;
+                                orderList.appendChild(orderCard)
+                            })
+                        } else { document.getElementById('no-orders').style.display = 'block'; }
                         
-                        document.getElementById('loading-state').style.display = 'none';
-                        document.getElementById('main-content').style.display = 'block';
-
+                        document.getElementById('loading-state').style.display='none';
+                        document.getElementById('main-content').style.display='block';
                     } else { throw new Error(data.error); }
                 })
                 .catch(err => {
-                    document.getElementById('loading-state').innerHTML = `<p>Gagal memuat data. ${err.message}. Coba login kembali.</p>`;
+                    document.getElementById('loading-state').innerHTML = `<p>Gagal memuat data: ${err.message}. Coba login kembali.</p>`;
                 });
         };
         
