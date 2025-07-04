@@ -7,56 +7,59 @@
     <style>
         body { font-family: sans-serif; margin: 0; color: #343A40; background-color: #FFFFFF; }
         .container { max-width: 960px; margin: auto; padding: 0 20px; }
+        /* HEADER BARU */
+        .header { display: flex; justify-content: space-between; align-items: center; padding: 15px 40px; background-color: #fff; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
+        .header .logo img { max-height: 40px; }
+        .header nav a { margin-left: 20px; text-decoration: none; color: #343A40; font-weight: bold; }
         .hero { background-color: #003366; color: white; padding: 100px 20px; text-align: center; }
         .hero h1 { font-size: 2.8em; margin-bottom: 10px; }
         .hero p { font-size: 1.3em; color: #DDDDDD; }
         .section { padding: 80px 0; }
         .section-title { text-align: center; color: #003366; font-size: 2.2em; margin-bottom: 10px; }
         .section-subtitle { text-align: center; color: #6C757D; font-size: 1.1em; margin-bottom: 60px; }
-        .about-section { display: flex; align-items: center; gap: 50px; background-color: #F8F9FA; padding: 60px; border-radius: 12px; }
-        .about-photo { flex-basis: 35%; }
-        .about-photo img { width: 100%; border-radius: 50%; }
-        .about-text { flex-basis: 65%; }
-        .about-text h2 { color: #003366; font-size: 2em; margin-top: 0; }
-        .about-text p { line-height: 1.6; }
-        .footer-cta { background-color: #003366; color: white; padding: 80px 20px; text-align: center; }
-        .footer-cta h2 { font-size: 2.2em; }
-        .cta-button { display: inline-block; background-color: #FF6600; color: white; padding: 15px 30px; text-decoration: none; font-weight: bold; border-radius: 8px; font-size: 1.2em; margin-top: 20px; }
+        /* PORTFOLIO BARU */
+        .portfolio-grid-main { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+        .portfolio-card { border-radius: 8px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+        .portfolio-card img { width: 100%; display: block; }
+        .portfolio-card .caption { padding: 15px; background-color: #F8F9FA; font-size: 0.9em; text-align: center; }
+        /* TESTIMONI BARU */
         .testimonial-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 30px; }
-        .testimonial-card { background-color: #FFFFFF; border-top: 5px solid #003366; padding: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.08); border-radius: 8px; text-align: left; }
-        .testimonial-card img { width: 100%; border-radius: 8px; margin-bottom: 15px; }
-        .testimonial-card p { font-size: 0.9em; line-height: 1.5; margin: 0 0 15px 0; }
+        .testimonial-card { text-align: center; }
+        .testimonial-card img { width: 80px; height: 80px; border-radius: 50%; margin-bottom: 15px; object-fit: cover; }
+        .testimonial-card p { font-size: 0.9em; font-style: italic; margin: 0 0 15px 0; }
         .testimonial-card .author { font-weight: bold; color: #003366; }
-        .testimonial-card .degree { font-size: 0.8em; color: #6C757D; }
-        
-        /* -- KODE YANG DIKEMBALIKAN: Floating WhatsApp Button -- */
-        .whatsapp-float {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            background-color: #25D366;
-            color: white;
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            text-align: center;
-            font-size: 30px;
-            box-shadow: 2px 2px 6px rgba(0,0,0,0.4);
-            z-index: 100;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-decoration: none;
+        /* FOOTER BARU */
+        .footer-cta { background-color: #003366; color: white; padding: 80px 0; }
+        .footer-container { display: flex; align-items: center; gap: 50px; }
+        .footer-image { flex-basis: 40%; }
+        .footer-image img { max-width: 100%; }
+        .footer-text { flex-basis: 60%; text-align: left;}
+        .footer-text h2 { font-size: 2.2em; margin-top: 0; }
+        .cta-button { display: inline-block; background-color: #FF6600; color: white; padding: 15px 30px; text-decoration: none; font-weight: bold; border-radius: 8px; font-size: 1.2em; margin-top: 20px; }
+        @media (max-width: 768px) {
+            .testimonial-grid { grid-template-columns: repeat(2, 1fr); }
+            .portfolio-grid-main { grid-template-columns: repeat(2, 1fr); }
+            .footer-container { flex-direction: column; text-align: center; }
+            .footer-text { text-align: center; }
         }
-
-        @media (max-width: 960px) { .testimonial-grid { grid-template-columns: repeat(2, 1fr); } }
         @media (max-width: 600px) {
             .testimonial-grid { grid-template-columns: 1fr; }
-            .about-section { flex-direction: column; text-align: center; }
+            .portfolio-grid-main { grid-template-columns: 1fr; }
         }
     </style>
 </head>
 <body>
+    <header class="header">
+        <div class="logo">
+            <img src="https://lh4.googleusercontent.com/D20zoN9oEvVpYC_L6qTy7H4B_rCYCY0FmnzeFdakGNOKFm69iyuEZ74lB2unE10lKBUmIIpxwmjx1MDWnw9CHsMjcOJ89Qs0BIV-6vJfREC853QudYsxCwRcXwismn2SRgZzNoY8Btg=w16383" alt="Logo Kelar.my.id">
+        </div>
+        <nav>
+            <a href="#">Layanan</a>
+            <a href="#">Portofolio</a>
+            <a href="#">Tentang</a>
+            <a href="Login.html">Masuk</a>
+        </nav>
+    </header>
 
     <header class="hero">
         <h1>Capek... ribet ngurus ini-itu?</h1>
@@ -64,38 +67,62 @@
     </header>
 
     <main>
-        <section id="testimonials" class="section container">
-            <h2 class="section-title">Kata Mereka yang Sudah Diterima Kerja 🥰</h2>
-            <div class="testimonial-grid">
-                <div class="testimonial-card"><img src="https://via.placeholder.com/300x200.png?text=Foto+Fatimah" alt="Foto Fatimah"><p>"Jujur, awalnya bingung banget mau isi CV. Tim Kelar bantu saya menerjemahkan pengalaman jadi poin-poin skill yang menjual."</p><div class="author">Fatimah Azzahra, S.Si</div></div>
-                <div class="testimonial-card"><img src="https://via.placeholder.com/300x200.png?text=Foto+Nadia" alt="Foto Nadia"><p>"CV saya awalnya cuma pengalaman praktikum. Tim Kelar mengubahnya jadi poin 'menjual'. Hasilnya? Langsung tembus jadi Staff Quality Control."</p><div class="author">Nadia Fitriani, S.Kom</div></div>
-                <div class="testimonial-card"><img src="https://via.placeholder.com/300x200.png?text=Foto+Clara" alt="Foto Clara"><p>"Awalnya ragu, tapi hasilnya di luar ekspektasi. Super rapi, detail, dan profesionalismenya terasa banget. Pilihan yang tepat."</p><div class="author">Clara Sutanto, S.E</div></div>
-                <div class="testimonial-card"><img src="https://via.placeholder.com/300x200.png?text=Foto+Amanda" alt="Foto Amanda"><p>"Butuh CV 'kekinian' untuk startup. Desainnya modern dan prosesnya cepat. Nggak perlu cari lagi, di sini tempatnya."</p><div class="author">Amanda Larasati, Designer</div></div>
+        <section id="portfolio" class="section container">
+            <h2 class="section-title">Contoh Hasil Kerja Kami</h2>
+            <p class="section-subtitle">Kualitas dan kepuasan Anda adalah prioritas utama kami.</p>
+            <h3>Curiculum Vitae (CV)</h3>
+            <div class="portfolio-grid-main" style="margin-bottom: 40px;">
+                <div class="portfolio-card"><img src="https://lh4.googleusercontent.com/VGtFbdrZuEHn6ETDIlSFbfq6OkfeUKnG9bh4vK4QNjeckQwcDFr3LODgiH0u-xHxNeCvTLCpNGZA1HKpLrkTtOr0Jh06HLRiySM6TzUqAUVSxlNo3uF07iK_u_gNhBEYrV0TddzeWE_b0aHO2lYmHCDQGYl_4T3JhX0hgSEAMotIqfAZ29Bd-g=w1280" alt="CV Korporat"><div class="caption">Gaya: Korporat Profesional</div></div>
+                <div class="portfolio-card"><img src="https://lh4.googleusercontent.com/2UTwm3dIZsXxJkF1iKdUi4jZH6ZRQBmPEnnNd2dDbzIPr96IUioNi1KPpivAcvdsIi-bcuKIKCjuOZberUYOKaEG4I7G_KfCDvIxMnFoEgQr2HDg04yVY64dAjUK_fS28bKmjkNAc8e70SaJGFfxCT3g3yS6Oe9wA0Y5I8TKVWH4KcXMcizgkA=w1280" alt="CV Kreatif"><div class="caption">Gaya: Fresh Graduate Kreatif</div></div>
+                <div class="portfolio-card"><img src="https://lh6.googleusercontent.com/XWuv3oyStaPHFORoVYRm3cA5Hpr9ct0v16zTW0p7s_uAAc2WI3A1tCAeT2CKrGsGDwQeHuoRQyv-FfTP1WXVRX87FTCP_BrNv6Uww9ITxxDQp4AAQLMELU4GbuGFYpg9yum1-NzjvJthQ78y6c__X8_GI5BS_M1pj6tuGu8tmkr5--nk3R01Bg=w1280" alt="CV Kreatif 2"><div class="caption">Gaya: Fresh Graduate Kreatif</div></div>
+            </div>
+            <h3>Surat Lamaran Kerja (SLK)</h3>
+            <div class="portfolio-grid-main">
+                <div class="portfolio-card"><img src="https://lh4.googleusercontent.com/VsBztoVLHlVQ9lWhggcVPifSHJFryoKwhaAmG03kNkD4UYnuPT8OLsMCJA2L-I2UKzYdSQmWAsk5nqSBcqE-k_nr5yRcRbz-CuI9QsRJOnRPaYBVw7piCv2nRkVXzplzpDR-7760ZQr9lyyjsE3NIN7I1NjaRxlXgcGrp5Vk28SwFawSezxT=w1280" alt="SLK Korporat"><div class="caption">Gaya: Korporat Profesional</div></div>
+                <div class="portfolio-card"><img src="https://lh4.googleusercontent.com/YOiAe9uE7uqHyk6Fmb5BzrxWYI5341pwwu2hF6zAnfHetZnFNhupP0vTcXePQhtJ9owL0W-oul42wC10PBEOEuXsT0eWg0eQJBCVOEK6Z1x0ORpXaxZ5osLDT5evo-NqP6iZ1WxEWQsHxbWTsz9eGdReTwMu0X2J_N15k1ifpqYbvZ9y80LRew=w1280" alt="SLK Kreatif"><div class="caption">Gaya: Fresh Graduate Kreatif</div></div>
+                <div class="portfolio-card"><img src="https://lh4.googleusercontent.com/JgAAJ0GWHjGeh9Y2Jq5zISD9IhwGUJvbOMMVz2dBAK8Z3ID9MkgQ2MgGKPqCb6zh2gBUoDn0w3uCbQp7JSjrLgcCH3ExNpwKlqzEcWgkdaGcAiqlsJX0gXLOt3dIaDBozlLRFj8sSsc8Whn6NRGdzej2YuFgXevinOA25zl4X36x46EHaGscZQ=w1280" alt="SLK Kreatif 2"><div class="caption">Gaya: Fresh Graduate Kreatif</div></div>
             </div>
         </section>
-        
-        <section id="about" class="section">
+
+        <section id="testimonials" class="section" style="background-color: #F8F9FA;">
             <div class="container">
-                <div class="about-section">
-                    <div class="about-photo"><img src="https://via.placeholder.com/300x300.png?text=Foto+Anda" alt="Foto Pemilik Kelar.my.id"></div>
-                    <div class="about-text">
-                        <h2>Bukan Sekadar Jasa, Kami adalah Mitra Anda.</h2>
-                        <p>"Kelar.my.id lahir dari satu keresahan sederhana: banyak profesional hebat dan bisnis potensial yang kesulitan menampilkan nilai terbaik mereka."</p>
+                <h2 class="section-title">Kata Mereka yang Sudah Diterima Kerja 🥰</h2>
+                <div class="testimonial-grid">
+                    <div class="testimonial-card">
+                        <img src="https://lh4.googleusercontent.com/IBY323HIyi02gRj81F0nXGHWmSOKnBiShHnFCB_UVETPN3wf55sE3bV5TznMF5YEC_qQNtehfkKAG8wyJ8s1r7vhm23jXg08VSLwj0CZMLu7wpH6BgHPMQoPYz_QZ8oXO7eqnIJtPfPr-yJwRFFC-pBrNsb4sg56v7Wchv2d_wJKE5sJdjsbbQ=w1280" alt="Foto Fatimah Azzahra">
+                        <p>"Tim Kelar bantu saya menerjemahkan pengalaman praktikum jadi poin-poin skill yang menjual."</p>
+                        <div class="author">Fatimah Azzahra, S.Si</div>
+                    </div>
+                    <div class="testimonial-card">
+                        <img src="https://lh6.googleusercontent.com/mcMuEreKV_DNF4IR7mx_ZeaXkaCdpStfm-iN3GJQHTXa6EZijSZhNzZ88wrOetR6_i3-0-BM0JMW4WzpU0QTc8jzZZ7gHv7z8uTJsreeLqYU-ivCPCv5lTG1fa-5T7OzHrghR-PUCTRp7lm77bHknC-OrU7Di79vvy3CIGQMZ9vxha-LXlXufA=w1280" alt="Foto Nadia Fitriani">
+                        <p>"Hasilnya? Langsung tembus jadi Staff Quality Control. Terima kasih banyak!"</p>
+                        <div class="author">Nadia Fitriani, S.Kom</div>
+                    </div>
+                    <div class="testimonial-card">
+                        <img src="https://lh5.googleusercontent.com/9Ml07sgsQAH1U2BnhQlfdhwQUQ-3FiQydFfH2dPNQ1gYP_44bOyV7dFM5Y0OrzDovBhmQvu7u9wyAbXhgW-0qeZO_VP80yYHl_AXmE4omob0WtwxuFRSkGr_jy00o9ksH61vGvn6WiLRbLDhVEY7KV2WYsdFPDyhCSoqZjOr4swZbKq9MT4ggg=w1280" alt="Foto Clara Sutanto">
+                        <p>"Awalnya ragu, tapi hasilnya di luar ekspektasi. Profesionalismenya terasa banget."</p>
+                        <div class="author">Clara Sutanto, S.E</div>
+                    </div>
+                    <div class="testimonial-card">
+                        <img src="https://lh3.googleusercontent.com/FD0XKOcFl92-6aJx9eWphyhmd_Yjfcp7B381SmzfjnWkvU5f-GiBsaT-MWudFL8c870j-KVSMJbCYyN6y2BcPLLygNl6GyJV4Y79zBOD9WcbzAjjrD86wUsOlmD4RIIPyZtyoiQn-t0a-xb2GcEvpc2hHTq6Ogksly74ofNIsY-7WnbNrAIW-Q=w1280" alt="Foto Amanda Larasati">
+                        <p>"Desainnya modern, prosesnya cepat, dan portofolio online saya jadi highlight utama."</p>
+                        <div class="author">Amanda Larasati, Designer</div>
                     </div>
                 </div>
             </div>
         </section>
     </main>
-    
-    <a href="https://wa.me/6285894448143?text=Halo%20kak,%20saya%20mau%20bertanya%20tentang%20layanan%20di%20kelar.my.id" class="whatsapp-float" target="_blank">
-        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-whatsapp" viewBox="0 0 16 16"><path d="M13.601 2.326A7.854 7.854 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c0 1.399.366 2.76 1.057 3.965L0 16l4.204-1.102a7.933 7.933 0 0 0 3.79.965h.004c4.368 0 7.926-3.558 7.93-7.93A7.898 7.898 0 0 0 13.6 2.326zM7.994 14.521a6.573 6.573 0 0 1-3.356-.92l-.24-.144-2.494.654.666-2.433-.156-.251a6.56 6.56 0 0 1-1.007-3.505c0-3.626 2.957-6.584 6.591-6.584a6.56 6.56 0 0 1 4.66 1.931 6.557 6.557 0 0 1 1.928 4.66c-.004 3.639-2.961 6.592-6.592 6.592zm3.615-4.934c-.197-.099-1.17-.578-1.353-.646-.182-.065-.315-.099-.445.099-.133.197-.513.646-.627.775-.114.133-.232.148-.43.05-.197-.1-.836-.308-1.592-.985-.59-.525-.985-1.175-1.103-1.372-.114-.198-.011-.304.088-.403.087-.088.197-.232.296-.346.1-.114.133-.198.198-.33.065-.134.034-.248-.015-.347-.05-.099-.445-1.076-.612-1.47-.16-.389-.323-.335-.445-.34-.114-.007-.247-.007-.38-.007a.729.729 0 0 0-.529.247c-.182.198-.691.677-.691 1.654 0 .977.71 1.916.81 2.049.098.133 1.394 2.132 3.383 2.992.47.205.84.326 1.129.418.475.152.904.129 1.246.08.38-.058 1.171-.48 1.338-1.176.164-.696.164-1.284.114-1.372-.05-.086-.182-.133-.38-.232z"/></svg>
-    </a>
 
     <footer class="footer-cta">
-        <div class="container">
-            <h2>Masih Ragu atau Punya Pertanyaan? 😉</h2>
-            <p>Jangan biarkan kebingungan menghalangi impianmu. Ngobrol dulu dengan kami, GRATIS tanpa komitmen.</p>
-            <a href="Login.html" class="cta-button">Pesan Layanan atau Masuk ke Akun Anda</a>
+        <div class="container footer-container">
+            <div class="footer-image">
+                <img src="https://lh6.googleusercontent.com/tjfQpdQxe2lnJI9iswG8N6ZglkIlD4i74P7xtGb7TVrWh40UPU-HeYIRrIpuUDkdbXT2QQYgaHU6zu9v12TXrNsGiilHtKbSuxW8c5Sz1Iv42qNDPpVi0S1cMB9NfeHa1AAqYMzqllv-r-NU9Gs6H-_EP_Xrzd0BtfubmqtcRCBGRfD-CRKszw=w1280" alt="Konsultasi Gratis">
+            </div>
+            <div class="footer-text">
+                <h2>Masih Ragu atau Punya Pertanyaan? 😉</h2>
+                <p>Jangan biarkan kebingungan menghalangi impianmu. Ngobrol dulu dengan kami, GRATIS tanpa komitmen.</p>
+                <a href="https://wa.me/6285894448143?text=Halo%20kak,%20saya%20mau%20bertanya%20tentang%20layanan%20di%20kelar.my.id" class="cta-button">Ngobrol via WhatsApp</a>
+            </div>
         </div>
     </footer>
 
