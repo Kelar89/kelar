@@ -11,13 +11,13 @@
             background-color: #f0f0f0;
             display: flex;
             justify-content: center;
-            align-items: center;
+            align-items: flex-start; /* Mengubah agar container tidak selalu di tengah secara vertikal jika konten panjang */
             padding: 20px;
         }
         .container {
             border: 1px solid #ccc;
             padding: 20px;
-            width: 800px;
+            width: 850px; /* Lebar container sedikit diperbesar untuk mengakomodasi foto baru */
             background-color: #ffffff;
             box-shadow: 0 0 15px rgba(0,0,0,0.1);
         }
@@ -34,9 +34,13 @@
         .header {
             display: flex;
             justify-content: space-between;
-            align-items: flex-start; /* Pastikan ini ada */
+            align-items: flex-start;
             border-bottom: 5px solid #d9d9d9;
             padding-bottom: 10px;
+            gap: 20px; /* Menambah jarak antara info dan foto header */
+        }
+        .header-info {
+            flex-grow: 1; /* Memastikan bagian info mengambil sisa ruang */
         }
         .header h1 {
             background-color: #c00000;
@@ -46,34 +50,37 @@
             font-size: 36px;
             display: inline-block;
         }
-        .header-photo {
-            width: 25%;
-            text-align: right;
-        }
         .header-photo img {
-            width: 100px; /* Sesuaikan lebar sesuai kebutuhan */
-            height: auto; /* Biarkan tinggi menyesuaikan aspek rasio */
+            /* UKURAN FOTO ATAS DISESUAIKAN */
+            width: 240px;
+            height: 336px;
+            object-fit: cover; /* Memastikan gambar mengisi area tanpa distorsi */
             border: 2px solid #555;
-            margin-top: 0; /* Pastikan tidak ada margin atas yang tidak perlu */
+            display: block; /* Mencegah spasi ekstra di bawah gambar */
         }
         .main-content {
             display: flex;
             justify-content: space-between;
             align-items: flex-start;
             margin-top: 15px;
+            gap: 20px; /* Menambah jarak antar kolom */
         }
         .left-column {
-            width: 65%;
+            width: 100%; /* Biarkan lebar fleksibel */
         }
         .right-column {
-            width: 33%;
-            padding-left: 15px;
+             /* UKURAN KOLOM KANAN DISESUAIKAN UNTUK FOTO BAWAH */
+            width: 336px; /* Menyamakan lebar kolom dengan lebar foto */
+            flex-shrink: 0; /* Mencegah kolom menyusut */
         }
         .right-column .full-photo {
-            width: 100%;
-            height: auto;
+            /* UKURAN FOTO BAWAH DISESUAIKAN */
+            width: 336px;
+            height: 480px;
+            object-fit: cover; /* Memastikan gambar mengisi area tanpa distorsi */
             border: 5px solid #d9e2f3;
             margin-bottom: 10px;
+            display: block;
         }
         .section-title {
             background-color: #d9e2f3;
@@ -312,7 +319,7 @@
             </table>
         </div>
     </div>
-
+    
     <div style="margin-top: 15px;">
         <div class="section-title" style="text-align: left; justify-content: flex-start;">
             <span>ARABIAN MEALS / FOOD WHICH I CAN COOK ARE AS BELOW :</span>
