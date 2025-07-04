@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Poin Rewards - Kelar.my.id</title>
+    <style>
+        body { font-family: sans-serif; margin: 0; background-color: #F8F9FA; color: #343A40; }
+        .container { max-width: 960px; margin: auto; padding: 20px; }
+        .header { display: flex; justify-content: space-between; align-items: center; padding: 15px 40px; background-color: #fff; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
+        .header .logo img { max-height: 40px; }
+        .header nav a { margin-left: 20px; text-decoration: none; color: #343A40; font-weight: bold; }
+        .points-summary-card { background-color: #003366; color: white; padding: 30px; border-radius: 12px; margin-bottom: 30px; text-align: center; }
+        .points-summary-card h1 { margin: 0; font-size: 1.5em; text-transform: uppercase; letter-spacing: 1px; }
+        .points-summary-card .points-balance { font-size: 3em; font-weight: bold; margin: 10px 0; }
+        .section-title { color: #003366; font-size: 1.8em; margin-bottom: 20px; border-bottom: 2px solid #DDDDDD; padding-bottom: 10px; }
+        .log-table { width: 100%; border-collapse: collapse; background-color: #fff; box-shadow: 0 2px 4px rgba(0,0,0,0.05); border-radius: 8px; overflow: hidden; }
+        .log-table th, .log-table td { padding: 15px; text-align: left; border-bottom: 1px solid #EEEEEE; }
+        .log-table th { background-color: #F8F9FA; }
+        .points-added { color: #28A745; font-weight: bold; }
+        .points-deducted { color: #DC3545; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="logo"><a href="index.html"><img src="foto/logo.png" alt="Logo Kelar.my.id"></a></div>
+        <nav><a href="index.html">Home</a><a href="portofolio.html">Portofolio</a><a href="dashboard.html">Dashboard</a><a href="#" id="logout-button">Logout</a></nav>
+    </header>
+    <main class="container">
+        <div id="loading-state">
+            <p>Memuat data poin Anda...</p>
+        </div>
+        <div id="main-content" style="display:none;">
+            <div class="points-summary-card">
+                <h1>Total Poin Rewards Anda</h1>
+                <div id="points-balance" class="points-balance">0</div>
+            </div>
+            
+            <h2 class="section-title">Riwayat Transaksi Poin</h2>
+            <table class="log-table">
+                <thead>
+                    <tr>
+                        <th>Tanggal</th>
+                        <th>Keterangan</th>
+                        <th>Jumlah</th>
+                    </tr>
+                </thead>
+                <tbody id="log-list">
+                    </tbody>
+            </table>
+            <p id="no-logs" style="display:none; text-align:center; padding: 40px; background-color:#fff; border-radius:8px;">Anda belum memiliki riwayat transaksi poin.</p>
+        </div>
+    </main>
+
+    <script>
+        const scriptURL = 'URL_WEB_APP_ANDA_YANG_SUDAH_DIDEPLOY'; // GANTI DENGAN URL ANDA
+
+        window.onload = function() {
+            // Logika untuk mengambil data sama seperti di dashboard.html
+            const clientId = localStorage.getItem('kelarClientId');
+            if (!clientId) {
+                window.location.href = 'Login.html';
+                return;
+            }
+
+            const formData = new FormData();
+            formData.append('action', 'getUserData'); // Kita tetap panggil getUserData karena ia mengembalikan semua data
+            formData.append('clientId', clientId);
+
+            fetch(scriptURL, { method: 'POST', body: formData })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.result === 'success') {
+                        // Tampilkan saldo poin
+                        document.getElementById('points-balance').innerText = data.client.poin;
+
+                        // Tampilkan log transaksi poin
+                        const logList = document.getElementById('log-list');
+                        // Logika untuk menampilkan log akan ditambahkan di sini
+                        
+                        document.getElementById('loading-state').style.display = 'none';
+                        document.getElementById('main-content').style.display = 'block';
+
+                    } else { throw new Error(data.error); }
+                })
+                .catch(err => {
+                    document.getElementById('loading-state').innerHTML = `<p>Gagal memuat data: ${err.message}. Coba login kembali.</p>`;
+                });
+        };
+        
+        document.getElementById('logout-button').addEventListener('click', function(e) {
+            e.preventDefault();
+            localStorage.removeItem('kelarClientId');
+            window.location.href = 'index.html';
+        });
+    </script>
+</body>
+</html>
