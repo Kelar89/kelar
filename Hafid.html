@@ -34,7 +34,7 @@
         .header {
             display: flex;
             justify-content: space-between;
-            align-items: flex-start;
+            align-items: flex-start; /* Pastikan ini ada */
             border-bottom: 5px solid #d9d9d9;
             padding-bottom: 10px;
         }
@@ -46,11 +46,15 @@
             font-size: 36px;
             display: inline-block;
         }
+        .header-photo {
+            width: 25%;
+            text-align: right;
+        }
         .header-photo img {
-            width: 130px;
-            height: 150px; /* Menyesuaikan tinggi agar lebih proporsional */
-            object-fit: cover; /* Memastikan gambar terpotong rapi */
+            width: 100px; /* Sesuaikan lebar sesuai kebutuhan */
+            height: auto; /* Biarkan tinggi menyesuaikan aspek rasio */
             border: 2px solid #555;
+            margin-top: 0; /* Pastikan tidak ada margin atas yang tidak perlu */
         }
         .main-content {
             display: flex;
@@ -308,7 +312,7 @@
             </table>
         </div>
     </div>
-    
+
     <div style="margin-top: 15px;">
         <div class="section-title" style="text-align: left; justify-content: flex-start;">
             <span>ARABIAN MEALS / FOOD WHICH I CAN COOK ARE AS BELOW :</span>
