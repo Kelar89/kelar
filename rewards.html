@@ -42,7 +42,7 @@
                     <tr>
                         <th>Tanggal</th>
                         <th>Keterangan</th>
-                        <th>Jumlah</th>
+                        <th style="text-align:right;">Jumlah</th>
                     </tr>
                 </thead>
                 <tbody id="log-list">
@@ -56,27 +56,38 @@
         const scriptURL = 'URL_WEB_APP_ANDA_YANG_SUDAH_DIDEPLOY'; // GANTI DENGAN URL ANDA
 
         window.onload = function() {
-            // Logika untuk mengambil data sama seperti di dashboard.html
             const clientId = localStorage.getItem('kelarClientId');
-            if (!clientId) {
-                window.location.href = 'Login.html';
-                return;
-            }
+            if (!clientId) { window.location.href = 'Login.html'; return; }
 
             const formData = new FormData();
-            formData.append('action', 'getUserData'); // Kita tetap panggil getUserData karena ia mengembalikan semua data
+            formData.append('action', 'getUserData');
             formData.append('clientId', clientId);
 
             fetch(scriptURL, { method: 'POST', body: formData })
                 .then(response => response.json())
                 .then(data => {
                     if (data.result === 'success') {
-                        // Tampilkan saldo poin
                         document.getElementById('points-balance').innerText = data.client.poin;
 
-                        // Tampilkan log transaksi poin
                         const logList = document.getElementById('log-list');
-                        // Logika untuk menampilkan log akan ditambahkan di sini
+                        // [BARU] Logika untuk menampilkan log poin
+                        if (data.pointsLog && data.pointsLog.length > 0) {
+                            data.pointsLog.reverse().forEach(log => { // Dibalik agar yang terbaru di atas
+                                // Kolom: ID_Log, ID_Klien, Tanggal, Jumlah, Keterangan
+                                let row = logList.insertRow();
+                                let jumlahPoin = parseInt(log[3]);
+                                let jumlahText = jumlahPoin > 0 ? `+${jumlahPoin}` : jumlahPoin;
+                                let jumlahClass = jumlahPoin > 0 ? 'points-added' : 'points-deducted';
+
+                                row.innerHTML = `
+                                    <td>${new Date(log[2]).toLocaleDateString('id-ID')}</td>
+                                    <td>${log[4]}</td>
+                                    <td class="${jumlahClass}" style="text-align:right;">${jumlahText}</td>
+                                `;
+                            });
+                        } else {
+                            document.getElementById('no-logs').style.display = 'block';
+                        }
                         
                         document.getElementById('loading-state').style.display = 'none';
                         document.getElementById('main-content').style.display = 'block';
