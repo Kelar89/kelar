@@ -1,13 +1,118 @@
 <!DOCTYPE html>
-<html>
+<html lang="id">
 <head>
-    <title>Dashboard - Kelar.my.id</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Klien - Kelar.my.id</title>
     <style>
-        body { font-family: sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; background-color: #F8F9FA; }
-        h1 { color: #003366; }
+        body { font-family: sans-serif; margin: 0; background-color: #F8F9FA; color: #343A40; }
+        .container { max-width: 1024px; margin: auto; padding: 20px; }
+        .header { display: flex; justify-content: space-between; align-items: center; padding: 15px 40px; background-color: #fff; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
+        .header .logo img { max-height: 40px; }
+        .header nav a { margin-left: 20px; text-decoration: none; color: #343A40; font-weight: bold; }
+        .welcome-card { background-color: #003366; color: white; padding: 30px; border-radius: 12px; margin-bottom: 30px; }
+        .welcome-card h1 { margin: 0; font-size: 2em; }
+        .welcome-card .points { font-size: 1.2em; opacity: 0.8; }
+        .section-title { color: #003366; font-size: 1.8em; margin-bottom: 20px; border-bottom: 2px solid #DDDDDD; padding-bottom: 10px; }
+        .order-table { width: 100%; border-collapse: collapse; background-color: #fff; box-shadow: 0 2px 4px rgba(0,0,0,0.05); border-radius: 8px; overflow: hidden; }
+        .order-table th, .order-table td { padding: 15px; text-align: left; border-bottom: 1px solid #EEEEEE; }
+        .order-table th { background-color: #F8F9FA; }
+        .status { padding: 5px 10px; border-radius: 15px; font-size: 0.8em; font-weight: bold; color: #fff; }
+        .status.completed { background-color: #28A745; } /* Hijau */
+        .status.in-progress { background-color: #FFC107; } /* Kuning */
+        .status.pending { background-color: #6C757D; } /* Abu-abu */
     </style>
 </head>
 <body>
-    <h1>🎉 Selamat Datang di Dashboard Anda! 🎉</h1>
+    <header class="header">
+        <div class="logo"><a href="index.html"><img src="foto/logo.png" alt="Logo Kelar.my.id"></a></div>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="portofolio.html">Portofolio</a>
+            <a href="#">Dashboard</a>
+            <a href="#" id="logout-button">Logout</a>
+        </nav>
+    </header>
+    <main class="container">
+        <div id="loading-state">
+            <p>Memuat data Anda...</p>
+        </div>
+        <div id="main-content" style="display:none;">
+            <div class="welcome-card">
+                <h1 id="welcome-name">Selamat Datang!</h1>
+                <p class="points">Poin Rewards Anda: <strong id="points-balance">0</strong> Poin</p>
+            </div>
+            
+            <h2 class="section-title">Riwayat Pesanan Anda</h2>
+            <table class="order-table">
+                <thead>
+                    <tr>
+                        <th>ID Pesanan</th>
+                        <th>Tanggal</th>
+                        <th>Layanan</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody id="order-list">
+                    </tbody>
+            </table>
+            <p id="no-orders" style="display:none; text-align:center; padding: 40px; background-color:#fff; border-radius:8px;">Anda belum memiliki riwayat pesanan.</p>
+        </div>
+    </main>
+
+    <script>
+        // PASTIKAN URL INI ADALAH URL WEB APP ANDA YANG BENAR
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbz8HLT65ouAETTQI-IYE2FRxLj3lw24Ij513jpu3s4VKWfGNQV7Qm4EPMQYZR1q8hQXVg/exec';
+
+        window.onload = function() {
+            const clientId = localStorage.getItem('kelarClientId');
+            if (!clientId) {
+                window.location.href = 'Login.html';
+                return;
+            }
+
+            const formData = new FormData();
+            formData.append('action', 'getUserData');
+            formData.append('clientId', clientId);
+
+            fetch(scriptURL, { method: 'POST', mode: 'cors', body: formData })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.result === 'success') {
+                        document.getElementById('welcome-name').innerText = 'Selamat Datang, ' + (data.client.nama || data.client.email.split('@')[0]) + '!';
+                        document.getElementById('points-balance').innerText = data.client.poin;
+
+                        const orderList = document.getElementById('order-list');
+                        if (data.orders.length > 0) {
+                            data.orders.forEach(order => {
+                                // Kolom: ID Pesanan, ID Klien, ID Layanan, Tanggal, Status
+                                let row = orderList.insertRow();
+                                row.innerHTML = `
+                                    <td>${order[0]}</td>
+                                    <td>${new Date(order[3]).toLocaleDateString('id-ID')}</td>
+                                    <td>${order[2]}</td>
+                                    <td><span class="status pending">${order[4]}</span></td>
+                                `;
+                            });
+                        } else {
+                            document.getElementById('no-orders').style.display = 'block';
+                        }
+                        
+                        document.getElementById('loading-state').style.display = 'none';
+                        document.getElementById('main-content').style.display = 'block';
+
+                    } else { throw new Error(data.error); }
+                })
+                .catch(err => {
+                    document.getElementById('loading-state').innerHTML = `<p>Gagal memuat data: ${err.message}. Coba login kembali.</p>`;
+                });
+        };
+        
+        document.getElementById('logout-button').addEventListener('click', function(e) {
+            e.preventDefault();
+            localStorage.removeItem('kelarClientId');
+            window.location.href = 'index.html';
+        });
+    </script>
 </body>
 </html>
