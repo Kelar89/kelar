@@ -4,172 +4,35 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Jasa Pembuatan CV ATS-Friendly | Kelar.my.id</title>
-    <style>
-        body {
-            font-family: sans-serif;
-            margin: 0;
-            color: #343A40;
-            background-color: #FFFFFF;
-        }
-        .container {
-            max-width: 960px;
-            margin: auto;
-            padding: 20px;
-        }
-        /* Hero Section */
-        .hero {
-            background-color: #001f3f; /* Darker Blue */
-            color: white;
-            padding: 80px 20px;
-            text-align: center;
-        }
-        .hero h1 {
-            font-size: 2.5em;
-            margin-bottom: 10px;
-        }
-        .hero p {
-            font-size: 1.2em;
-            color: #DDDDDD;
-        }
-        /* Value Section */
-        .value-section {
-            padding: 60px 20px;
-            text-align: center;
-            background-color: #F8F9FA;
-        }
-        .value-grid {
-            display: flex;
-            justify-content: space-around;
-            flex-wrap: wrap;
-            margin-top: 40px;
-        }
-        .value-item {
-            flex-basis: 30%;
-            min-width: 250px;
-            padding: 20px;
-        }
-        .value-item i { /* Placeholder for icons */
-            font-size: 3em;
-            color: #FF6600;
-        }
-        .value-item h3 {
-            color: #003366;
-            margin-top: 15px;
-        }
-        /* Offer Section */
-        .offer-section {
-            padding: 60px 20px;
-            display: flex;
-            align-items: center;
-            gap: 40px;
-        }
-        .offer-image, .offer-text {
-            flex: 1;
-        }
-        .offer-image img {
-            width: 100%;
-            border-radius: 8px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-        }
-        .offer-text h2 {
-            color: #003366;
-        }
-        .offer-text ul {
-            list-style: none;
-            padding: 0;
-        }
-        .offer-text li {
-            padding: 10px 0;
-            border-bottom: 1px solid #EEEEEE;
-        }
-        .offer-text li::before {
-            content: '✓';
-            color: #FF6600;
-            font-weight: bold;
-            margin-right: 10px;
-        }
-        /* CTA Section */
-        .cta-section {
-            background-color: #003366;
-            color: white;
-            padding: 60px 20px;
-            text-align: center;
-        }
-        .cta-section h2 {
-            font-size: 2em;
-        }
-        .cta-button {
-            display: inline-block;
-            background-color: #FF6600;
-            color: white;
-            padding: 15px 30px;
-            text-decoration: none;
-            font-weight: bold;
-            border-radius: 8px;
-            font-size: 1.2em;
-            margin-top: 20px;
-        }
-        .secondary-cta {
-            margin-top: 15px;
-        }
-        .secondary-cta a {
-            color: #FFFFFF;
-            text-decoration: underline;
-        }
-    </style>
+    <style>/* Kode CSS tetap sama */ body{font-family:sans-serif;margin:0;color:#343a40}.container{max-width:960px;margin:auto;padding:0 20px}.header{display:flex;justify-content:space-between;align-items:center;padding:15px 40px;background-color:#fff;box-shadow:0 2px 4px rgba(0,0,0,.05)}.header .logo img{max-height:40px}.header nav a{margin-left:20px;text-decoration:none;color:#343a40;font-weight:700}.hero{background-color:#003366;color:#fff;padding:80px 20px;text-align:center}.hero h1{font-size:2.5em}.offer-section{padding:60px 20px;display:flex;align-items:center;gap:40px}.offer-image,.offer-text{flex:1}.offer-image img{width:100%;border-radius:8px;box-shadow:0 4px 15px rgba(0,0,0,.1)}.offer-text h2{color:#003366}.offer-text ul{list-style:none;padding:0}.offer-text li{padding:10px 0;border-bottom:1px solid #eee}.offer-text li::before{content:'✓';color:#FF6600;font-weight:700;margin-right:10px}.cta-section{background-color:#003366;color:#fff;padding:60px 20px;text-align:center}.cta-section h2{font-size:2.2em}.cta-button{display:inline-block;background-color:#FF6600;color:#fff;padding:15px 30px;text-decoration:none;font-weight:700;border-radius:8px;font-size:1.2em;margin-top:20px}.secondary-cta{margin-top:15px}.secondary-cta a{color:#fff}</style>
 </head>
 <body>
-
-    <header class="hero">
-        <h1>Stop Kirim CV Biasa. Kirim CV yang Bikin Kamu Diincar HRD!</h1>
-        <p>Sering diabaikan HRD? CV kamu bisa jadi alasannya.</p>
+    <header class="header">
+        <div class="logo"><a href="index.html"><img src="foto/logo.png" alt="Logo Kelar.my.id"></a></div>
+        <nav><a href="index.html#services">Layanan</a><a href="portofolio.html">Portofolio</a><a href="index.html#about">Tentang</a><a href="Login.html">Masuk</a></nav>
     </header>
-
-    <section class="value-section">
-        <div class="container">
-            <div class="value-grid">
-                <div class="value-item">
-                    <i>&#128640;</i> <h3>Lebih Banyak Panggilan Interview</h3>
-                    <p>Notifikasi interview berdatangan dari perusahaan impian! CV ATS-friendly kami berhasil menembus sistem penyaringan otomatis.</p>
-                </div>
-                <div class="value-item">
-                    <i>&#128170;</i> <h3>Rasa Percaya Diri yang Meledak</h3>
-                    <p>Merasa bangga setiap kali mengirimkan CV—bukan lagi minder—karena tahu dokumen Anda profesional dan siap bersaing.</p>
-                </div>
-                <div class="value-item">
-                    <i>&#11088;</i> <h3>Kesan Pertama yang Menancap</h3>
-                    <p>Langsung menonjol di tumpukan ratusan pelamar — tunjukkan bahwa Anda kandidat yang serius.</p>
-                </div>
+    <main>
+        <section class="offer-section container">
+            <div class="offer-image"><img src="https://i.ibb.co/d2HqWjC/cv1.png" alt="Contoh CV ATS-Friendly"></div>
+            <div class="offer-text">
+                <h2>Paket CV ATS Profesional: Kunci Karier Impian Anda</h2>
+                <p>Setiap CV kami rancang dengan jaminan:</p>
+                <ul>
+                    <li>Kami memastikan CV Anda 100% lolos sistem ATS.</li>
+                    <li>Kami mendesain CV Anda modern & profesional untuk kesan terbaik di mata HRD.</li>
+                    <li>Garansi 3x Revisi Gratis untuk kepuasan maksimal.</li>
+                    <li>Pengerjaan Cepat: Draf awal siap dalam 24 jam kerja (Senin-Jumat).</li>
+                </ul>
             </div>
-        </div>
-    </section>
-
-    <section class="offer-section container">
-        <div class="offer-image">
-            <img src="https://via.placeholder.com/450x300.png?text=Contoh+CV+Sebelum+dan+Sesudah" alt="Contoh CV ATS-Friendly">
-        </div>
-        <div class="offer-text">
-            <h2>Paket CV ATS Profesional: Kunci Karier Impian Anda</h2>
-            <p>Setiap CV kami rancang dengan jaminan:</p>
-            <ul>
-                <li>Kami memastikan CV Anda 100% lolos sistem ATS.</li>
-                <li>Kami mendesain CV Anda modern & profesional untuk kesan terbaik di mata HRD.</li>
-                <li>Garansi 3x Revisi Gratis untuk kepuasan maksimal.</li>
-                <li>Pengerjaan Cepat: Draf awal siap dalam 24 jam kerja (Senin-Jumat).</li>
-            </ul>
-        </div>
-    </section>
-
-    <footer class="cta-section">
-        <div class="container">
-            <h2>Siap Jadi Kandidat Favorit HRD?</h2>
-            <p>Wujudkan karier impianmu dengan CV yang membuktikan kualitasmu.</p>
-            <a href="#" class="cta-button">Pesan Sekarang & Siap Dipanggil Interview Lebih Cepat!</a>
-            <div class="secondary-cta">
-                <p>atau, <a href="https://wa.me/6285894448143?text=Halo%20kak,%20saya%20tertarik%20dengan%20Jasa%20Pembuatan%20CV%20dari%20website%20kelar.my.id.%20Boleh%20tanya-tanya?">Konsultasi Gratis Dulu via WhatsApp</a></p>
+        </section>
+        <section class="cta-section">
+            <div class="container">
+                <h2>Siap Jadi Kandidat Favorit HRD?</h2>
+                <p>Wujudkan karier impianmu dengan CV yang membuktikan kualitasmu.</p>
+                <a href="Login.html" class="cta-button">Pesan Sekarang & Siap Dipanggil Interview Lebih Cepat!</a>
+                <div class="secondary-cta"><p>atau, <a href="https://wa.me/6285894448143?text=Halo%20kak,%20saya%20tertarik%20dengan%20Jasa%20Pembuatan%20CV%20dari%20website%20kelar.my.id.%20Boleh%20tanya-tanya?">Konsultasi Gratis Dulu via WhatsApp</a></p></div>
             </div>
-        </div>
-    </footer>
-
+        </section>
+    </main>
 </body>
 </html>
