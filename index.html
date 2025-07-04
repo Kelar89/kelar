@@ -17,15 +17,17 @@
         .section { padding: 80px 0; }
         .section-title { text-align: center; color: #003366; font-size: 2.2em; margin-bottom: 10px; }
         .section-subtitle { text-align: center; color: #6C757D; font-size: 1.1em; margin-bottom: 60px; }
-        .portfolio-grid-main { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
-        .portfolio-card { border-radius: 8px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
-        .portfolio-card img { width: 100%; display: block; aspect-ratio: 3 / 4; object-fit: cover; }
-        .portfolio-card .caption { padding: 15px; background-color: #F8F9FA; font-size: 0.9em; text-align: center; }
         .testimonial-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 30px; }
         .testimonial-card { text-align: center; }
         .testimonial-card img { width: 80px; height: 80px; border-radius: 50%; margin-bottom: 15px; object-fit: cover; }
         .testimonial-card p { font-size: 0.9em; font-style: italic; margin: 0 0 15px 0; }
         .testimonial-card .author { font-weight: bold; color: #003366; }
+        .about-section { display: flex; align-items: center; gap: 50px; background-color: #F8F9FA; padding: 60px; border-radius: 12px; }
+        .about-photo { flex-basis: 35%; }
+        .about-photo img { width: 100%; border-radius: 50%; }
+        .about-text { flex-basis: 65%; }
+        .about-text h2 { color: #003366; font-size: 2em; margin-top: 0; }
+        .about-text p { line-height: 1.6; }
         .footer-cta { background-color: #003366; color: white; padding: 80px 0; }
         .footer-container { display: flex; align-items: center; gap: 50px; }
         .footer-image { flex-basis: 40%; }
@@ -33,7 +35,7 @@
         .footer-text { flex-basis: 60%; text-align: left;}
         .footer-text h2 { font-size: 2.2em; margin-top: 0; }
         .cta-button { display: inline-block; background-color: #FF6600; color: white; padding: 15px 30px; text-decoration: none; font-weight: bold; border-radius: 8px; font-size: 1.2em; margin-top: 20px; }
-        @media (max-width: 960px) { .testimonial-grid { grid-template-columns: repeat(2, 1fr); } .portfolio-grid-main { grid-template-columns: 1fr; } .header nav { display: none; } }
+        @media (max-width: 960px) { .testimonial-grid { grid-template-columns: repeat(2, 1fr); } .header nav { display: none; } }
         @media (max-width: 600px) { .testimonial-grid { grid-template-columns: 1fr; } .footer-container { flex-direction: column; text-align: center;} .footer-text{text-align: center;} }
     </style>
 </head>
@@ -41,7 +43,7 @@
 
     <header class="header">
         <div class="logo">
-             <a href="index.html"><img src="logo.png" alt="Logo Kelar.my.id"></a>
+             <a href="index.html"><img src="foto/logo.png" alt="Logo Kelar.my.id"></a>
         </div>
         <nav>
             <a href="#services">Layanan</a>
@@ -61,22 +63,22 @@
             <h2 class="section-title">Kata Mereka yang Sudah Diterima Kerja 🥰</h2>
             <div class="testimonial-grid">
                 <div class="testimonial-card">
-                    <img src="Fatimah.png" alt="Foto Fatimah Azzahra">
+                    <img src="foto/Fatimah.png" alt="Foto Fatimah Azzahra">
                     <p>"Tim Kelar bantu saya menerjemahkan pengalaman praktikum jadi poin-poin skill yang menjual."</p>
                     <div class="author">Fatimah Azzahra, S.Si</div>
                 </div>
                 <div class="testimonial-card">
-                    <img src="Nadia.png" alt="Foto Nadia Fitriani">
+                    <img src="foto/Nadia.png" alt="Foto Nadia Fitriani">
                     <p>"Hasilnya? Langsung tembus jadi Staff Quality Control. Terima kasih banyak!"</p>
                     <div class="author">Nadia Fitriani, S.Kom</div>
                 </div>
                 <div class="testimonial-card">
-                    <img src="Clara.png" alt="Foto Clara Sutanto">
+                    <img src="foto/Clara.png" alt="Foto Clara Sutanto">
                     <p>"Awalnya ragu, tapi hasilnya di luar ekspektasi. Profesionalismenya terasa banget."</p>
                     <div class="author">Clara Sutanto, S.E</div>
                 </div>
                 <div class="testimonial-card">
-                    <img src="Amanda.png" alt="Foto Amanda Larasati">
+                    <img src="foto/Amanda.png" alt="Foto Amanda Larasati">
                     <p>"Desainnya modern, prosesnya cepat, dan portofolio online saya jadi highlight utama."</p>
                     <div class="author">Amanda Larasati, Designer</div>
                 </div>
@@ -87,7 +89,7 @@
             <div class="container">
                  <div class="about-section">
                     <div class="about-photo">
-                        <img src="ilustrasidiskusi.jpg" alt="Ilustrasi Diskusi">
+                        <img src="foto/ilustrasidiskusi.jpg" alt="Ilustrasi Diskusi">
                     </div>
                     <div class="about-text">
                         <h2>Bukan Sekadar Jasa, Kami adalah Mitra Anda.</h2>
@@ -101,7 +103,7 @@
     <footer class="footer-cta">
         <div class="container footer-container">
             <div class="footer-image">
-                <img src="chatsekarang.jpg" alt="Konsultasi Gratis">
+                <img src="foto/chatsekarang.jpg" alt="Konsultasi Gratis">
             </div>
             <div class="footer-text">
                 <h2>Masih Ragu atau Punya Pertanyaan? 😉</h2>
