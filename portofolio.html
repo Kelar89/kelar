@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Komponen Portofolio</title>
+    <style>
+        body { font-family: sans-serif; background-color: #FFFFFF; padding: 40px 0; }
+        .container { max-width: 960px; margin: auto; padding: 0 20px; }
+        
+        .portfolio-section {
+            text-align: center;
+            padding: 60px 0;
+        }
+        .portfolio-section h2 {
+            color: #003366;
+            font-size: 2.2em;
+            margin-bottom: 10px;
+        }
+        .portfolio-section .subtitle {
+            color: #6C757D;
+            font-size: 1.1em;
+            margin-bottom: 50px;
+        }
+
+        .portfolio-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 60px; /* Jarak antara setiap item portofolio */
+        }
+
+        .portfolio-item {
+            background-color: #F8F9FA;
+            padding: 30px;
+            border-radius: 12px;
+            text-align: left;
+        }
+
+        .portfolio-item h3 {
+            color: #003366;
+            margin-top: 0;
+        }
+
+        .comparison-container {
+            display: flex;
+            gap: 20px;
+        }
+        .comparison-box {
+            flex: 1;
+        }
+        .comparison-box h4 {
+            color: #6C757D;
+            text-align: center;
+        }
+        .comparison-box img {
+            width: 100%;
+            border: 2px solid #DDDDDD;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+<body>
+
+    <section class="portfolio-section container">
+        <h2>Transformasi yang Kami Berikan</h2>
+        <p class="subtitle">Kami tidak hanya memperbaiki, kami meningkatkan. Lihat beberapa hasil kerja kami.</p>
+
+        <div class="portfolio-grid">
+
+            <div class="portfolio-item">
+                <h3>Transformasi CV untuk Fresh Graduate</h3>
+                <div class="comparison-container">
+                    <div class="comparison-box">
+                        <h4>SEBELUM</h4>
+                        <img src="https://via.placeholder.com/400x560.png?text=CV+Lama+Berantakan" alt="CV Sebelum Diedit">
+                    </div>
+                    <div class="comparison-box">
+                        <h4>SESUDAH</h4>
+                        <img src="https://via.placeholder.com/400x560.png?text=CV+ATS+Profesional" alt="CV Sesudah Diedit">
+                    </div>
+                </div>
+            </div>
+
+            <div class="portfolio-item">
+                <h3>Perapihan Laporan Tahunan Perusahaan</h3>
+                <div class="comparison-container">
+                    <div class="comparison-box">
+                        <h4>SEBELUM</h4>
+                        <img src="https://via.placeholder.com/400x560.png?text=Dokumen+Tidak+Terstruktur" alt="Dokumen Sebelum Diedit">
+                    </div>
+                    <div class="comparison-box">
+                        <h4>SESUDAH</h4>
+                        <img src="https://via.placeholder.com/400x560.png?text=Laporan+Rapi+dan+Mudah+Dibaca" alt="Dokumen Sesudah Diedit">
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+    </body>
+</html>
