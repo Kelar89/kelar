@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Generator Biodata Multi-Bahasa</title>
+    <title>Generator Biodata Multi-Bahasa (Final)</title>
     <style>
         :root {
             --primary-color: #007bff;
@@ -135,7 +135,7 @@
             justify-content: center;
             gap: 10px;
         }
-        .lang-btn { flex-grow: 1; padding: 10px; cursor: pointer; border: 1px solid var(--border-color); background-color: var(--secondary-color); border-radius: 5px; max-width: 150px; }
+        .lang-btn { flex-grow: 1; padding: 10px; cursor: pointer; border: 1px solid var(--border-color); background-color: var(--secondary-color); border-radius: 5px; max-width: 200px; }
         .lang-btn.active { background-color: var(--primary-color); color: white; border-color: var(--primary-color); }
         #output-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 10px; }
 
@@ -347,7 +347,140 @@
 
     <script>
     document.addEventListener('DOMContentLoaded', function() {
-        // ... (JavaScript dari kode sebelumnya, dengan sedikit modifikasi untuk logika bahasa) ...
+        const translations = {
+            id: {
+                post_applied_label: "POSISI DILAMAR", salary_label: "GAJI BULANAN", contract_label: "PERIODE KONTRAK",
+                ref_no_label: "REF. NO.", name_label: "Nama", father_name_label: "Nama Ayah", grandfather_name_label: "Nama Kakek",
+                passport_details_title: "Detail Paspor", passport_no_label: "No. Paspor", issue_date_label: "Tanggal Dikeluarkan", expiry_date_label: "Tanggal Kedaluwarsa", issue_place_label: "Tempat Dikeluarkan",
+                applicant_details_title: "Detail Pelamar", nationality_label: "Kewarganegaraan", religion_label: "Agama", dob_label: "Tanggal Lahir", pob_label: "Tempat Lahir",
+                living_town_label: "Kota Tinggal", marital_status_label: "Status Pernikahan", children_label: "Jumlah Anak", weight_label: "Berat Badan", height_label: "Tinggi Badan", age_label: "Umur", education_label: "Pendidikan",
+                language_title: "Bahasa", experience_title: "PENGALAMAN",
+                language_table_header_lang: "Bahasa", language_level_poor: "Kurang", language_level_fair: "Cukup", language_level_fluent: "Lancar",
+            },
+            en: {
+                post_applied_label: "POST APPLIED FOR", salary_label: "MONTHLY SALARY", contract_label: "CONTRACT PERIOD",
+                ref_no_label: "REF. NO.", name_label: "Name", father_name_label: "Father's Name", grandfather_name_label: "Grandfather's Name",
+                passport_details_title: "Passport Details", passport_no_label: "Passport No", issue_date_label: "Date Of Issue", expiry_date_label: "Date of Expiry", issue_place_label: "Place of Issue",
+                applicant_details_title: "Details of Applicant", nationality_label: "Nationality", religion_label: "Religion", dob_label: "Date of Birth", pob_label: "Place of Birth",
+                living_town_label: "Living Town", marital_status_label: "Marital Status", children_label: "No. of Children", weight_label: "Weight", height_label: "Height", age_label: "Age", education_label: "Educational Qualification",
+                language_title: "Language", experience_title: "EXPERIENCE",
+                language_table_header_lang: "Language", language_level_poor: "Poor", language_level_fair: "Fair", language_level_fluent: "Fluent",
+            },
+            ar: {
+                post_applied_label_rtl: "الوظيفة", salary_label_rtl: "الراتب الشهري", contract_label_rtl: "مدة العقد",
+                ref_no_label_rtl: "رقم الطلب", name_label_rtl: "الاسم", father_name_label_rtl: "اسم الأب", grandfather_name_label_rtl: "اسم الجد",
+                passport_details_title_rtl: "بيانات جواز السفر", passport_no_label_rtl: "رقم جواز السفر", issue_date_label_rtl: "تاريخ الإصدار", expiry_date_label_rtl: "تاريخ الإنتهاء", issue_place_label_rtl: "مكان الإصدار",
+                applicant_details_title_rtl: "بيانات صاحب الطالب", nationality_label_rtl: "الجنسية", religion_label_rtl: "الديانة", dob_label_rtl: "تاريخ الميلاد", pob_label_rtl: "مكان الميلاد",
+                living_town_label_rtl: "مكان السكن", marital_status_label_rtl: "الحالة الإجتماعية", children_label_rtl: "عدد الأطفال", weight_label_rtl: "الوزن", height_label_rtl: "الطول", age_label_rtl: "العمر", education_label_rtl: "الدرجة العلمية",
+                language_title_rtl: "إجادة اللغات", experience_title_rtl: "العمل السابق",
+                language_table_header_lang_rtl: "اللغات", language_level_poor_rtl: "لاشيء", language_level_fair_rtl: "وسط", language_level_fluent_rtl: "ممتاز",
+            },
+            fr: {
+                post_applied_label: "POSTE DEMANDÉ", salary_label: "SALAIRE MENSUEL", contract_label: "DURÉE DU CONTRAT",
+                ref_no_label: "RÉF. NO.", name_label: "Nom", father_name_label: "Nom du père", grandfather_name_label: "Nom du grand-père",
+                passport_details_title: "Détails du passeport", passport_no_label: "N° de passeport", issue_date_label: "Date de délivrance", expiry_date_label: "Date d'expiration", issue_place_label: "Lieu de délivrance",
+                applicant_details_title: "Détails du candidat", nationality_label: "Nationalité", religion_label: "Religion", dob_label: "Date de naissance", pob_label: "Lieu de naissance",
+                living_town_label: "Ville de résidence", marital_status_label: "État civil", children_label: "Nombre d'enfants", weight_label: "Poids", height_label: "Taille", age_label: "Âge", education_label: "Niveau d'études",
+                language_title: "Langues", experience_title: "EXPÉRIENCE",
+                language_table_header_lang: "Langue", language_level_poor: "Faible", language_level_fair: "Moyen", language_level_fluent: "Courant",
+            },
+            de: {
+                post_applied_label: "BEWORBENE STELLE", salary_label: "MONATSGEHALT", contract_label: "VERTRAGSDAUER",
+                ref_no_label: "REF. NR.", name_label: "Name", father_name_label: "Name des Vaters", grandfather_name_label: "Name des Großvaters",
+                passport_details_title: "Passdetails", passport_no_label: "Passnummer", issue_date_label: "Ausstellungsdatum", expiry_date_label: "Ablaufdatum", issue_place_label: "Ausstellungsort",
+                applicant_details_title: "Details des Bewerbers", nationality_label: "Staatsangehörigkeit", religion_label: "Religion", dob_label: "Geburtsdatum", pob_label: "Geburtsort",
+                living_town_label: "Wohnort", marital_status_label: "Familienstand", children_label: "Anzahl der Kinder", weight_label: "Gewicht", height_label: "Größe", age_label: "Alter", education_label: "Bildungsabschluss",
+                language_title: "Sprachen", experience_title: "ERFAHRUNG",
+                language_table_header_lang: "Sprache", language_level_poor: "Gering", language_level_fair: "Mittel", language_level_fluent: "Fließend",
+            }
+        };
+
+        const formContainer = document.getElementById('form-container');
+        const outputContainer = document.getElementById('output-container');
+        const biodataForm = document.getElementById('biodata-form');
+        const editBtn = document.getElementById('edit-btn');
+        const printBtn = document.getElementById('print-btn');
+        const languageSelector = document.querySelector('.language-selector-container');
+
+        const agencyLogoInput = document.getElementById('agency_logo');
+        const previewLogo = document.getElementById('preview_logo');
+        const photoHeadshotInput = document.getElementById('photo_headshot');
+        const previewHeadshot = document.getElementById('preview_headshot');
+        const photoFullbodyInput = document.getElementById('photo_fullbody');
+        const previewFullbody = document.getElementById('preview_fullbody');
+
+        function setupPreview(inputElement, previewElement) {
+            inputElement.addEventListener('change', event => {
+                const file = event.target.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = e => { previewElement.src = e.target.result; previewElement.style.display = 'block'; };
+                    reader.readAsDataURL(file);
+                }
+            });
+        }
+        setupPreview(agencyLogoInput, previewLogo);
+        setupPreview(photoHeadshotInput, previewHeadshot);
+        setupPreview(photoFullbodyInput, previewFullbody);
+
+        biodataForm.addEventListener('submit', event => {
+            event.preventDefault();
+            const data = {
+                post_applied: document.getElementById('post_applied').value, salary: document.getElementById('salary').value, contract: document.getElementById('contract').value,
+                ref_no: document.getElementById('ref_no').value, name: document.getElementById('name').value, father_name: document.getElementById('father_name').value, grandfather_name: document.getElementById('grandfather_name').value,
+                nationality: document.getElementById('nationality').value, religion: document.getElementById('religion').value, dob: formatDate(document.getElementById('dob').value), pob: document.getElementById('pob').value,
+                living_town: document.getElementById('living_town').value, marital_status: document.getElementById('marital_status').value, children: document.getElementById('children').value,
+                weight: document.getElementById('weight').value + ' KG', height: document.getElementById('height').value + ' CM', age: document.getElementById('age').value + ' YEAR', education: document.getElementById('education').value,
+                passport_no: document.getElementById('passport_no').value, issue_date: formatDate(document.getElementById('issue_date').value), expiry_date: formatDate(document.getElementById('expiry_date').value), issue_place: document.getElementById('issue_place').value,
+                experience: document.getElementById('experience').value.replace(/\n/g, '<br>')
+            };
+            for (const key in data) { if (document.getElementById(`output_${key}`)) document.getElementById(`output_${key}`).innerHTML = data[key]; }
+            document.getElementById('output_photo_headshot').src = previewHeadshot.src || 'https://via.placeholder.com/150x156';
+            document.getElementById('output_photo_fullbody').src = previewFullbody.src || 'https://via.placeholder.com/336x495';
+            const logoOutput = document.getElementById('agency-logo-output');
+            if (previewLogo.src && previewLogo.src.startsWith('data:image')) { logoOutput.src = previewLogo.src; logoOutput.style.display = 'block'; }
+            else { logoOutput.style.display = 'none'; }
+            formContainer.style.display = 'none';
+            outputContainer.style.display = 'block';
+            window.scrollTo(0, 0);
+            switchLanguage('id-ar');
+        });
+
+        languageSelector.addEventListener('click', (event) => {
+            if (event.target.tagName === 'BUTTON') {
+                const langPair = event.target.dataset.lang;
+                switchLanguage(langPair);
+            }
+        });
+
+        function switchLanguage(langPair) {
+            document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.toggle('active', btn.dataset.lang === langPair));
+            const [leftLang, rightLang] = langPair.split('-');
+            const leftDict = translations[leftLang] || translations.id;
+            const rightDict = translations[rightLang] || translations.ar;
+            document.querySelectorAll('[data-key]').forEach(element => {
+                const key = element.dataset.key;
+                if (leftDict[key]) element.textContent = leftDict[key];
+            });
+            document.querySelectorAll('[data-key-rtl]').forEach(element => {
+                const key = element.dataset.keyRtl;
+                if (rightDict[key]) element.textContent = rightDict[key];
+            });
+        }
+
+        editBtn.addEventListener('click', () => {
+            outputContainer.style.display = 'none';
+            formContainer.style.display = 'block';
+        });
+
+        printBtn.addEventListener('click', () => window.print());
+
+        function formatDate(dateString) {
+            if (!dateString) return '';
+            const date = new Date(dateString);
+            const userTimezoneOffset = date.getTimezoneOffset() * 60000;
+            return new Date(date.getTime() + userTimezoneOffset).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' }).replace(/ /g, '-').toUpperCase();
+        }
     });
     </script>
 </body>
