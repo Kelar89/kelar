@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Generator Biodata Multi-Bahasa (Final)</title>
+    <title>Generator Biodata Multi-Bahasa (Final V.2)</title>
     <style>
         :root {
             --primary-color: #007bff;
@@ -47,6 +47,10 @@
             border-radius: 5px;
             box-sizing: border-box;
             font-size: 1em;
+        }
+        input[readonly] {
+            background-color: #e9ecef;
+            cursor: not-allowed;
         }
         .btn {
             display: block;
@@ -223,8 +227,8 @@
                 <input type="number" id="weight" value="57">
                 <label for="height">Tinggi Badan (CM)</label>
                 <input type="number" id="height" value="158">
-                <label for="age">Umur</label>
-                <input type="number" id="age" value="43">
+                <label for="age">Umur (Otomatis)</label>
+                <input type="text" id="age" value="43" readonly>
                 <label for="education">Pendidikan Terakhir</label>
                 <input type="text" id="education">
             </div>
@@ -239,6 +243,22 @@
                 <input type="date" id="expiry_date" value="2030-03-04">
                 <label for="issue_place">Tempat Dikeluarkan</label>
                 <input type="text" id="issue_place" value="BEKASI">
+            </div>
+
+            <div class="form-section">
+                <h2>Keahlian Bahasa</h2>
+                <label for="arabic_skill_level">Keahlian Bahasa Arab</label>
+                <select id="arabic_skill_level">
+                    <option value="poor">Kurang</option>
+                    <option value="fair">Cukup</option>
+                    <option value="fluent" selected>Lancar</option>
+                </select>
+                <label for="english_skill_level">Keahlian Bahasa Inggris</label>
+                <select id="english_skill_level">
+                    <option value="poor">Kurang</option>
+                    <option value="fair" selected>Cukup</option>
+                    <option value="fluent">Lancar</option>
+                </select>
             </div>
 
             <div class="form-section">
@@ -325,15 +345,15 @@
                         <thead>
                             <tr style="font-weight: bold;">
                                 <th style="font-size:12px" data-key="language_table_header_lang"></th>
-                                <th style="font-size:12px">Arabic</th>
-                                <th style="font-size:12px">English</th>
+                                <th style="font-size:12px" data-key="language_table_header_arabic"></th>
+                                <th style="font-size:12px" data-key="language_table_header_english"></th>
                                 <th style="text-align: center;" dir="rtl" data-key-rtl="language_table_header_lang_rtl"></th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr><td style="font-weight: bold;" data-key="language_level_poor"></td><td style="text-align: center;">✔</td><td style="text-align: center;"></td><td class="output-arabic-col" dir="rtl" data-key-rtl="language_level_poor_rtl"></td></tr>
-                            <tr><td style="font-weight: bold;" data-key="language_level_fair"></td><td style="text-align: center;"></td><td style="text-align: center;">✔</td><td class="output-arabic-col" dir="rtl" data-key-rtl="language_level_fair_rtl"></td></tr>
-                            <tr><td style="font-weight: bold;" data-key="language_level_fluent"></td><td style="text-align: center;"></td><td style="text-align: center;"></td><td class="output-arabic-col" dir="rtl" data-key-rtl="language_level_fluent_rtl"></td></tr>
+                            <tr><td style="font-weight: bold;" data-key="language_level_poor"></td><td id="skill_arabic_poor" style="text-align: center;"></td><td id="skill_english_poor" style="text-align: center;"></td><td class="output-arabic-col" dir="rtl" data-key-rtl="language_level_poor_rtl"></td></tr>
+                            <tr><td style="font-weight: bold;" data-key="language_level_fair"></td><td id="skill_arabic_fair" style="text-align: center;"></td><td id="skill_english_fair" style="text-align: center;"></td><td class="output-arabic-col" dir="rtl" data-key-rtl="language_level_fair_rtl"></td></tr>
+                            <tr><td style="font-weight: bold;" data-key="language_level_fluent"></td><td id="skill_arabic_fluent" style="text-align: center;"></td><td id="skill_english_fluent" style="text-align: center;"></td><td class="output-arabic-col" dir="rtl" data-key-rtl="language_level_fluent_rtl"></td></tr>
                         </tbody>
                     </table>
                 </div>
@@ -355,7 +375,7 @@
                 applicant_details_title: "Detail Pelamar", nationality_label: "Kewarganegaraan", religion_label: "Agama", dob_label: "Tanggal Lahir", pob_label: "Tempat Lahir",
                 living_town_label: "Kota Tinggal", marital_status_label: "Status Pernikahan", children_label: "Jumlah Anak", weight_label: "Berat Badan", height_label: "Tinggi Badan", age_label: "Umur", education_label: "Pendidikan",
                 language_title: "Bahasa", experience_title: "PENGALAMAN",
-                language_table_header_lang: "Bahasa", language_level_poor: "Kurang", language_level_fair: "Cukup", language_level_fluent: "Lancar",
+                language_table_header_lang: "Level", language_table_header_arabic: "Arab", language_table_header_english: "Inggris", language_level_poor: "Kurang", language_level_fair: "Cukup", language_level_fluent: "Lancar",
             },
             en: {
                 post_applied_label: "POST APPLIED FOR", salary_label: "MONTHLY SALARY", contract_label: "CONTRACT PERIOD",
@@ -364,7 +384,7 @@
                 applicant_details_title: "Details of Applicant", nationality_label: "Nationality", religion_label: "Religion", dob_label: "Date of Birth", pob_label: "Place of Birth",
                 living_town_label: "Living Town", marital_status_label: "Marital Status", children_label: "No. of Children", weight_label: "Weight", height_label: "Height", age_label: "Age", education_label: "Educational Qualification",
                 language_title: "Language", experience_title: "EXPERIENCE",
-                language_table_header_lang: "Language", language_level_poor: "Poor", language_level_fair: "Fair", language_level_fluent: "Fluent",
+                language_table_header_lang: "Level", language_table_header_arabic: "Arabic", language_table_header_english: "English", language_level_poor: "Poor", language_level_fair: "Fair", language_level_fluent: "Fluent",
             },
             ar: {
                 post_applied_label_rtl: "الوظيفة", salary_label_rtl: "الراتب الشهري", contract_label_rtl: "مدة العقد",
@@ -373,7 +393,7 @@
                 applicant_details_title_rtl: "بيانات صاحب الطالب", nationality_label_rtl: "الجنسية", religion_label_rtl: "الديانة", dob_label_rtl: "تاريخ الميلاد", pob_label_rtl: "مكان الميلاد",
                 living_town_label_rtl: "مكان السكن", marital_status_label_rtl: "الحالة الإجتماعية", children_label_rtl: "عدد الأطفال", weight_label_rtl: "الوزن", height_label_rtl: "الطول", age_label_rtl: "العمر", education_label_rtl: "الدرجة العلمية",
                 language_title_rtl: "إجادة اللغات", experience_title_rtl: "العمل السابق",
-                language_table_header_lang_rtl: "اللغات", language_level_poor_rtl: "لاشيء", language_level_fair_rtl: "وسط", language_level_fluent_rtl: "ممتاز",
+                language_table_header_lang_rtl: "المستوى", language_level_poor_rtl: "لاشيء", language_level_fair_rtl: "وسط", language_level_fluent_rtl: "ممتاز",
             },
             fr: {
                 post_applied_label: "POSTE DEMANDÉ", salary_label: "SALAIRE MENSUEL", contract_label: "DURÉE DU CONTRAT",
@@ -382,7 +402,7 @@
                 applicant_details_title: "Détails du candidat", nationality_label: "Nationalité", religion_label: "Religion", dob_label: "Date de naissance", pob_label: "Lieu de naissance",
                 living_town_label: "Ville de résidence", marital_status_label: "État civil", children_label: "Nombre d'enfants", weight_label: "Poids", height_label: "Taille", age_label: "Âge", education_label: "Niveau d'études",
                 language_title: "Langues", experience_title: "EXPÉRIENCE",
-                language_table_header_lang: "Langue", language_level_poor: "Faible", language_level_fair: "Moyen", language_level_fluent: "Courant",
+                language_table_header_lang: "Niveau", language_table_header_arabic: "Arabe", language_table_header_english: "Anglais", language_level_poor: "Faible", language_level_fair: "Moyen", language_level_fluent: "Courant",
             },
             de: {
                 post_applied_label: "BEWORBENE STELLE", salary_label: "MONATSGEHALT", contract_label: "VERTRAGSDAUER",
@@ -391,7 +411,7 @@
                 applicant_details_title: "Details des Bewerbers", nationality_label: "Staatsangehörigkeit", religion_label: "Religion", dob_label: "Geburtsdatum", pob_label: "Geburtsort",
                 living_town_label: "Wohnort", marital_status_label: "Familienstand", children_label: "Anzahl der Kinder", weight_label: "Gewicht", height_label: "Größe", age_label: "Alter", education_label: "Bildungsabschluss",
                 language_title: "Sprachen", experience_title: "ERFAHRUNG",
-                language_table_header_lang: "Sprache", language_level_poor: "Gering", language_level_fair: "Mittel", language_level_fluent: "Fließend",
+                language_table_header_lang: "Niveau", language_table_header_arabic: "Arabisch", language_table_header_english: "Englisch", language_level_poor: "Gering", language_level_fair: "Mittel", language_level_fluent: "Fließend",
             }
         };
 
@@ -401,6 +421,8 @@
         const editBtn = document.getElementById('edit-btn');
         const printBtn = document.getElementById('print-btn');
         const languageSelector = document.querySelector('.language-selector-container');
+        const dobInput = document.getElementById('dob');
+        const ageInput = document.getElementById('age');
 
         const agencyLogoInput = document.getElementById('agency_logo');
         const previewLogo = document.getElementById('preview_logo');
@@ -423,6 +445,28 @@
         setupPreview(photoHeadshotInput, previewHeadshot);
         setupPreview(photoFullbodyInput, previewFullbody);
 
+        function calculateAge(dateString) {
+            if (!dateString) return '';
+            const birthDate = new Date(dateString);
+            const today = new Date();
+            let age = today.getFullYear() - birthDate.getFullYear();
+            const m = today.getMonth() - birthDate.getMonth();
+            if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+                age--;
+            }
+            return age;
+        }
+
+        dobInput.addEventListener('change', () => {
+            const age = calculateAge(dobInput.value);
+            ageInput.value = age ? age : '';
+        });
+        
+        // Initial age calculation
+        if(dobInput.value) {
+            ageInput.value = calculateAge(dobInput.value);
+        }
+
         biodataForm.addEventListener('submit', event => {
             event.preventDefault();
             const data = {
@@ -430,16 +474,29 @@
                 ref_no: document.getElementById('ref_no').value, name: document.getElementById('name').value, father_name: document.getElementById('father_name').value, grandfather_name: document.getElementById('grandfather_name').value,
                 nationality: document.getElementById('nationality').value, religion: document.getElementById('religion').value, dob: formatDate(document.getElementById('dob').value), pob: document.getElementById('pob').value,
                 living_town: document.getElementById('living_town').value, marital_status: document.getElementById('marital_status').value, children: document.getElementById('children').value,
-                weight: document.getElementById('weight').value + ' KG', height: document.getElementById('height').value + ' CM', age: document.getElementById('age').value + ' YEAR', education: document.getElementById('education').value,
+                weight: document.getElementById('weight').value + ' KG', height: document.getElementById('height').value + ' CM', age: ageInput.value + ' YEAR', education: document.getElementById('education').value,
                 passport_no: document.getElementById('passport_no').value, issue_date: formatDate(document.getElementById('issue_date').value), expiry_date: formatDate(document.getElementById('expiry_date').value), issue_place: document.getElementById('issue_place').value,
-                experience: document.getElementById('experience').value.replace(/\n/g, '<br>')
+                experience: document.getElementById('experience').value.replace(/\n/g, '<br>'),
+                arabic_skill: document.getElementById('arabic_skill_level').value,
+                english_skill: document.getElementById('english_skill_level').value
             };
             for (const key in data) { if (document.getElementById(`output_${key}`)) document.getElementById(`output_${key}`).innerHTML = data[key]; }
-            document.getElementById('output_photo_headshot').src = previewHeadshot.src || 'https://via.placeholder.com/150x156';
-            document.getElementById('output_photo_fullbody').src = previewFullbody.src || 'https://via.placeholder.com/336x495';
+            
+            // Handle language skills checkmarks
+            ['poor', 'fair', 'fluent'].forEach(level => {
+                document.getElementById(`skill_arabic_${level}`).textContent = '';
+                document.getElementById(`skill_english_${level}`).textContent = '';
+            });
+            document.getElementById(`skill_arabic_${data.arabic_skill}`).textContent = '✔';
+            document.getElementById(`skill_english_${data.english_skill}`).textContent = '✔';
+
+
+            document.getElementById('output_photo_headshot').src = previewHeadshot.src || 'https://via.placeholder.com/150x156?text=No+Photo';
+            document.getElementById('output_photo_fullbody').src = previewFullbody.src || 'https://via.placeholder.com/336x495?text=No+Photo';
             const logoOutput = document.getElementById('agency-logo-output');
             if (previewLogo.src && previewLogo.src.startsWith('data:image')) { logoOutput.src = previewLogo.src; logoOutput.style.display = 'block'; }
             else { logoOutput.style.display = 'none'; }
+            
             formContainer.style.display = 'none';
             outputContainer.style.display = 'block';
             window.scrollTo(0, 0);
@@ -458,6 +515,7 @@
             const [leftLang, rightLang] = langPair.split('-');
             const leftDict = translations[leftLang] || translations.id;
             const rightDict = translations[rightLang] || translations.ar;
+            
             document.querySelectorAll('[data-key]').forEach(element => {
                 const key = element.dataset.key;
                 if (leftDict[key]) element.textContent = leftDict[key];
