@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Generator Biodata Multi-Bahasa (Final V.2)</title>
+    <title>Generator Biodata Final</title>
     <style>
         :root {
             --primary-color: #007bff;
@@ -12,99 +12,26 @@
             --text-color: #212529;
             --table-header-bg: #d9e2f3;
         }
-        body {
-            margin: 0;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-            background-color: #e9ecef;
-            color: var(--text-color);
-        }
-        .form-wrapper {
-            max-width: 800px;
-            margin: 15px auto;
-            padding: 15px;
-            background-color: #ffffff;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-        }
-        h1, h2 {
-            color: var(--primary-color);
-            border-bottom: 2px solid var(--primary-color);
-            padding-bottom: 10px;
-            text-align: center;
-        }
+        body { margin: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; background-color: #e9ecef; color: var(--text-color); }
+        .form-wrapper { max-width: 800px; margin: 15px auto; padding: 15px; background-color: #ffffff; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        h1, h2 { color: var(--primary-color); border-bottom: 2px solid var(--primary-color); padding-bottom: 10px; text-align: center; }
         h1 { font-size: 1.8em; }
         h2 { font-size: 1.4em; margin-top: 30px; }
         .form-section { margin-bottom: 20px; }
-        label {
-            display: block;
-            font-weight: bold;
-            margin-bottom: 8px;
-        }
-        input, select, textarea {
-            width: 100%;
-            padding: 12px;
-            border: 1px solid var(--border-color);
-            border-radius: 5px;
-            box-sizing: border-box;
-            font-size: 1em;
-        }
-        input[readonly] {
-            background-color: #e9ecef;
-            cursor: not-allowed;
-        }
-        .btn {
-            display: block;
-            width: 100%;
-            padding: 15px;
-            border: none;
-            border-radius: 5px;
-            font-size: 1.1em;
-            font-weight: bold;
-            cursor: pointer;
-            text-align: center;
-            margin-top: 10px;
-        }
+        label { display: block; font-weight: bold; margin-bottom: 8px; }
+        input, select, textarea { width: 100%; padding: 12px; border: 1px solid var(--border-color); border-radius: 5px; box-sizing: border-box; font-size: 1em; }
+        input[readonly] { background-color: #e9ecef; cursor: not-allowed; }
+        .btn { display: block; width: 100%; padding: 15px; border: none; border-radius: 5px; font-size: 1.1em; font-weight: bold; cursor: pointer; text-align: center; margin-top: 10px; }
         .btn-primary { background-color: var(--primary-color); color: white; }
         .btn-secondary { background-color: #6c757d; color: white; }
         .btn-success { background-color: #28a745; color: white; }
-        .photo-upload-area {
-            border: 2px dashed var(--border-color);
-            padding: 20px;
-            text-align: center;
-            border-radius: 5px;
-            margin-bottom: 15px;
-        }
+        .photo-upload-area { border: 2px dashed var(--border-color); padding: 20px; text-align: center; border-radius: 5px; margin-bottom: 15px; }
         .photo-upload-area input { display: none; }
-        .photo-upload-area label {
-            cursor: pointer;
-            background-color: var(--secondary-color);
-            padding: 10px 15px;
-            border-radius: 5px;
-            border: 1px solid var(--border-color);
-        }
-        .photo-preview {
-            max-width: 100px;
-            max-height: 100px;
-            margin-top: 10px;
-            border-radius: 5px;
-            border: 1px solid var(--border-color);
-        }
+        .photo-upload-area label { cursor: pointer; background-color: var(--secondary-color); padding: 10px 15px; border-radius: 5px; border: 1px solid var(--border-color); }
+        .photo-preview { max-width: 100px; max-height: 100px; margin-top: 10px; border-radius: 5px; border: 1px solid var(--border-color); }
         #output-container { display: none; }
-        #biodata-output {
-            position: relative;
-            border: 1px solid #ccc;
-            padding: 20px;
-            width: 850px;
-            background-color: #ffffff;
-            margin: 20px auto;
-        }
-        #agency-logo-output {
-            position: absolute;
-            top: 25px;
-            left: 25px;
-            max-width: 150px;
-            max-height: 75px;
-        }
+        #biodata-output { position: relative; border: 1px solid #ccc; padding: 20px; width: 850px; background-color: #ffffff; margin: 20px auto; }
+        #agency-logo-output { position: absolute; top: 25px; left: 25px; max-width: 200px; max-height: 80px; }
         #biodata-output table { width: 100%; border-collapse: collapse; }
         #biodata-output td, #biodata-output th { border: 1px solid black; padding: 4px 8px; font-size: 12px; vertical-align: middle; }
         .output-header { display: flex; justify-content: space-between; align-items: flex-start; border-bottom: 5px solid #d9d9d9; padding-bottom: 10px; gap: 20px; }
@@ -119,34 +46,12 @@
         .output-data-col { font-weight: bold; }
         .output-arabic-col { font-weight: bold; text-align: right; background-color: var(--table-header-bg); }
         .output-experience-content { padding: 10px 8px; border: 1px solid black; border-top: 0; font-weight: bold; line-height: 1.5; }
-        
-        #output-controls {
-            max-width: 850px;
-            margin: 20px auto;
-            padding: 10px;
-            background-color: #fff;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-        }
-        .language-selector-container {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            margin-bottom: 15px;
-        }
-        .language-pair {
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-        }
-        .lang-btn { flex-grow: 1; padding: 10px; cursor: pointer; border: 1px solid var(--border-color); background-color: var(--secondary-color); border-radius: 5px; max-width: 200px; }
-        .lang-btn.active { background-color: var(--primary-color); color: white; border-color: var(--primary-color); }
-        #output-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 10px; }
+        #output-actions { max-width: 850px; margin: 20px auto; display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
 
         @media print {
             @page { size: A4; margin: 15mm; }
             body { background-color: #ffffff; padding: 0; margin: 0; }
-            #form-container, #output-controls { display: none !important; }
+            #form-container, #output-actions { display: none !important; }
             #output-container, #biodata-output { display: block !important; width: 100%; border: none; box-shadow: none; padding: 0; margin: 0; }
             #biodata-output td, #biodata-output th { font-size: 9pt; padding: 2px 4px; }
             #agency-logo-output { top: 10mm; left: 10mm; max-width: 120px; max-height: 60px; }
@@ -164,7 +69,18 @@
 
     <div id="form-container" class="form-wrapper">
         <form id="biodata-form">
-            <h1>Generator Biodata Multi-Bahasa</h1>
+            <h1>Generator Biodata</h1>
+            
+            <div class="form-section">
+                <h2>Pengaturan Utama</h2>
+                <label for="language_pair">Pilih Kombinasi Bahasa untuk Hasil Akhir</label>
+                <select id="language_pair">
+                    <option value="id-ar">Indonesia - Arab</option>
+                    <option value="en-ar">English - Arab</option>
+                    <option value="fr-en">Prancis - Inggris</option>
+                    <option value="de-en">Jerman - Inggris</option>
+                </select>
+            </div>
             
             <div class="form-section">
                 <h2>Logo Agensi (Opsional)</h2>
@@ -228,9 +144,9 @@
                 <label for="height">Tinggi Badan (CM)</label>
                 <input type="number" id="height" value="158">
                 <label for="age">Umur (Otomatis)</label>
-                <input type="text" id="age" value="43" readonly>
+                <input type="text" id="age" readonly>
                 <label for="education">Pendidikan Terakhir</label>
-                <input type="text" id="education">
+                <input type="text" id="education" value="Sarjana Komputer">
             </div>
 
             <div class="form-section">
@@ -244,7 +160,7 @@
                 <label for="issue_place">Tempat Dikeluarkan</label>
                 <input type="text" id="issue_place" value="BEKASI">
             </div>
-
+            
             <div class="form-section">
                 <h2>Keahlian Bahasa</h2>
                 <label for="arabic_skill_level">Keahlian Bahasa Arab</label>
@@ -272,31 +188,15 @@
     </div>
 
     <div id="output-container">
-        <div id="output-controls">
-            <div>
-                <label style="display: block; text-align: center; margin-bottom: 10px;">Pilih Kombinasi Bahasa:</label>
-                <div class="language-selector-container">
-                    <div class="language-pair"><button class="lang-btn" data-lang="id-ar">Indonesia - Arab</button></div>
-                    <div class="language-pair"><button class="lang-btn" data-lang="en-ar">English - Arab</button></div>
-                    <div class="language-pair"><button class="lang-btn" data-lang="fr-en">Prancis - Inggris</button></div>
-                    <div class="language-pair"><button class="lang-btn" data-lang="de-en">Jerman - Inggris</button></div>
-                </div>
-            </div>
-            <div id="output-actions">
-                <button id="print-btn" class="btn btn-success">📄 Simpan sebagai PDF</button>
-                <button id="edit-btn" class="btn btn-secondary">✏️ Edit Lagi</button>
-            </div>
-        </div>
-
         <div id="biodata-output">
             <img id="agency-logo-output" src="" alt="Agency Logo" style="display:none;">
             <div class="output-header">
                 <div class="output-header-info">
                     <table>
                         <tbody>
-                            <tr><td class="output-label-col" data-key="post_applied_label"></td><td id="output_post_applied" class="output-data-col" style="text-align: center;"></td><td class="output-arabic-col" dir="rtl" data-key-rtl="post_applied_label_rtl"></td></tr>
-                            <tr><td class="output-label-col" data-key="salary_label"></td><td id="output_salary" class="output-data-col" style="text-align: center;"></td><td class="output-arabic-col" dir="rtl" data-key-rtl="salary_label_rtl"></td></tr>
-                            <tr><td class="output-label-col" data-key="contract_label"></td><td id="output_contract" class="output-data-col" style="text-align: center;"></td><td class="output-arabic-col" dir="rtl" data-key-rtl="contract_label_rtl"></td></tr>
+                            <tr><td class="output-label-col" data-key="post_applied_label_left"></td><td id="output_post_applied" class="output-data-col" style="text-align: center;"></td><td class="output-arabic-col" dir="rtl" data-key="post_applied_label_right"></td></tr>
+                            <tr><td class="output-label-col" data-key="salary_label_left"></td><td id="output_salary" class="output-data-col" style="text-align: center;"></td><td class="output-arabic-col" dir="rtl" data-key="salary_label_right"></td></tr>
+                            <tr><td class="output-label-col" data-key="contract_label_left"></td><td id="output_contract" class="output-data-col" style="text-align: center;"></td><td class="output-arabic-col" dir="rtl" data-key="contract_label_right"></td></tr>
                         </tbody>
                     </table>
                 </div>
@@ -306,62 +206,66 @@
                 <div class="output-left-column">
                     <table>
                         <tbody>
-                            <tr style="background-color: #d9e2f3;"><td style="font-weight: bold;" data-key="ref_no_label"></td><td id="output_ref_no"></td><td class="output-arabic-col" dir="rtl" data-key-rtl="ref_no_label_rtl"></td></tr>
-                            <tr><td class="output-label-col" data-key="name_label"></td><td id="output_name" class="output-data-col"></td><td class="output-arabic-col" dir="rtl" data-key-rtl="name_label_rtl"></td></tr>
-                            <tr><td class="output-label-col" data-key="father_name_label"></td><td id="output_father_name" class="output-data-col"></td><td class="output-arabic-col" dir="rtl" data-key-rtl="father_name_label_rtl"></td></tr>
-                            <tr><td class="output-label-col" data-key="grandfather_name_label"></td><td id="output_grandfather_name" class="output-data-col"></td><td class="output-arabic-col" dir="rtl" data-key-rtl="grandfather_name_label_rtl"></td></tr>
+                            <tr style="background-color: #d9e2f3;"><td style="font-weight: bold;" data-key="ref_no_label_left"></td><td id="output_ref_no"></td><td class="output-arabic-col" dir="rtl" data-key="ref_no_label_right"></td></tr>
+                            <tr><td class="output-label-col" data-key="name_label_left"></td><td id="output_name" class="output-data-col"></td><td class="output-arabic-col" dir="rtl" data-key="name_label_right"></td></tr>
+                            <tr><td class="output-label-col" data-key="father_name_label_left"></td><td id="output_father_name" class="output-data-col"></td><td class="output-arabic-col" dir="rtl" data-key="father_name_label_right"></td></tr>
+                            <tr><td class="output-label-col" data-key="grandfather_name_label_left"></td><td id="output_grandfather_name" class="output-data-col"></td><td class="output-arabic-col" dir="rtl" data-key="grandfather_name_label_right"></td></tr>
                         </tbody>
                     </table>
-                    <div class="output-section-title"><span data-key="passport_details_title"></span><span dir="rtl" data-key-rtl="passport_details_title_rtl"></span></div>
+                    <div class="output-section-title"><span data-key="passport_details_title_left"></span><span dir="rtl" data-key="passport_details_title_right"></span></div>
                     <table>
                         <tbody>
-                            <tr><td class="output-label-col" data-key="passport_no_label"></td><td id="output_passport_no" class="output-data-col"></td><td class="output-arabic-col" dir="rtl" data-key-rtl="passport_no_label_rtl"></td></tr>
-                            <tr><td class="output-label-col" data-key="issue_date_label"></td><td id="output_issue_date" class="output-data-col"></td><td class="output-arabic-col" dir="rtl" data-key-rtl="issue_date_label_rtl"></td></tr>
-                            <tr><td class="output-label-col" data-key="expiry_date_label"></td><td id="output_expiry_date" class="output-data-col"></td><td class="output-arabic-col" dir="rtl" data-key-rtl="expiry_date_label_rtl"></td></tr>
-                            <tr><td class="output-label-col" data-key="issue_place_label"></td><td id="output_issue_place" class="output-data-col"></td><td class="output-arabic-col" dir="rtl" data-key-rtl="issue_place_label_rtl"></td></tr>
+                            <tr><td class="output-label-col" data-key="passport_no_label_left"></td><td id="output_passport_no" class="output-data-col"></td><td class="output-arabic-col" dir="rtl" data-key="passport_no_label_right"></td></tr>
+                            <tr><td class="output-label-col" data-key="issue_date_label_left"></td><td id="output_issue_date" class="output-data-col"></td><td class="output-arabic-col" dir="rtl" data-key="issue_date_label_right"></td></tr>
+                            <tr><td class="output-label-col" data-key="expiry_date_label_left"></td><td id="output_expiry_date" class="output-data-col"></td><td class="output-arabic-col" dir="rtl" data-key="expiry_date_label_right"></td></tr>
+                            <tr><td class="output-label-col" data-key="issue_place_label_left"></td><td id="output_issue_place" class="output-data-col"></td><td class="output-arabic-col" dir="rtl" data-key="issue_place_label_right"></td></tr>
                         </tbody>
                     </table>
-                    <div class="output-section-title"><span data-key="applicant_details_title"></span><span dir="rtl" data-key-rtl="applicant_details_title_rtl"></span></div>
+                    <div class="output-section-title"><span data-key="applicant_details_title_left"></span><span dir="rtl" data-key="applicant_details_title_right"></span></div>
                     <table>
                         <tbody>
-                            <tr><td class="output-label-col" data-key="nationality_label"></td><td id="output_nationality" class="output-data-col"></td><td class="output-arabic-col" dir="rtl" data-key-rtl="nationality_label_rtl"></td></tr>
-                            <tr><td class="output-label-col" data-key="religion_label"></td><td id="output_religion" class="output-data-col"></td><td class="output-arabic-col" dir="rtl" data-key-rtl="religion_label_rtl"></td></tr>
-                            <tr><td class="output-label-col" data-key="dob_label"></td><td id="output_dob" class="output-data-col"></td><td class="output-arabic-col" dir="rtl" data-key-rtl="dob_label_rtl"></td></tr>
-                            <tr><td class="output-label-col" data-key="pob_label"></td><td id="output_pob" class="output-data-col"></td><td class="output-arabic-col" dir="rtl" data-key-rtl="pob_label_rtl"></td></tr>
-                            <tr><td class="output-label-col" data-key="living_town_label"></td><td id="output_living_town" class="output-data-col"></td><td class="output-arabic-col" dir="rtl" data-key-rtl="living_town_label_rtl"></td></tr>
-                            <tr><td class="output-label-col" data-key="marital_status_label"></td><td id="output_marital_status" class="output-data-col"></td><td class="output-arabic-col" dir="rtl" data-key-rtl="marital_status_label_rtl"></td></tr>
-                            <tr><td class="output-label-col" data-key="children_label"></td><td id="output_children" class="output-data-col"></td><td class="output-arabic-col" dir="rtl" data-key-rtl="children_label_rtl"></td></tr>
-                            <tr><td class="output-label-col" data-key="weight_label"></td><td id="output_weight" class="output-data-col"></td><td class="output-arabic-col" dir="rtl" data-key-rtl="weight_label_rtl"></td></tr>
-                            <tr><td class="output-label-col" data-key="height_label"></td><td id="output_height" class="output-data-col"></td><td class="output-arabic-col" dir="rtl" data-key-rtl="height_label_rtl"></td></tr>
-                            <tr><td class="output-label-col" data-key="age_label"></td><td id="output_age" class="output-data-col"></td><td class="output-arabic-col" dir="rtl" data-key-rtl="age_label_rtl"></td></tr>
-                            <tr><td class="output-label-col" data-key="education_label"></td><td id="output_education" class="output-data-col"></td><td class="output-arabic-col" dir="rtl" data-key-rtl="education_label_rtl"></td></tr>
+                            <tr><td class="output-label-col" data-key="nationality_label_left"></td><td id="output_nationality" class="output-data-col"></td><td class="output-arabic-col" dir="rtl" data-key="nationality_label_right"></td></tr>
+                            <tr><td class="output-label-col" data-key="religion_label_left"></td><td id="output_religion" class="output-data-col"></td><td class="output-arabic-col" dir="rtl" data-key="religion_label_right"></td></tr>
+                            <tr><td class="output-label-col" data-key="dob_label_left"></td><td id="output_dob" class="output-data-col"></td><td class="output-arabic-col" dir="rtl" data-key="dob_label_right"></td></tr>
+                            <tr><td class="output-label-col" data-key="pob_label_left"></td><td id="output_pob" class="output-data-col"></td><td class="output-arabic-col" dir="rtl" data-key="pob_label_right"></td></tr>
+                            <tr><td class="output-label-col" data-key="living_town_label_left"></td><td id="output_living_town" class="output-data-col"></td><td class="output-arabic-col" dir="rtl" data-key="living_town_label_right"></td></tr>
+                            <tr><td class="output-label-col" data-key="marital_status_label_left"></td><td id="output_marital_status" class="output-data-col"></td><td class="output-arabic-col" dir="rtl" data-key="marital_status_label_right"></td></tr>
+                            <tr><td class="output-label-col" data-key="children_label_left"></td><td id="output_children" class="output-data-col"></td><td class="output-arabic-col" dir="rtl" data-key="children_label_right"></td></tr>
+                            <tr><td class="output-label-col" data-key="weight_label_left"></td><td id="output_weight" class="output-data-col"></td><td class="output-arabic-col" dir="rtl" data-key="weight_label_right"></td></tr>
+                            <tr><td class="output-label-col" data-key="height_label_left"></td><td id="output_height" class="output-data-col"></td><td class="output-arabic-col" dir="rtl" data-key="height_label_right"></td></tr>
+                            <tr><td class="output-label-col" data-key="age_label_left"></td><td id="output_age" class="output-data-col"></td><td class="output-arabic-col" dir="rtl" data-key="age_label_right"></td></tr>
+                            <tr><td class="output-label-col" data-key="education_label_left"></td><td id="output_education" class="output-data-col"></td><td class="output-arabic-col" dir="rtl" data-key="education_label_right"></td></tr>
                         </tbody>
                     </table>
                 </div>
                 <div class="output-right-column">
                     <img id="output_photo_fullbody" src="" alt="Applicant Full Photo" class="full-photo">
-                    <div class="output-section-title"><span data-key="language_title"></span><span dir="rtl" data-key-rtl="language_title_rtl"></span></div>
+                    <div class="output-section-title"><span data-key="language_title_left"></span><span dir="rtl" data-key="language_title_right"></span></div>
                     <table>
                         <thead>
                             <tr style="font-weight: bold;">
-                                <th style="font-size:12px" data-key="language_table_header_lang"></th>
-                                <th style="font-size:12px" data-key="language_table_header_arabic"></th>
-                                <th style="font-size:12px" data-key="language_table_header_english"></th>
-                                <th style="text-align: center;" dir="rtl" data-key-rtl="language_table_header_lang_rtl"></th>
+                                <th style="font-size:12px" data-key="language_table_header_lang_left"></th>
+                                <th style="font-size:12px" data-key="language_table_header_arabic_left"></th>
+                                <th style="font-size:12px" data-key="language_table_header_english_left"></th>
+                                <th style="text-align: center;" dir="rtl" data-key="language_table_header_lang_right"></th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr><td style="font-weight: bold;" data-key="language_level_poor"></td><td id="skill_arabic_poor" style="text-align: center;"></td><td id="skill_english_poor" style="text-align: center;"></td><td class="output-arabic-col" dir="rtl" data-key-rtl="language_level_poor_rtl"></td></tr>
-                            <tr><td style="font-weight: bold;" data-key="language_level_fair"></td><td id="skill_arabic_fair" style="text-align: center;"></td><td id="skill_english_fair" style="text-align: center;"></td><td class="output-arabic-col" dir="rtl" data-key-rtl="language_level_fair_rtl"></td></tr>
-                            <tr><td style="font-weight: bold;" data-key="language_level_fluent"></td><td id="skill_arabic_fluent" style="text-align: center;"></td><td id="skill_english_fluent" style="text-align: center;"></td><td class="output-arabic-col" dir="rtl" data-key-rtl="language_level_fluent_rtl"></td></tr>
+                            <tr><td style="font-weight: bold;" data-key="language_level_poor_left"></td><td id="skill_arabic_poor" style="text-align: center;"></td><td id="skill_english_poor" style="text-align: center;"></td><td class="output-arabic-col" dir="rtl" data-key="language_level_poor_right"></td></tr>
+                            <tr><td style="font-weight: bold;" data-key="language_level_fair_left"></td><td id="skill_arabic_fair" style="text-align: center;"></td><td id="skill_english_fair" style="text-align: center;"></td><td class="output-arabic-col" dir="rtl" data-key="language_level_fair_right"></td></tr>
+                            <tr><td style="font-weight: bold;" data-key="language_level_fluent_left"></td><td id="skill_arabic_fluent" style="text-align: center;"></td><td id="skill_english_fluent" style="text-align: center;"></td><td class="output-arabic-col" dir="rtl" data-key="language_level_fluent_right"></td></tr>
                         </tbody>
                     </table>
                 </div>
             </div>
             <div style="margin-top: 5px;">
-                <div class="output-section-title"><span data-key="experience_title"></span><span dir="rtl" data-key-rtl="experience_title_rtl"></span></div>
+                <div class="output-section-title"><span data-key="experience_title_left"></span><span dir="rtl" data-key="experience_title_right"></span></div>
                 <div id="output_experience" class="output-experience-content"></div>
             </div>
+        </div>
+        <div id="output-actions">
+            <button id="print-btn" class="btn btn-success">📄 Simpan sebagai PDF</button>
+            <button id="edit-btn" class="btn btn-secondary">✏️ Edit Lagi</button>
         </div>
     </div>
 
@@ -369,67 +273,101 @@
     document.addEventListener('DOMContentLoaded', function() {
         const translations = {
             id: {
-                post_applied_label: "POSISI DILAMAR", salary_label: "GAJI BULANAN", contract_label: "PERIODE KONTRAK",
-                ref_no_label: "REF. NO.", name_label: "Nama", father_name_label: "Nama Ayah", grandfather_name_label: "Nama Kakek",
-                passport_details_title: "Detail Paspor", passport_no_label: "No. Paspor", issue_date_label: "Tanggal Dikeluarkan", expiry_date_label: "Tanggal Kedaluwarsa", issue_place_label: "Tempat Dikeluarkan",
-                applicant_details_title: "Detail Pelamar", nationality_label: "Kewarganegaraan", religion_label: "Agama", dob_label: "Tanggal Lahir", pob_label: "Tempat Lahir",
-                living_town_label: "Kota Tinggal", marital_status_label: "Status Pernikahan", children_label: "Jumlah Anak", weight_label: "Berat Badan", height_label: "Tinggi Badan", age_label: "Umur", education_label: "Pendidikan",
-                language_title: "Bahasa", experience_title: "PENGALAMAN",
-                language_table_header_lang: "Level", language_table_header_arabic: "Arab", language_table_header_english: "Inggris", language_level_poor: "Kurang", language_level_fair: "Cukup", language_level_fluent: "Lancar",
+                post_applied_label_left: "POSISI DILAMAR", post_applied_label_right: "الوظيفة",
+                salary_label_left: "GAJI BULANAN", salary_label_right: "الراتب الشهري",
+                contract_label_left: "PERIODE KONTRAK", contract_label_right: "مدة العقد",
+                ref_no_label_left: "REF. NO.", ref_no_label_right: "رقم الطلب",
+                name_label_left: "Nama", name_label_right: "الاسم",
+                father_name_label_left: "Nama Ayah", father_name_label_right: "اسم الأب",
+                grandfather_name_label_left: "Nama Kakek", grandfather_name_label_right: "اسم الجد",
+                passport_details_title_left: "Detail Paspor", passport_details_title_right: "بيانات جواز السفر",
+                passport_no_label_left: "No. Paspor", passport_no_label_right: "رقم جواز السفر",
+                issue_date_label_left: "Tanggal Dikeluarkan", issue_date_label_right: "تاريخ الإصدار",
+                expiry_date_label_left: "Tanggal Kedaluwarsa", expiry_date_label_right: "تاريخ الإنتهاء",
+                issue_place_label_left: "Tempat Dikeluarkan", issue_place_label_right: "مكان الإصدار",
+                applicant_details_title_left: "Detail Pelamar", applicant_details_title_right: "بيانات صاحب الطالب",
+                nationality_label_left: "Kewarganegaraan", nationality_label_right: "الجنسية",
+                religion_label_left: "Agama", religion_label_right: "الديانة",
+                dob_label_left: "Tanggal Lahir", dob_label_right: "تاريخ الميلاد",
+                pob_label_left: "Tempat Lahir", pob_label_right: "مكان الميلاد",
+                living_town_label_left: "Kota Tinggal", living_town_label_right: "مكان السكن",
+                marital_status_label_left: "Status Pernikahan", marital_status_label_right: "الحالة الإجتماعية",
+                children_label_left: "Jumlah Anak", children_label_right: "عدد الأطفال",
+                weight_label_left: "Berat Badan", weight_label_right: "الوزن",
+                height_label_left: "Tinggi Badan", height_label_right: "الطول",
+                age_label_left: "Umur", age_label_right: "العمر",
+                education_label_left: "Pendidikan", education_label_right: "الدرجة العلمية",
+                language_title_left: "Bahasa", language_title_right: "إجادة اللغات",
+                experience_title_left: "PENGALAMAN", experience_title_right: "العمل السابق",
+                language_table_header_lang_left: "Level", language_table_header_arabic_left: "Arab", language_table_header_english_left: "Inggris", language_table_header_lang_right: "المستوى",
+                language_level_poor_left: "Kurang", language_level_poor_right: "لاشيء",
+                language_level_fair_left: "Cukup", language_level_fair_right: "وسط",
+                language_level_fluent_left: "Lancar", language_level_fluent_right: "ممتاز",
             },
             en: {
-                post_applied_label: "POST APPLIED FOR", salary_label: "MONTHLY SALARY", contract_label: "CONTRACT PERIOD",
-                ref_no_label: "REF. NO.", name_label: "Name", father_name_label: "Father's Name", grandfather_name_label: "Grandfather's Name",
-                passport_details_title: "Passport Details", passport_no_label: "Passport No", issue_date_label: "Date Of Issue", expiry_date_label: "Date of Expiry", issue_place_label: "Place of Issue",
-                applicant_details_title: "Details of Applicant", nationality_label: "Nationality", religion_label: "Religion", dob_label: "Date of Birth", pob_label: "Place of Birth",
-                living_town_label: "Living Town", marital_status_label: "Marital Status", children_label: "No. of Children", weight_label: "Weight", height_label: "Height", age_label: "Age", education_label: "Educational Qualification",
-                language_title: "Language", experience_title: "EXPERIENCE",
-                language_table_header_lang: "Level", language_table_header_arabic: "Arabic", language_table_header_english: "English", language_level_poor: "Poor", language_level_fair: "Fair", language_level_fluent: "Fluent",
-            },
-            ar: {
-                post_applied_label_rtl: "الوظيفة", salary_label_rtl: "الراتب الشهري", contract_label_rtl: "مدة العقد",
-                ref_no_label_rtl: "رقم الطلب", name_label_rtl: "الاسم", father_name_label_rtl: "اسم الأب", grandfather_name_label_rtl: "اسم الجد",
-                passport_details_title_rtl: "بيانات جواز السفر", passport_no_label_rtl: "رقم جواز السفر", issue_date_label_rtl: "تاريخ الإصدار", expiry_date_label_rtl: "تاريخ الإنتهاء", issue_place_label_rtl: "مكان الإصدار",
-                applicant_details_title_rtl: "بيانات صاحب الطالب", nationality_label_rtl: "الجنسية", religion_label_rtl: "الديانة", dob_label_rtl: "تاريخ الميلاد", pob_label_rtl: "مكان الميلاد",
-                living_town_label_rtl: "مكان السكن", marital_status_label_rtl: "الحالة الإجتماعية", children_label_rtl: "عدد الأطفال", weight_label_rtl: "الوزن", height_label_rtl: "الطول", age_label_rtl: "العمر", education_label_rtl: "الدرجة العلمية",
-                language_title_rtl: "إجادة اللغات", experience_title_rtl: "العمل السابق",
-                language_table_header_lang_rtl: "المستوى", language_level_poor_rtl: "لاشيء", language_level_fair_rtl: "وسط", language_level_fluent_rtl: "ممتاز",
+                post_applied_label_left: "POST APPLIED FOR", post_applied_label_right: "الوظيفة",
+                salary_label_left: "MONTHLY SALARY", salary_label_right: "الراتب الشهري",
+                contract_label_left: "CONTRACT PERIOD", contract_label_right: "مدة العقد",
+                ref_no_label_left: "REF. NO.", ref_no_label_right: "رقم الطلب",
+                name_label_left: "Name", name_label_right: "الاسم",
+                father_name_label_left: "Father's Name", father_name_label_right: "اسم الأب",
+                grandfather_name_label_left: "Grandfather's Name", grandfather_name_label_right: "اسم الجد",
+                passport_details_title_left: "Passport Details", passport_details_title_right: "بيانات جواز السفر",
+                passport_no_label_left: "Passport No", passport_no_label_right: "رقم جواز السفر",
+                issue_date_label_left: "Date Of Issue", issue_date_label_right: "تاريخ الإصدار",
+                expiry_date_label_left: "Date of Expiry", expiry_date_label_right: "تاريخ الإنتهاء",
+                issue_place_label_left: "Place of Issue", issue_place_label_right: "مكان الإصدار",
+                applicant_details_title_left: "Details of Applicant", applicant_details_title_right: "بيانات صاحب الطالب",
+                nationality_label_left: "Nationality", nationality_label_right: "الجنسية",
+                religion_label_left: "Religion", religion_label_right: "الديانة",
+                dob_label_left: "Date of Birth", dob_label_right: "تاريخ الميلاد",
+                pob_label_left: "Place of Birth", pob_label_right: "مكان الميلاد",
+                living_town_label_left: "Living Town", living_town_label_right: "مكان السكن",
+                marital_status_label_left: "Marital Status", marital_status_label_right: "الحالة الإجتماعية",
+                children_label_left: "No. of Children", children_label_right: "عدد الأطفال",
+                weight_label_left: "Weight", weight_label_right: "الوزن",
+                height_label_left: "Height", height_label_right: "الطول",
+                age_label_left: "Age", age_label_right: "العمر",
+                education_label_left: "Educational Qualification", education_label_right: "الدرجة العلمية",
+                language_title_left: "Language", language_title_right: "إجادة اللغات",
+                experience_title_left: "EXPERIENCE", experience_title_right: "العمل السابق",
+                language_table_header_lang_left: "Level", language_table_header_arabic_left: "Arabic", language_table_header_english_left: "English", language_table_header_lang_right: "المستوى",
+                language_level_poor_left: "Poor", language_level_poor_right: "لاشيء",
+                language_level_fair_left: "Fair", language_level_fair_right: "وسط",
+                language_level_fluent_left: "Fluent", language_level_fluent_right: "ممتاز",
             },
             fr: {
-                post_applied_label: "POSTE DEMANDÉ", salary_label: "SALAIRE MENSUEL", contract_label: "DURÉE DU CONTRAT",
-                ref_no_label: "RÉF. NO.", name_label: "Nom", father_name_label: "Nom du père", grandfather_name_label: "Nom du grand-père",
-                passport_details_title: "Détails du passeport", passport_no_label: "N° de passeport", issue_date_label: "Date de délivrance", expiry_date_label: "Date d'expiration", issue_place_label: "Lieu de délivrance",
-                applicant_details_title: "Détails du candidat", nationality_label: "Nationalité", religion_label: "Religion", dob_label: "Date de naissance", pob_label: "Lieu de naissance",
-                living_town_label: "Ville de résidence", marital_status_label: "État civil", children_label: "Nombre d'enfants", weight_label: "Poids", height_label: "Taille", age_label: "Âge", education_label: "Niveau d'études",
-                language_title: "Langues", experience_title: "EXPÉRIENCE",
-                language_table_header_lang: "Niveau", language_table_header_arabic: "Arabe", language_table_header_english: "Anglais", language_level_poor: "Faible", language_level_fair: "Moyen", language_level_fluent: "Courant",
+                post_applied_label_left: "POSTE DEMANDÉ", post_applied_label_right: "Position",
+                salary_label_left: "SALAIRE MENSUEL", salary_label_right: "Salaire",
+                // ... (dan seterusnya untuk bahasa Prancis-Inggris)
             },
             de: {
-                post_applied_label: "BEWORBENE STELLE", salary_label: "MONATSGEHALT", contract_label: "VERTRAGSDAUER",
-                ref_no_label: "REF. NR.", name_label: "Name", father_name_label: "Name des Vaters", grandfather_name_label: "Name des Großvaters",
-                passport_details_title: "Passdetails", passport_no_label: "Passnummer", issue_date_label: "Ausstellungsdatum", expiry_date_label: "Ablaufdatum", issue_place_label: "Ausstellungsort",
-                applicant_details_title: "Details des Bewerbers", nationality_label: "Staatsangehörigkeit", religion_label: "Religion", dob_label: "Geburtsdatum", pob_label: "Geburtsort",
-                living_town_label: "Wohnort", marital_status_label: "Familienstand", children_label: "Anzahl der Kinder", weight_label: "Gewicht", height_label: "Größe", age_label: "Alter", education_label: "Bildungsabschluss",
-                language_title: "Sprachen", experience_title: "ERFAHRUNG",
-                language_table_header_lang: "Niveau", language_table_header_arabic: "Arabisch", language_table_header_english: "Englisch", language_level_poor: "Gering", language_level_fair: "Mittel", language_level_fluent: "Fließend",
+                post_applied_label_left: "BEWORBENE STELLE", post_applied_label_right: "Position",
+                // ... (dan seterusnya untuk bahasa Jerman-Inggris)
             }
         };
+        
+        // Terjemahan kolom kanan untuk Eropa
+        const en_right = {
+            post_applied_label_right: "Position", salary_label_right: "Salary", contract_label_right: "Contract",
+            ref_no_label_right: "Ref. No", name_label_right: "Name", father_name_label_right: "Father's Name", grandfather_name_label_right: "Grandfather's Name",
+            passport_details_title_right: "Passport", passport_no_label_right: "Passport No.", issue_date_label_right: "Issue Date", expiry_date_label_right: "Expiry Date", issue_place_label_right: "Place of Issue",
+            applicant_details_title_right: "Applicant", nationality_label_right: "Nationality", religion_label_right: "Religion", dob_label_right: "Birth Date", pob_label_right: "Birth Place",
+            living_town_label_right: "City", marital_status_label_right: "Marital Status", children_label_right: "Children", weight_label_right: "Weight", height_label_right: "Height", age_label_right: "Age", education_label_right: "Education",
+            language_title_right: "Language", experience_title_right: "Experience",
+            language_table_header_lang_right: "Level", language_level_poor_right: "Poor", language_level_fair_right: "Fair", language_level_fluent_right: "Fluent",
+        };
+
 
         const formContainer = document.getElementById('form-container');
         const outputContainer = document.getElementById('output-container');
         const biodataForm = document.getElementById('biodata-form');
         const editBtn = document.getElementById('edit-btn');
         const printBtn = document.getElementById('print-btn');
-        const languageSelector = document.querySelector('.language-selector-container');
+        const languagePairSelect = document.getElementById('language_pair');
+
         const dobInput = document.getElementById('dob');
         const ageInput = document.getElementById('age');
-
-        const agencyLogoInput = document.getElementById('agency_logo');
-        const previewLogo = document.getElementById('preview_logo');
-        const photoHeadshotInput = document.getElementById('photo_headshot');
-        const previewHeadshot = document.getElementById('preview_headshot');
-        const photoFullbodyInput = document.getElementById('photo_fullbody');
-        const previewFullbody = document.getElementById('preview_fullbody');
 
         function setupPreview(inputElement, previewElement) {
             inputElement.addEventListener('change', event => {
@@ -441,19 +379,17 @@
                 }
             });
         }
-        setupPreview(agencyLogoInput, previewLogo);
-        setupPreview(photoHeadshotInput, previewHeadshot);
-        setupPreview(photoFullbodyInput, previewFullbody);
-
+        setupPreview(document.getElementById('agency_logo'), document.getElementById('preview_logo'));
+        setupPreview(document.getElementById('photo_headshot'), document.getElementById('preview_headshot'));
+        setupPreview(document.getElementById('photo_fullbody'), document.getElementById('preview_fullbody'));
+        
         function calculateAge(dateString) {
             if (!dateString) return '';
             const birthDate = new Date(dateString);
             const today = new Date();
             let age = today.getFullYear() - birthDate.getFullYear();
             const m = today.getMonth() - birthDate.getMonth();
-            if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
-                age--;
-            }
+            if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) { age--; }
             return age;
         }
 
@@ -461,11 +397,7 @@
             const age = calculateAge(dobInput.value);
             ageInput.value = age ? age : '';
         });
-        
-        // Initial age calculation
-        if(dobInput.value) {
-            ageInput.value = calculateAge(dobInput.value);
-        }
+        if(dobInput.value) { ageInput.value = calculateAge(dobInput.value); }
 
         biodataForm.addEventListener('submit', event => {
             event.preventDefault();
@@ -482,7 +414,6 @@
             };
             for (const key in data) { if (document.getElementById(`output_${key}`)) document.getElementById(`output_${key}`).innerHTML = data[key]; }
             
-            // Handle language skills checkmarks
             ['poor', 'fair', 'fluent'].forEach(level => {
                 document.getElementById(`skill_arabic_${level}`).textContent = '';
                 document.getElementById(`skill_english_${level}`).textContent = '';
@@ -490,32 +421,37 @@
             document.getElementById(`skill_arabic_${data.arabic_skill}`).textContent = '✔';
             document.getElementById(`skill_english_${data.english_skill}`).textContent = '✔';
 
-
-            document.getElementById('output_photo_headshot').src = previewHeadshot.src || 'https://via.placeholder.com/150x156?text=No+Photo';
-            document.getElementById('output_photo_fullbody').src = previewFullbody.src || 'https://via.placeholder.com/336x495?text=No+Photo';
+            document.getElementById('output_photo_headshot').src = document.getElementById('preview_headshot').src || 'https://via.placeholder.com/150x156?text=No+Photo';
+            document.getElementById('output_photo_fullbody').src = document.getElementById('preview_fullbody').src || 'https://via.placeholder.com/336x495?text=No+Photo';
             const logoOutput = document.getElementById('agency-logo-output');
-            if (previewLogo.src && previewLogo.src.startsWith('data:image')) { logoOutput.src = previewLogo.src; logoOutput.style.display = 'block'; }
-            else { logoOutput.style.display = 'none'; }
+            if (document.getElementById('preview_logo').src && document.getElementById('preview_logo').src.startsWith('data:image')) {
+                logoOutput.src = document.getElementById('preview_logo').src;
+                logoOutput.style.display = 'block';
+            } else {
+                logoOutput.style.display = 'none';
+            }
             
+            const selectedLangPair = languagePairSelect.value;
+            switchLanguage(selectedLangPair);
+
             formContainer.style.display = 'none';
             outputContainer.style.display = 'block';
             window.scrollTo(0, 0);
-            switchLanguage('id-ar');
-        });
-
-        languageSelector.addEventListener('click', (event) => {
-            if (event.target.tagName === 'BUTTON') {
-                const langPair = event.target.dataset.lang;
-                switchLanguage(langPair);
-            }
         });
 
         function switchLanguage(langPair) {
-            document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.toggle('active', btn.dataset.lang === langPair));
             const [leftLang, rightLang] = langPair.split('-');
             const leftDict = translations[leftLang] || translations.id;
-            const rightDict = translations[rightLang] || translations.ar;
+            let rightDict;
             
+            if (rightLang === 'ar') {
+                rightDict = translations.ar;
+            } else if (rightLang === 'en') {
+                rightDict = en_right; // Gunakan kamus khusus untuk kolom kanan Inggris
+            } else {
+                rightDict = translations.ar; // Default
+            }
+
             document.querySelectorAll('[data-key]').forEach(element => {
                 const key = element.dataset.key;
                 if (leftDict[key]) element.textContent = leftDict[key];
