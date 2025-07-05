@@ -3,65 +3,326 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Generator Biodata Final</title>
+    <title>Generator Biodata</title>
     <style>
+        /* === GAYA UMUM & FORM === */
         :root {
             --primary-color: #007bff;
             --secondary-color: #f8f9fa;
             --border-color: #dee2e6;
             --text-color: #212529;
+            --header-bg: #c00000;
             --table-header-bg: #d9e2f3;
         }
-        body { margin: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; background-color: #e9ecef; color: var(--text-color); }
-        .form-wrapper { max-width: 800px; margin: 15px auto; padding: 15px; background-color: #ffffff; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
-        h1, h2 { color: var(--primary-color); border-bottom: 2px solid var(--primary-color); padding-bottom: 10px; text-align: center; }
+
+        body {
+            margin: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background-color: #e9ecef;
+            color: var(--text-color);
+        }
+
+        .form-wrapper {
+            max-width: 800px;
+            margin: 15px auto;
+            padding: 15px;
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        h1, h2 {
+            color: var(--primary-color);
+            border-bottom: 2px solid var(--primary-color);
+            padding-bottom: 10px;
+            text-align: center;
+        }
+        
         h1 { font-size: 1.8em; }
         h2 { font-size: 1.4em; margin-top: 30px; }
-        .form-section { margin-bottom: 20px; }
-        label { display: block; font-weight: bold; margin-bottom: 8px; }
-        input, select, textarea { width: 100%; padding: 12px; border: 1px solid var(--border-color); border-radius: 5px; box-sizing: border-box; font-size: 1em; }
-        input[readonly] { background-color: #e9ecef; cursor: not-allowed; }
-        .btn { display: block; width: 100%; padding: 15px; border: none; border-radius: 5px; font-size: 1.1em; font-weight: bold; cursor: pointer; text-align: center; margin-top: 10px; }
-        .btn-primary { background-color: var(--primary-color); color: white; }
-        .btn-secondary { background-color: #6c757d; color: white; }
-        .btn-success { background-color: #28a745; color: white; }
-        .photo-upload-area { border: 2px dashed var(--border-color); padding: 20px; text-align: center; border-radius: 5px; margin-bottom: 15px; }
-        .photo-upload-area input { display: none; }
-        .photo-upload-area label { cursor: pointer; background-color: var(--secondary-color); padding: 10px 15px; border-radius: 5px; border: 1px solid var(--border-color); }
-        .photo-preview { max-width: 100px; max-height: 100px; margin-top: 10px; border-radius: 5px; border: 1px solid var(--border-color); }
-        #output-container { display: none; }
-        #biodata-output { position: relative; border: 1px solid #ccc; padding: 20px; width: 850px; background-color: #ffffff; margin: 20px auto; }
-        #agency-logo-output { position: absolute; top: 25px; left: 25px; max-width: 200px; max-height: 80px; }
-        #biodata-output table { width: 100%; border-collapse: collapse; }
-        #biodata-output td, #biodata-output th { border: 1px solid black; padding: 4px 8px; font-size: 12px; vertical-align: middle; }
-        .output-header { display: flex; justify-content: space-between; align-items: flex-start; border-bottom: 5px solid #d9d9d9; padding-bottom: 10px; gap: 20px; }
-        .output-header-info { flex-grow: 1; text-align: left; }
-        .output-header-photo img { width: 150px; height: 156px; object-fit: cover; border: 2px solid #555; display: block; }
-        .output-main-content { display: flex; justify-content: space-between; align-items: flex-start; margin-top: 15px; gap: 20px; }
-        .output-left-column { width: 100%; }
-        .output-right-column { width: 336px; flex-shrink: 0; }
-        .output-right-column .full-photo { width: 336px; height: 495px; object-fit: cover; border: 5px solid var(--table-header-bg); margin-bottom: 10px; display: block; }
-        .output-section-title { background-color: var(--table-header-bg); font-weight: bold; text-align: center; padding: 5px; border: 1px solid black; margin-top: 10px; display: flex; justify-content: space-between; align-items: center; }
-        .output-label-col { font-weight: bold; background-color: var(--table-header-bg); width: 35%; }
-        .output-data-col { font-weight: bold; }
-        .output-arabic-col { font-weight: bold; text-align: right; background-color: var(--table-header-bg); }
-        .output-experience-content { padding: 10px 8px; border: 1px solid black; border-top: 0; font-weight: bold; line-height: 1.5; }
-        #output-actions { max-width: 850px; margin: 20px auto; display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
 
+        .form-section {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        input[type="text"],
+        input[type="date"],
+        input[type="number"],
+        select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid var(--border-color);
+            border-radius: 5px;
+            box-sizing: border-box;
+            font-size: 1em;
+        }
+
+        .btn {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.1em;
+            font-weight: bold;
+            cursor: pointer;
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        .btn-secondary {
+            background-color: #6c757d;
+            color: white;
+        }
+        
+        .btn-success {
+            background-color: #28a745;
+            color: white;
+        }
+
+        .photo-upload-area {
+            border: 2px dashed var(--border-color);
+            padding: 20px;
+            text-align: center;
+            border-radius: 5px;
+            margin-bottom: 15px;
+        }
+
+        .photo-upload-area input[type="file"] {
+            display: none;
+        }
+
+        .photo-upload-area label {
+            cursor: pointer;
+            background-color: var(--secondary-color);
+            padding: 10px 15px;
+            border-radius: 5px;
+            border: 1px solid var(--border-color);
+        }
+
+        .photo-preview {
+            max-width: 100px;
+            max-height: 100px;
+            margin-top: 10px;
+            border-radius: 5px;
+            border: 1px solid var(--border-color);
+        }
+
+        .food-input-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 10px;
+        }
+        
+        @media (min-width: 600px) {
+            .food-input-grid {
+                grid-template-columns: 2fr 1fr 1fr auto;
+                align-items: end;
+            }
+        }
+
+        #food-list { margin-top: 15px; }
+        .food-item {
+            background-color: var(--secondary-color);
+            padding: 8px 12px;
+            border-radius: 5px;
+            margin-bottom: 5px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .food-item-delete {
+            color: red;
+            cursor: pointer;
+            font-weight: bold;
+            padding-left: 15px;
+        }
+
+        /* === GAYA UNTUK HASIL BIODATA (OUTPUT) === */
+        #output-container {
+            display: none; /* Sembunyikan secara default */
+            font-family: Arial, sans-serif;
+            background: white;
+        }
+
+        #biodata-output {
+            border: 1px solid #ccc;
+            padding: 20px;
+            width: 850px;
+            background-color: #ffffff;
+            margin: 20px auto;
+        }
+
+        #biodata-output table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        #biodata-output td, #biodata-output th {
+            border: 1px solid black;
+            padding: 4px 8px;
+            font-size: 12px;
+            vertical-align: middle;
+        }
+
+        .output-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            border-bottom: 5px solid #d9d9d9;
+            padding-bottom: 10px;
+            gap: 20px;
+        }
+
+        .output-header-info { flex-grow: 1; }
+        .output-header-info h3 {
+            background-color: var(--header-bg);
+            color: white;
+            padding: 5px 10px;
+            margin: 0;
+            font-size: 36px;
+            display: inline-block;
+        }
+        .output-header-photo img {
+            width: 150px;
+            height: 156px;
+            object-fit: cover;
+            border: 2px solid #555;
+            display: block;
+        }
+
+        .output-main-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-top: 15px;
+            gap: 20px;
+        }
+
+        .output-left-column { width: 100%; }
+        .output-right-column {
+            width: 336px;
+            flex-shrink: 0;
+        }
+        .output-right-column .full-photo {
+            width: 336px;
+            height: 495px;
+            object-fit: cover;
+            border: 5px solid var(--table-header-bg);
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .output-section-title {
+            background-color: var(--table-header-bg);
+            font-weight: bold;
+            text-align: center;
+            padding: 5px;
+            border: 1px solid black;
+            margin-top: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .output-label-col {
+            font-weight: bold;
+            background-color: var(--table-header-bg);
+            width: 35%;
+        }
+        .output-data-col, .output-food-table { font-weight: bold; }
+        .output-arabic-col {
+            font-weight: bold;
+            text-align: right;
+            background-color: var(--table-header-bg);
+        }
+
+        .output-food-table {
+            font-size: 10px;
+            text-align: center;
+        }
+        .output-food-table td { padding: 2px; }
+        .output-food-table .shaded { background-color: var(--table-header-bg); }
+        .output-experience-content {
+            padding: 10px 8px;
+            border: 1px solid black;
+            border-top: 0;
+            font-weight: bold;
+            line-height: 1.5;
+        }
+        
+        #output-controls {
+            max-width: 850px;
+            margin: 20px auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        /* === GAYA CETAK A4 (SANGAT PENTING) === */
         @media print {
-            @page { size: A4; margin: 15mm; }
-            body { background-color: #ffffff; padding: 0; margin: 0; }
-            #form-container, #output-actions { display: none !important; }
-            #output-container, #biodata-output { display: block !important; width: 100%; border: none; box-shadow: none; padding: 0; margin: 0; }
-            #biodata-output td, #biodata-output th { font-size: 9pt; padding: 2px 4px; }
-            #agency-logo-output { top: 10mm; left: 10mm; max-width: 120px; max-height: 60px; }
-            .output-header-photo img { width: 3.5cm; height: 4.0cm; border-width: 1px; }
+            @page {
+                size: A4;
+                margin: 15mm;
+            }
+
+            body {
+                background-color: #ffffff;
+                padding: 0;
+                margin: 0;
+            }
+
+            #form-container, #output-controls { display: none !important; }
+            #output-container, #biodata-output {
+                display: block !important;
+                width: 100%;
+                border: none;
+                box-shadow: none;
+                padding: 0;
+                margin: 0;
+            }
+            
+            #biodata-output td, #biodata-output th {
+                font-size: 9pt;
+                padding: 2px 4px;
+            }
+            
+            .output-header-info h3 { font-size: 28pt; padding: 2px 8px; }
+            .output-header-photo img {
+                width: 3.5cm;
+                height: 4.0cm;
+                border-width: 1px;
+            }
             .output-right-column { width: 7.5cm; }
-            .output-right-column .full-photo { width: 7cm; height: 9cm; border-width: 3px; margin-bottom: 5px; }
-            .output-main-content, .output-section-title, div span { margin-top: 5px !important; }
+            .output-right-column .full-photo {
+                width: 7cm; 
+                height: 9cm;
+                border-width: 3px;
+                margin-bottom: 5px;
+            }
+            
+            .output-main-content, .output-section-title, div[style*="margin-top"] {
+                margin-top: 5px !important;
+            }
             .output-header { padding-bottom: 5px; }
+
             table, tr, td, th, div { page-break-inside: avoid !important; }
-            .output-label-col, .output-arabic-col, .output-section-title { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+
+            .output-header-info h3, .output-label-col, .output-arabic-col, .output-section-title, .output-food-table .shaded {
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
         }
     </style>
 </head>
@@ -70,39 +331,21 @@
     <div id="form-container" class="form-wrapper">
         <form id="biodata-form">
             <h1>Generator Biodata</h1>
-            
-            <div class="form-section">
-                <h2>Pengaturan Utama</h2>
-                <label for="language_pair">Pilih Kombinasi Bahasa untuk Hasil Akhir</label>
-                <select id="language_pair">
-                    <option value="id-ar">Indonesia - Arab</option>
-                    <option value="en-ar">English - Arab</option>
-                    <option value="fr-en">Prancis - Inggris</option>
-                    <option value="de-en">Jerman - Inggris</option>
-                </select>
-            </div>
-            
-            <div class="form-section">
-                <h2>Logo Agensi (Opsional)</h2>
-                <div class="photo-upload-area">
-                    <label for="agency_logo">🖼️ Upload Logo Anda</label>
-                    <input type="file" id="agency_logo" accept="image/*">
-                    <img id="preview_logo" class="photo-preview" src="" alt="Pratinjau Logo" style="display:none;">
-                </div>
-            </div>
 
             <div class="form-section">
-                <h2>Data Pekerjaan</h2>
+                <h2>Data Pribadi & Pekerjaan</h2>
                 <label for="post_applied">Posisi Dilamar</label>
                 <input type="text" id="post_applied" value="HOUSEMAID ONLY" required>
+
                 <label for="salary">Gaji Bulanan</label>
                 <input type="text" id="salary" value="130 MR" required>
+
                 <label for="contract">Periode Kontrak</label>
-                <input type="text" id="contract" value="5 YEARS ONLY" required>
+                <input type="text" id="contract" value="2 YEARS ONLY" required>
             </div>
             
             <div class="form-section">
-                <h2>Upload Foto Kandidat</h2>
+                <h2>Upload Foto</h2>
                 <div class="photo-upload-area">
                     <label for="photo_headshot">📷 Upload Foto Wajah (Close-up)</label>
                     <input type="file" id="photo_headshot" accept="image/*">
@@ -119,34 +362,59 @@
                 <h2>Detail Pelamar</h2>
                 <label for="ref_no">No. Referensi</label>
                 <input type="text" id="ref_no">
+                
                 <label for="name">Nama Lengkap</label>
                 <input type="text" id="name" value="KARSIH" required>
+                
                 <label for="father_name">Nama Ayah</label>
                 <input type="text" id="father_name" value="WADI">
+                
                 <label for="grandfather_name">Nama Kakek</label>
                 <input type="text" id="grandfather_name" value="DASIM">
+                
                 <label for="nationality">Kewarganegaraan</label>
                 <input type="text" id="nationality" value="INDONESIA">
+                
                 <label for="religion">Agama</label>
-                <select id="religion"><option>ISLAM</option><option>KRISTEN</option><option>KATOLIK</option><option>HINDU</option><option>BUDDHA</option><option>KONGHUCU</option></select>
+                <select id="religion">
+                    <option>ISLAM</option>
+                    <option>KRISTEN</option>
+                    <option>KATOLIK</option>
+                    <option>HINDU</option>
+                    <option>BUDDHA</option>
+                    <option>KONGHUCU</option>
+                </select>
+
                 <label for="dob">Tanggal Lahir</label>
                 <input type="date" id="dob" value="1980-10-02">
+
                 <label for="pob">Tempat Lahir</label>
                 <input type="text" id="pob" value="KARAWANG">
+                
                 <label for="living_town">Kota Tinggal</label>
                 <input type="text" id="living_town" value="KARAWANG">
+                
                 <label for="marital_status">Status Pernikahan</label>
-                <select id="marital_status"><option>MARRIED</option><option>SINGLE</option><option>DIVORCED</option></select>
+                <select id="marital_status">
+                    <option>MARRIED</option>
+                    <option>SINGLE</option>
+                    <option>DIVORCED</option>
+                </select>
+                
                 <label for="children">Jumlah Anak</label>
                 <input type="number" id="children" value="2">
+                
                 <label for="weight">Berat Badan (KG)</label>
                 <input type="number" id="weight" value="57">
+                
                 <label for="height">Tinggi Badan (CM)</label>
                 <input type="number" id="height" value="158">
-                <label for="age">Umur (Otomatis)</label>
-                <input type="text" id="age" readonly>
+                
+                <label for="age">Umur</label>
+                <input type="number" id="age" value="43">
+                
                 <label for="education">Pendidikan Terakhir</label>
-                <input type="text" id="education" value="Sarjana Komputer">
+                <input type="text" id="education">
             </div>
 
             <div class="form-section">
@@ -160,322 +428,351 @@
                 <label for="issue_place">Tempat Dikeluarkan</label>
                 <input type="text" id="issue_place" value="BEKASI">
             </div>
-            
+
             <div class="form-section">
                 <h2>Keahlian Bahasa</h2>
-                <label for="arabic_skill_level">Keahlian Bahasa Arab</label>
-                <select id="arabic_skill_level">
-                    <option value="poor">Kurang</option>
-                    <option value="fair">Cukup</option>
-                    <option value="fluent" selected>Lancar</option>
+                <label>Bahasa Inggris</label>
+                <select id="english_skill">
+                    <option value="Poor">Poor</option>
+                    <option value="Fair" selected>Fair</option>
+                    <option value="Fluent">Fluent</option>
                 </select>
-                <label for="english_skill_level">Keahlian Bahasa Inggris</label>
-                <select id="english_skill_level">
-                    <option value="poor">Kurang</option>
-                    <option value="fair" selected>Cukup</option>
-                    <option value="fluent">Lancar</option>
+                <label>Bahasa Arab</label>
+                <select id="arabic_skill">
+                    <option value="Poor">Poor</option>
+                    <option value="Fair">Fair</option>
+                    <option value="Fluent" selected>Fluent</option>
                 </select>
+            </div>
+            
+            <div class="form-section">
+                <h2>Keahlian Memasak</h2>
+                <p>Masukkan nama makanan dan pilih posisinya di tabel.</p>
+                <div class="food-input-grid">
+                    <div>
+                        <label for="food_name">Nama Makanan</label>
+                        <input type="text" id="food_name">
+                    </div>
+                    <div>
+                        <label for="food_row">Baris</label>
+                        <select id="food_row">
+                            <option value="top">Atas</option>
+                            <option value="bottom">Bawah</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="food_col">Kolom</label>
+                        <select id="food_col"></select>
+                    </div>
+                    <button type="button" id="add-food-btn" class="btn btn-secondary">+ Tambah</button>
+                </div>
+                <div id="food-list"></div>
             </div>
 
             <div class="form-section">
                 <h2>Pengalaman Kerja</h2>
                 <label for="experience">Tulis pengalaman (pisahkan dengan baris baru)</label>
-                <textarea id="experience" rows="4">- SAUDI 3 YEAR&#10;- JORDAN 3 YEAR&#10;- mesir 10 Years</textarea>
+                <textarea id="experience" rows="4" style="width: 100%; font-size: 1em; padding: 10px;">- SAUDI 3 YEAR&#10;- JORDAN 3 YEAR</textarea>
             </div>
 
-            <button type="submit" class="btn btn-primary">BUAT BIODATA</button>
+            <button type="submit" class="btn btn-primary">LIHAT HASIL BIODATA</button>
         </form>
     </div>
 
     <div id="output-container">
         <div id="biodata-output">
-            <img id="agency-logo-output" src="" alt="Agency Logo" style="display:none;">
             <div class="output-header">
                 <div class="output-header-info">
+                    <h3>INDONESIA</h3>
                     <table>
-                        <tbody>
-                            <tr><td class="output-label-col" data-key="post_applied_label_left"></td><td id="output_post_applied" class="output-data-col" style="text-align: center;"></td><td class="output-arabic-col" dir="rtl" data-key="post_applied_label_right"></td></tr>
-                            <tr><td class="output-label-col" data-key="salary_label_left"></td><td id="output_salary" class="output-data-col" style="text-align: center;"></td><td class="output-arabic-col" dir="rtl" data-key="salary_label_right"></td></tr>
-                            <tr><td class="output-label-col" data-key="contract_label_left"></td><td id="output_contract" class="output-data-col" style="text-align: center;"></td><td class="output-arabic-col" dir="rtl" data-key="contract_label_right"></td></tr>
-                        </tbody>
-                    </table>
+                        <tbody><tr>
+                            <td class="output-label-col">POST APPLIED FOR</td>
+                            <td id="output_post_applied" class="output-data-col" style="text-align: center;"></td>
+                            <td class="output-arabic-col" dir="rtl">الوظيفة</td>
+                        </tr>
+                        <tr>
+                            <td class="output-label-col">MONTHLY SALARY</td>
+                            <td id="output_salary" class="output-data-col" style="text-align: center;"></td>
+                            <td class="output-arabic-col" dir="rtl">الراتب الشهري</td>
+                        </tr>
+                        <tr>
+                            <td class="output-label-col">CONTRACT PERIOD</td>
+                            <td id="output_contract" class="output-data-col" style="text-align: center;"></td>
+                            <td class="output-arabic-col" dir="rtl">مدة العقد</td>
+                        </tr>
+                    </tbody></table>
                 </div>
-                <div class="output-header-photo"><img id="output_photo_headshot" src="" alt="Applicant Photo"></div>
+                <div class="output-header-photo">
+                    <img id="output_photo_headshot" src="" alt="Applicant Photo">
+                </div>
             </div>
+
             <div class="output-main-content">
                 <div class="output-left-column">
                     <table>
-                        <tbody>
-                            <tr style="background-color: #d9e2f3;"><td style="font-weight: bold;" data-key="ref_no_label_left"></td><td id="output_ref_no"></td><td class="output-arabic-col" dir="rtl" data-key="ref_no_label_right"></td></tr>
-                            <tr><td class="output-label-col" data-key="name_label_left"></td><td id="output_name" class="output-data-col"></td><td class="output-arabic-col" dir="rtl" data-key="name_label_right"></td></tr>
-                            <tr><td class="output-label-col" data-key="father_name_label_left"></td><td id="output_father_name" class="output-data-col"></td><td class="output-arabic-col" dir="rtl" data-key="father_name_label_right"></td></tr>
-                            <tr><td class="output-label-col" data-key="grandfather_name_label_left"></td><td id="output_grandfather_name" class="output-data-col"></td><td class="output-arabic-col" dir="rtl" data-key="grandfather_name_label_right"></td></tr>
-                        </tbody>
-                    </table>
-                    <div class="output-section-title"><span data-key="passport_details_title_left"></span><span dir="rtl" data-key="passport_details_title_right"></span></div>
+                        <tbody><tr style="background-color: #d9e2f3;">
+                            <td style="font-weight: bold;">REF. NO.</td>
+                            <td id="output_ref_no"></td>
+                            <td class="output-arabic-col" dir="rtl">رقم الطلب</td>
+                        </tr>
+                        <tr><td class="output-label-col">Name</td><td id="output_name" class="output-data-col"></td><td class="output-arabic-col" dir="rtl">الاسم</td></tr>
+                        <tr><td class="output-label-col">Father's Name</td><td id="output_father_name" class="output-data-col"></td><td class="output-arabic-col" dir="rtl">اسم الأب</td></tr>
+                        <tr><td class="output-label-col">Grandfather's Name</td><td id="output_grandfather_name" class="output-data-col"></td><td class="output-arabic-col" dir="rtl">اسم الجد</td></tr>
+                    </tbody></table>
+
+                    <div class="output-section-title"><span>Passport Details</span><span dir="rtl">بيانات جواز السفر</span></div>
                     <table>
                         <tbody>
-                            <tr><td class="output-label-col" data-key="passport_no_label_left"></td><td id="output_passport_no" class="output-data-col"></td><td class="output-arabic-col" dir="rtl" data-key="passport_no_label_right"></td></tr>
-                            <tr><td class="output-label-col" data-key="issue_date_label_left"></td><td id="output_issue_date" class="output-data-col"></td><td class="output-arabic-col" dir="rtl" data-key="issue_date_label_right"></td></tr>
-                            <tr><td class="output-label-col" data-key="expiry_date_label_left"></td><td id="output_expiry_date" class="output-data-col"></td><td class="output-arabic-col" dir="rtl" data-key="expiry_date_label_right"></td></tr>
-                            <tr><td class="output-label-col" data-key="issue_place_label_left"></td><td id="output_issue_place" class="output-data-col"></td><td class="output-arabic-col" dir="rtl" data-key="issue_place_label_right"></td></tr>
+                            <tr><td class="output-label-col">Passport No</td><td id="output_passport_no" class="output-data-col"></td><td class="output-arabic-col" dir="rtl">رقم جواز السفر</td></tr>
+                            <tr><td class="output-label-col">Date Of Issue</td><td id="output_issue_date" class="output-data-col"></td><td class="output-arabic-col" dir="rtl">تاريخ الإصدار</td></tr>
+                            <tr><td class="output-label-col">Date of Expiry</td><td id="output_expiry_date" class="output-data-col"></td><td class="output-arabic-col" dir="rtl">تاريخ الإنتهاء</td></tr>
+                            <tr><td class="output-label-col">Place of Issue</td><td id="output_issue_place" class="output-data-col"></td><td class="output-arabic-col" dir="rtl">مكان الإصدار</td></tr>
                         </tbody>
                     </table>
-                    <div class="output-section-title"><span data-key="applicant_details_title_left"></span><span dir="rtl" data-key="applicant_details_title_right"></span></div>
+
+                    <div class="output-section-title"><span>Details of Applicant</span><span dir="rtl">بيانات صاحب الطالب</span></div>
                     <table>
                         <tbody>
-                            <tr><td class="output-label-col" data-key="nationality_label_left"></td><td id="output_nationality" class="output-data-col"></td><td class="output-arabic-col" dir="rtl" data-key="nationality_label_right"></td></tr>
-                            <tr><td class="output-label-col" data-key="religion_label_left"></td><td id="output_religion" class="output-data-col"></td><td class="output-arabic-col" dir="rtl" data-key="religion_label_right"></td></tr>
-                            <tr><td class="output-label-col" data-key="dob_label_left"></td><td id="output_dob" class="output-data-col"></td><td class="output-arabic-col" dir="rtl" data-key="dob_label_right"></td></tr>
-                            <tr><td class="output-label-col" data-key="pob_label_left"></td><td id="output_pob" class="output-data-col"></td><td class="output-arabic-col" dir="rtl" data-key="pob_label_right"></td></tr>
-                            <tr><td class="output-label-col" data-key="living_town_label_left"></td><td id="output_living_town" class="output-data-col"></td><td class="output-arabic-col" dir="rtl" data-key="living_town_label_right"></td></tr>
-                            <tr><td class="output-label-col" data-key="marital_status_label_left"></td><td id="output_marital_status" class="output-data-col"></td><td class="output-arabic-col" dir="rtl" data-key="marital_status_label_right"></td></tr>
-                            <tr><td class="output-label-col" data-key="children_label_left"></td><td id="output_children" class="output-data-col"></td><td class="output-arabic-col" dir="rtl" data-key="children_label_right"></td></tr>
-                            <tr><td class="output-label-col" data-key="weight_label_left"></td><td id="output_weight" class="output-data-col"></td><td class="output-arabic-col" dir="rtl" data-key="weight_label_right"></td></tr>
-                            <tr><td class="output-label-col" data-key="height_label_left"></td><td id="output_height" class="output-data-col"></td><td class="output-arabic-col" dir="rtl" data-key="height_label_right"></td></tr>
-                            <tr><td class="output-label-col" data-key="age_label_left"></td><td id="output_age" class="output-data-col"></td><td class="output-arabic-col" dir="rtl" data-key="age_label_right"></td></tr>
-                            <tr><td class="output-label-col" data-key="education_label_left"></td><td id="output_education" class="output-data-col"></td><td class="output-arabic-col" dir="rtl" data-key="education_label_right"></td></tr>
+                            <tr><td class="output-label-col">Nationality</td><td id="output_nationality" class="output-data-col"></td><td class="output-arabic-col" dir="rtl">الجنسية</td></tr>
+                            <tr><td class="output-label-col">Religion</td><td id="output_religion" class="output-data-col"></td><td class="output-arabic-col" dir="rtl">الديانة</td></tr>
+                            <tr><td class="output-label-col">Date of Birth</td><td id="output_dob" class="output-data-col"></td><td class="output-arabic-col" dir="rtl">تاريخ الميلاد</td></tr>
+                            <tr><td class="output-label-col">Place of Birth</td><td id="output_pob" class="output-data-col"></td><td class="output-arabic-col" dir="rtl">مكان الميلاد</td></tr>
+                            <tr><td class="output-label-col">Living Town</td><td id="output_living_town" class="output-data-col"></td><td class="output-arabic-col" dir="rtl">مكان السكن</td></tr>
+                            <tr><td class="output-label-col">Marital Status</td><td id="output_marital_status" class="output-data-col"></td><td class="output-arabic-col" dir="rtl">الحالة الإجتماعية</td></tr>
+                            <tr><td class="output-label-col">No. of Children</td><td id="output_children" class="output-data-col"></td><td class="output-arabic-col" dir="rtl">عدد الأطفال</td></tr>
+                            <tr><td class="output-label-col">Weight</td><td id="output_weight" class="output-data-col"></td><td class="output-arabic-col" dir="rtl">الوزن</td></tr>
+                            <tr><td class="output-label-col">Height</td><td id="output_height" class="output-data-col"></td><td class="output-arabic-col" dir="rtl">الطول</td></tr>
+                            <tr><td class="output-label-col">Age</td><td id="output_age" class="output-data-col"></td><td class="output-arabic-col" dir="rtl">العمر</td></tr>
+                            <tr><td class="output-label-col">Educational Qualification</td><td id="output_education" class="output-data-col"></td><td class="output-arabic-col" dir="rtl">الدرجة العلمية</td></tr>
                         </tbody>
                     </table>
                 </div>
                 <div class="output-right-column">
                     <img id="output_photo_fullbody" src="" alt="Applicant Full Photo" class="full-photo">
-                    <div class="output-section-title"><span data-key="language_title_left"></span><span dir="rtl" data-key="language_title_right"></span></div>
+                    <div class="output-section-title"><span>Language</span><span dir="rtl">إجادة اللغات</span></div>
                     <table>
-                        <thead>
-                            <tr style="font-weight: bold;">
-                                <th style="font-size:12px" data-key="language_table_header_lang_left"></th>
-                                <th style="font-size:12px" data-key="language_table_header_arabic_left"></th>
-                                <th style="font-size:12px" data-key="language_table_header_english_left"></th>
-                                <th style="text-align: center;" dir="rtl" data-key="language_table_header_lang_right"></th>
-                            </tr>
-                        </thead>
+                        <thead><tr style="font-weight: bold;"><th style="font-size:12px">Language</th><th style="font-size:12px">Arabic</th><th style="font-size:12px">English</th><th style="text-align: center;" dir="rtl">اللغات العربية</th></tr></thead>
                         <tbody>
-                            <tr><td style="font-weight: bold;" data-key="language_level_poor_left"></td><td id="skill_arabic_poor" style="text-align: center;"></td><td id="skill_english_poor" style="text-align: center;"></td><td class="output-arabic-col" dir="rtl" data-key="language_level_poor_right"></td></tr>
-                            <tr><td style="font-weight: bold;" data-key="language_level_fair_left"></td><td id="skill_arabic_fair" style="text-align: center;"></td><td id="skill_english_fair" style="text-align: center;"></td><td class="output-arabic-col" dir="rtl" data-key="language_level_fair_right"></td></tr>
-                            <tr><td style="font-weight: bold;" data-key="language_level_fluent_left"></td><td id="skill_arabic_fluent" style="text-align: center;"></td><td id="skill_english_fluent" style="text-align: center;"></td><td class="output-arabic-col" dir="rtl" data-key="language_level_fluent_right"></td></tr>
+                            <tr><td style="font-weight: bold;">Poor</td><td id="arabic_poor" style="text-align: center;"></td><td id="english_poor" style="text-align: center;"></td><td class="output-arabic-col" dir="rtl">لاشيء</td></tr>
+                            <tr><td style="font-weight: bold;">Fair</td><td id="arabic_fair" style="text-align: center;"></td><td id="english_fair" style="text-align: center;"></td><td class="output-arabic-col" dir="rtl">وسط</td></tr>
+                            <tr><td style="font-weight: bold;">Fluent</td><td id="arabic_fluent" style="text-align: center;"></td><td id="english_fluent" style="text-align: center;"></td><td class="output-arabic-col" dir="rtl">ممتاز</td></tr>
                         </tbody>
                     </table>
                 </div>
             </div>
+            
             <div style="margin-top: 5px;">
-                <div class="output-section-title"><span data-key="experience_title_left"></span><span dir="rtl" data-key="experience_title_right"></span></div>
+                <div class="output-section-title" style="text-align: left; justify-content: flex-start;"><span>ARABIAN MEALS / FOOD WHICH I CAN COOK ARE AS BELOW :</span></div>
+                <table class="output-food-table">
+                    <tbody>
+                        <tr>
+                            <td id="food-top-1" class="shaded"></td><td id="food-top-2"></td><td id="food-top-3"></td><td id="food-top-4" class="shaded"></td><td id="food-top-5"></td><td id="food-top-6" class="shaded"></td><td id="food-top-7"></td><td id="food-top-8" class="shaded"></td><td id="food-top-9"></td><td id="food-top-10" class="shaded"></td><td id="food-top-11"></td><td id="food-top-12" class="shaded"></td>
+                        </tr>
+                        <tr>
+                            <td id="food-bottom-1" class="shaded"></td><td id="food-bottom-2"></td><td id="food-bottom-3"></td><td id="food-bottom-4" class="shaded"></td><td id="food-bottom-5"></td><td id="food-bottom-6" class="shaded"></td><td id="food-bottom-7"></td><td id="food-bottom-8" class="shaded"></td><td id="food-bottom-9"></td><td id="food-bottom-10" class="shaded"></td><td id="food-bottom-11"></td><td id="food-bottom-12" class="shaded"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div style="margin-top: 5px;">
+                <div class="output-section-title"><span>EXPERIENCE :</span><span dir="rtl">العمل السابق</span></div>
                 <div id="output_experience" class="output-experience-content"></div>
             </div>
         </div>
-        <div id="output-actions">
+        
+        <div id="output-controls">
             <button id="print-btn" class="btn btn-success">📄 Simpan sebagai PDF</button>
             <button id="edit-btn" class="btn btn-secondary">✏️ Edit Lagi</button>
         </div>
     </div>
 
+
     <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const translations = {
-            id: {
-                post_applied_label_left: "POSISI DILAMAR", post_applied_label_right: "الوظيفة",
-                salary_label_left: "GAJI BULANAN", salary_label_right: "الراتب الشهري",
-                contract_label_left: "PERIODE KONTRAK", contract_label_right: "مدة العقد",
-                ref_no_label_left: "REF. NO.", ref_no_label_right: "رقم الطلب",
-                name_label_left: "Nama", name_label_right: "الاسم",
-                father_name_label_left: "Nama Ayah", father_name_label_right: "اسم الأب",
-                grandfather_name_label_left: "Nama Kakek", grandfather_name_label_right: "اسم الجد",
-                passport_details_title_left: "Detail Paspor", passport_details_title_right: "بيانات جواز السفر",
-                passport_no_label_left: "No. Paspor", passport_no_label_right: "رقم جواز السفر",
-                issue_date_label_left: "Tanggal Dikeluarkan", issue_date_label_right: "تاريخ الإصدار",
-                expiry_date_label_left: "Tanggal Kedaluwarsa", expiry_date_label_right: "تاريخ الإنتهاء",
-                issue_place_label_left: "Tempat Dikeluarkan", issue_place_label_right: "مكان الإصدار",
-                applicant_details_title_left: "Detail Pelamar", applicant_details_title_right: "بيانات صاحب الطالب",
-                nationality_label_left: "Kewarganegaraan", nationality_label_right: "الجنسية",
-                religion_label_left: "Agama", religion_label_right: "الديانة",
-                dob_label_left: "Tanggal Lahir", dob_label_right: "تاريخ الميلاد",
-                pob_label_left: "Tempat Lahir", pob_label_right: "مكان الميلاد",
-                living_town_label_left: "Kota Tinggal", living_town_label_right: "مكان السكن",
-                marital_status_label_left: "Status Pernikahan", marital_status_label_right: "الحالة الإجتماعية",
-                children_label_left: "Jumlah Anak", children_label_right: "عدد الأطفال",
-                weight_label_left: "Berat Badan", weight_label_right: "الوزن",
-                height_label_left: "Tinggi Badan", height_label_right: "الطول",
-                age_label_left: "Umur", age_label_right: "العمر",
-                education_label_left: "Pendidikan", education_label_right: "الدرجة العلمية",
-                language_title_left: "Bahasa", language_title_right: "إجادة اللغات",
-                experience_title_left: "PENGALAMAN", experience_title_right: "العمل السابق",
-                language_table_header_lang_left: "Level", language_table_header_arabic_left: "Arab", language_table_header_english_left: "Inggris", language_table_header_lang_right: "المستوى",
-                language_level_poor_left: "Kurang", language_level_poor_right: "لاشيء",
-                language_level_fair_left: "Cukup", language_level_fair_right: "وسط",
-                language_level_fluent_left: "Lancar", language_level_fluent_right: "ممتاز",
-            },
-            en: {
-                post_applied_label_left: "POST APPLIED FOR", post_applied_label_right: "الوظيفة",
-                salary_label_left: "MONTHLY SALARY", salary_label_right: "الراتب الشهري",
-                contract_label_left: "CONTRACT PERIOD", contract_label_right: "مدة العقد",
-                ref_no_label_left: "REF. NO.", ref_no_label_right: "رقم الطلب",
-                name_label_left: "Name", name_label_right: "الاسم",
-                father_name_label_left: "Father's Name", father_name_label_right: "اسم الأب",
-                grandfather_name_label_left: "Grandfather's Name", grandfather_name_label_right: "اسم الجد",
-                passport_details_title_left: "Passport Details", passport_details_title_right: "بيانات جواز السفر",
-                passport_no_label_left: "Passport No", passport_no_label_right: "رقم جواز السفر",
-                issue_date_label_left: "Date Of Issue", issue_date_label_right: "تاريخ الإصدار",
-                expiry_date_label_left: "Date of Expiry", expiry_date_label_right: "تاريخ الإنتهاء",
-                issue_place_label_left: "Place of Issue", issue_place_label_right: "مكان الإصدار",
-                applicant_details_title_left: "Details of Applicant", applicant_details_title_right: "بيانات صاحب الطالب",
-                nationality_label_left: "Nationality", nationality_label_right: "الجنسية",
-                religion_label_left: "Religion", religion_label_right: "الديانة",
-                dob_label_left: "Date of Birth", dob_label_right: "تاريخ الميلاد",
-                pob_label_left: "Place of Birth", pob_label_right: "مكان الميلاد",
-                living_town_label_left: "Living Town", living_town_label_right: "مكان السكن",
-                marital_status_label_left: "Marital Status", marital_status_label_right: "الحالة الإجتماعية",
-                children_label_left: "No. of Children", children_label_right: "عدد الأطفال",
-                weight_label_left: "Weight", weight_label_right: "الوزن",
-                height_label_left: "Height", height_label_right: "الطول",
-                age_label_left: "Age", age_label_right: "العمر",
-                education_label_left: "Educational Qualification", education_label_right: "الدرجة العلمية",
-                language_title_left: "Language", language_title_right: "إجادة اللغات",
-                experience_title_left: "EXPERIENCE", experience_title_right: "العمل السابق",
-                language_table_header_lang_left: "Level", language_table_header_arabic_left: "Arabic", language_table_header_english_left: "English", language_table_header_lang_right: "المستوى",
-                language_level_poor_left: "Poor", language_level_poor_right: "لاشيء",
-                language_level_fair_left: "Fair", language_level_fair_right: "وسط",
-                language_level_fluent_left: "Fluent", language_level_fluent_right: "ممتاز",
-            },
-            fr: {
-                post_applied_label_left: "POSTE DEMANDÉ", post_applied_label_right: "Position",
-                salary_label_left: "SALAIRE MENSUEL", salary_label_right: "Salaire",
-                // ... (dan seterusnya untuk bahasa Prancis-Inggris)
-            },
-            de: {
-                post_applied_label_left: "BEWORBENE STELLE", post_applied_label_right: "Position",
-                // ... (dan seterusnya untuk bahasa Jerman-Inggris)
+        document.addEventListener('DOMContentLoaded', function() {
+            // === Referensi Elemen DOM ===
+            const formContainer = document.getElementById('form-container');
+            const outputContainer = document.getElementById('output-container');
+            const biodataForm = document.getElementById('biodata-form');
+            const editBtn = document.getElementById('edit-btn');
+            const printBtn = document.getElementById('print-btn');
+
+            // --- Foto ---
+            const photoHeadshotInput = document.getElementById('photo_headshot');
+            const previewHeadshot = document.getElementById('preview_headshot');
+            const photoFullbodyInput = document.getElementById('photo_fullbody');
+            const previewFullbody = document.getElementById('preview_fullbody');
+
+            // --- Makanan ---
+            const foodNameInput = document.getElementById('food_name');
+            const foodRowSelect = document.getElementById('food_row');
+            const foodColSelect = document.getElementById('food_col');
+            const addFoodBtn = document.getElementById('add-food-btn');
+            const foodListDiv = document.getElementById('food-list');
+            let addedFoods = [];
+
+            // === Inisialisasi ===
+            // Isi pilihan kolom makanan 1-12
+            for (let i = 1; i <= 12; i++) {
+                const option = document.createElement('option');
+                option.value = i;
+                option.textContent = `Kolom ${i}`;
+                foodColSelect.appendChild(option);
             }
-        };
-        
-        // Terjemahan kolom kanan untuk Eropa
-        const en_right = {
-            post_applied_label_right: "Position", salary_label_right: "Salary", contract_label_right: "Contract",
-            ref_no_label_right: "Ref. No", name_label_right: "Name", father_name_label_right: "Father's Name", grandfather_name_label_right: "Grandfather's Name",
-            passport_details_title_right: "Passport", passport_no_label_right: "Passport No.", issue_date_label_right: "Issue Date", expiry_date_label_right: "Expiry Date", issue_place_label_right: "Place of Issue",
-            applicant_details_title_right: "Applicant", nationality_label_right: "Nationality", religion_label_right: "Religion", dob_label_right: "Birth Date", pob_label_right: "Birth Place",
-            living_town_label_right: "City", marital_status_label_right: "Marital Status", children_label_right: "Children", weight_label_right: "Weight", height_label_right: "Height", age_label_right: "Age", education_label_right: "Education",
-            language_title_right: "Language", experience_title_right: "Experience",
-            language_table_header_lang_right: "Level", language_level_poor_right: "Poor", language_level_fair_right: "Fair", language_level_fluent_right: "Fluent",
-        };
 
+            // === Event Listener ===
 
-        const formContainer = document.getElementById('form-container');
-        const outputContainer = document.getElementById('output-container');
-        const biodataForm = document.getElementById('biodata-form');
-        const editBtn = document.getElementById('edit-btn');
-        const printBtn = document.getElementById('print-btn');
-        const languagePairSelect = document.getElementById('language_pair');
-
-        const dobInput = document.getElementById('dob');
-        const ageInput = document.getElementById('age');
-
-        function setupPreview(inputElement, previewElement) {
-            inputElement.addEventListener('change', event => {
+            // Pratinjau Foto
+            photoHeadshotInput.addEventListener('change', event => {
                 const file = event.target.files[0];
                 if (file) {
-                    const reader = new FileReader();
-                    reader.onload = e => { previewElement.src = e.target.result; previewElement.style.display = 'block'; };
-                    reader.readAsDataURL(file);
+                    previewHeadshot.src = URL.createObjectURL(file);
+                    previewHeadshot.style.display = 'block';
                 }
             });
-        }
-        setupPreview(document.getElementById('agency_logo'), document.getElementById('preview_logo'));
-        setupPreview(document.getElementById('photo_headshot'), document.getElementById('preview_headshot'));
-        setupPreview(document.getElementById('photo_fullbody'), document.getElementById('preview_fullbody'));
-        
-        function calculateAge(dateString) {
-            if (!dateString) return '';
-            const birthDate = new Date(dateString);
-            const today = new Date();
-            let age = today.getFullYear() - birthDate.getFullYear();
-            const m = today.getMonth() - birthDate.getMonth();
-            if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) { age--; }
-            return age;
-        }
-
-        dobInput.addEventListener('change', () => {
-            const age = calculateAge(dobInput.value);
-            ageInput.value = age ? age : '';
-        });
-        if(dobInput.value) { ageInput.value = calculateAge(dobInput.value); }
-
-        biodataForm.addEventListener('submit', event => {
-            event.preventDefault();
-            const data = {
-                post_applied: document.getElementById('post_applied').value, salary: document.getElementById('salary').value, contract: document.getElementById('contract').value,
-                ref_no: document.getElementById('ref_no').value, name: document.getElementById('name').value, father_name: document.getElementById('father_name').value, grandfather_name: document.getElementById('grandfather_name').value,
-                nationality: document.getElementById('nationality').value, religion: document.getElementById('religion').value, dob: formatDate(document.getElementById('dob').value), pob: document.getElementById('pob').value,
-                living_town: document.getElementById('living_town').value, marital_status: document.getElementById('marital_status').value, children: document.getElementById('children').value,
-                weight: document.getElementById('weight').value + ' KG', height: document.getElementById('height').value + ' CM', age: ageInput.value + ' YEAR', education: document.getElementById('education').value,
-                passport_no: document.getElementById('passport_no').value, issue_date: formatDate(document.getElementById('issue_date').value), expiry_date: formatDate(document.getElementById('expiry_date').value), issue_place: document.getElementById('issue_place').value,
-                experience: document.getElementById('experience').value.replace(/\n/g, '<br>'),
-                arabic_skill: document.getElementById('arabic_skill_level').value,
-                english_skill: document.getElementById('english_skill_level').value
-            };
-            for (const key in data) { if (document.getElementById(`output_${key}`)) document.getElementById(`output_${key}`).innerHTML = data[key]; }
-            
-            ['poor', 'fair', 'fluent'].forEach(level => {
-                document.getElementById(`skill_arabic_${level}`).textContent = '';
-                document.getElementById(`skill_english_${level}`).textContent = '';
+            photoFullbodyInput.addEventListener('change', event => {
+                const file = event.target.files[0];
+                if (file) {
+                    previewFullbody.src = URL.createObjectURL(file);
+                    previewFullbody.style.display = 'block';
+                }
             });
-            document.getElementById(`skill_arabic_${data.arabic_skill}`).textContent = '✔';
-            document.getElementById(`skill_english_${data.english_skill}`).textContent = '✔';
 
-            document.getElementById('output_photo_headshot').src = document.getElementById('preview_headshot').src || 'https://via.placeholder.com/150x156?text=No+Photo';
-            document.getElementById('output_photo_fullbody').src = document.getElementById('preview_fullbody').src || 'https://via.placeholder.com/336x495?text=No+Photo';
-            const logoOutput = document.getElementById('agency-logo-output');
-            if (document.getElementById('preview_logo').src && document.getElementById('preview_logo').src.startsWith('data:image')) {
-                logoOutput.src = document.getElementById('preview_logo').src;
-                logoOutput.style.display = 'block';
-            } else {
-                logoOutput.style.display = 'none';
+            // Tambah Makanan
+            addFoodBtn.addEventListener('click', () => {
+                const name = foodNameInput.value.trim();
+                const row = foodRowSelect.value;
+                const col = foodColSelect.value;
+
+                if (!name) {
+                    alert('Silakan masukkan nama makanan.');
+                    return;
+                }
+
+                // Cek duplikat posisi
+                const isDuplicate = addedFoods.some(food => food.row === row && food.col === col);
+                if (isDuplicate) {
+                    alert(`Posisi baris ${row} kolom ${col} sudah terisi.`);
+                    return;
+                }
+
+                const foodData = { id: Date.now(), name, row, col };
+                addedFoods.push(foodData);
+                renderFoodList();
+                foodNameInput.value = '';
+                foodNameInput.focus();
+            });
+            
+            // Generate Biodata
+            biodataForm.addEventListener('submit', event => {
+                event.preventDefault();
+                
+                // --- Kumpulkan semua data dari form ---
+                const data = {
+                    post_applied: document.getElementById('post_applied').value,
+                    salary: document.getElementById('salary').value,
+                    contract: document.getElementById('contract').value,
+                    photo_headshot: previewHeadshot.src,
+                    photo_fullbody: previewFullbody.src,
+                    ref_no: document.getElementById('ref_no').value,
+                    name: document.getElementById('name').value,
+                    father_name: document.getElementById('father_name').value,
+                    grandfather_name: document.getElementById('grandfather_name').value,
+                    nationality: document.getElementById('nationality').value,
+                    religion: document.getElementById('religion').value,
+                    dob: formatDate(document.getElementById('dob').value),
+                    pob: document.getElementById('pob').value,
+                    living_town: document.getElementById('living_town').value,
+                    marital_status: document.getElementById('marital_status').value,
+                    children: document.getElementById('children').value,
+                    weight: document.getElementById('weight').value + ' KG',
+                    height: document.getElementById('height').value + ' CM',
+                    age: document.getElementById('age').value + ' YEAR',
+                    education: document.getElementById('education').value,
+                    passport_no: document.getElementById('passport_no').value,
+                    issue_date: formatDate(document.getElementById('issue_date').value),
+                    expiry_date: formatDate(document.getElementById('expiry_date').value),
+                    issue_place: document.getElementById('issue_place').value,
+                    english_skill: document.getElementById('english_skill').value,
+                    arabic_skill: document.getElementById('arabic_skill').value,
+                    experience: document.getElementById('experience').value.replace(/\n/g, '<br>'),
+                };
+                
+                // --- Isi data ke template output ---
+                for (const key in data) {
+                    const element = document.getElementById(`output_${key}`);
+                    if (element) {
+                        if (element.tagName === 'IMG') {
+                            element.src = data[key];
+                        } else {
+                            element.innerHTML = data[key];
+                        }
+                    }
+                }
+                
+                // Isi skill bahasa
+                document.querySelectorAll('#english_poor, #english_fair, #english_fluent, #arabic_poor, #arabic_fair, #arabic_fluent').forEach(el => el.textContent = '');
+                document.getElementById(`english_${data.english_skill.toLowerCase()}`).textContent = '✔';
+                document.getElementById(`arabic_${data.arabic_skill.toLowerCase()}`).textContent = '✔';
+
+                // Isi tabel makanan
+                document.querySelectorAll('.output-food-table td').forEach(td => td.textContent = '');
+                addedFoods.forEach(food => {
+                    document.getElementById(`food-${food.row}-${food.col}`).textContent = food.name;
+                });
+
+                // --- Tampilkan hasil ---
+                formContainer.style.display = 'none';
+                outputContainer.style.display = 'block';
+                window.scrollTo(0, 0);
+            });
+            
+            // Tombol Edit
+            editBtn.addEventListener('click', () => {
+                outputContainer.style.display = 'none';
+                formContainer.style.display = 'block';
+            });
+            
+            // Tombol Print
+            printBtn.addEventListener('click', () => {
+                window.print();
+            });
+
+            // === Fungsi Bantuan ===
+            function renderFoodList() {
+                foodListDiv.innerHTML = '';
+                if (addedFoods.length > 0) {
+                    const title = document.createElement('strong');
+                    title.textContent = 'Daftar Makanan Ditambahkan:';
+                    foodListDiv.appendChild(title);
+                }
+                addedFoods.forEach(food => {
+                    const itemDiv = document.createElement('div');
+                    itemDiv.className = 'food-item';
+                    itemDiv.innerHTML = `
+                        <span>${food.name} (Baris: ${food.row}, Kolom: ${food.col})</span>
+                        <span class="food-item-delete" data-id="${food.id}">X</span>
+                    `;
+                    foodListDiv.appendChild(itemDiv);
+                });
             }
-            
-            const selectedLangPair = languagePairSelect.value;
-            switchLanguage(selectedLangPair);
 
-            formContainer.style.display = 'none';
-            outputContainer.style.display = 'block';
-            window.scrollTo(0, 0);
-        });
+            foodListDiv.addEventListener('click', event => {
+                if (event.target.classList.contains('food-item-delete')) {
+                    const foodId = parseInt(event.target.getAttribute('data-id'));
+                    addedFoods = addedFoods.filter(food => food.id !== foodId);
+                    renderFoodList();
+                }
+            });
 
-        function switchLanguage(langPair) {
-            const [leftLang, rightLang] = langPair.split('-');
-            const leftDict = translations[leftLang] || translations.id;
-            let rightDict;
-            
-            if (rightLang === 'ar') {
-                rightDict = translations.ar;
-            } else if (rightLang === 'en') {
-                rightDict = en_right; // Gunakan kamus khusus untuk kolom kanan Inggris
-            } else {
-                rightDict = translations.ar; // Default
+            function formatDate(dateString) {
+                if (!dateString) return '';
+                const options = { day: 'numeric', month: 'short', year: 'numeric' };
+                const date = new Date(dateString + 'T00:00:00'); // Atasi masalah timezone
+                return date.toLocaleDateString('en-GB', options).replace(/ /g, '-').toUpperCase();
             }
 
-            document.querySelectorAll('[data-key]').forEach(element => {
-                const key = element.dataset.key;
-                if (leftDict[key]) element.textContent = leftDict[key];
-            });
-            document.querySelectorAll('[data-key-rtl]').forEach(element => {
-                const key = element.dataset.keyRtl;
-                if (rightDict[key]) element.textContent = rightDict[key];
-            });
-        }
-
-        editBtn.addEventListener('click', () => {
-            outputContainer.style.display = 'none';
-            formContainer.style.display = 'block';
         });
-
-        printBtn.addEventListener('click', () => window.print());
-
-        function formatDate(dateString) {
-            if (!dateString) return '';
-            const date = new Date(dateString);
-            const userTimezoneOffset = date.getTimezoneOffset() * 60000;
-            return new Date(date.getTime() + userTimezoneOffset).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' }).replace(/ /g, '-').toUpperCase();
-        }
-    });
     </script>
 </body>
 </html>
