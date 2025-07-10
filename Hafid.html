@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Generator Biodata</title>
+    <title>Generator Biodata </title>
     <style>
         /* === GAYA UMUM & FORM === */
         :root {
@@ -13,6 +13,7 @@
             --text-color: #212529;
             --header-bg: #c00000;
             --table-header-bg: #d9e2f3;
+            --info-color: #17a2b8; /* Warna baru untuk tombol info/notepad */
         }
 
         body {
@@ -54,7 +55,8 @@
         input[type="text"],
         input[type="date"],
         input[type="number"],
-        select {
+        select,
+        textarea {
             width: 100%;
             padding: 12px;
             border: 1px solid var(--border-color);
@@ -76,20 +78,10 @@
             margin-top: 10px;
         }
 
-        .btn-primary {
-            background-color: var(--primary-color);
-            color: white;
-        }
-        
-        .btn-secondary {
-            background-color: #6c757d;
-            color: white;
-        }
-        
-        .btn-success {
-            background-color: #28a745;
-            color: white;
-        }
+        .btn-primary { background-color: var(--primary-color); color: white; }
+        .btn-secondary { background-color: #6c757d; color: white; }
+        .btn-success { background-color: #28a745; color: white; }
+        .btn-info { background-color: var(--info-color); color: white; } /* Gaya tombol baru */
 
         .photo-upload-area {
             border: 2px dashed var(--border-color);
@@ -99,10 +91,7 @@
             margin-bottom: 15px;
         }
 
-        .photo-upload-area input[type="file"] {
-            display: none;
-        }
-
+        .photo-upload-area input[type="file"] { display: none; }
         .photo-upload-area label {
             cursor: pointer;
             background-color: var(--secondary-color);
@@ -142,12 +131,7 @@
             justify-content: space-between;
             align-items: center;
         }
-        .food-item-delete {
-            color: red;
-            cursor: pointer;
-            font-weight: bold;
-            padding-left: 15px;
-        }
+        .food-item-delete { color: red; cursor: pointer; font-weight: bold; padding-left: 15px; }
 
         /* === GAYA UNTUK HASIL BIODATA (OUTPUT) === */
         #output-container {
@@ -164,11 +148,7 @@
             margin: 20px auto;
         }
 
-        #biodata-output table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-
+        #biodata-output table { width: 100%; border-collapse: collapse; }
         #biodata-output td, #biodata-output th {
             border: 1px solid black;
             padding: 4px 8px;
@@ -236,22 +216,11 @@
             align-items: center;
         }
         
-        .output-label-col {
-            font-weight: bold;
-            background-color: var(--table-header-bg);
-            width: 35%;
-        }
+        .output-label-col { font-weight: bold; background-color: var(--table-header-bg); width: 35%; }
         .output-data-col, .output-food-table { font-weight: bold; }
-        .output-arabic-col {
-            font-weight: bold;
-            text-align: right;
-            background-color: var(--table-header-bg);
-        }
+        .output-arabic-col { font-weight: bold; text-align: right; background-color: var(--table-header-bg); }
 
-        .output-food-table {
-            font-size: 10px;
-            text-align: center;
-        }
+        .output-food-table { font-size: 10px; text-align: center; }
         .output-food-table td { padding: 2px; }
         .output-food-table .shaded { background-color: var(--table-header-bg); }
         .output-experience-content {
@@ -266,23 +235,14 @@
             max-width: 850px;
             margin: 20px auto;
             display: grid;
-            grid-template-columns: 1fr 1fr;
+            grid-template-columns: 1fr 1fr 1fr; /* Diubah untuk 3 tombol */
             gap: 15px;
         }
 
         /* === GAYA CETAK A4 (SANGAT PENTING) === */
         @media print {
-            @page {
-                size: A4;
-                margin: 15mm;
-            }
-
-            body {
-                background-color: #ffffff;
-                padding: 0;
-                margin: 0;
-            }
-
+            @page { size: A4; margin: 15mm; }
+            body { background-color: #ffffff; padding: 0; margin: 0; }
             #form-container, #output-controls { display: none !important; }
             #output-container, #biodata-output {
                 display: block !important;
@@ -292,33 +252,14 @@
                 padding: 0;
                 margin: 0;
             }
-            
-            #biodata-output td, #biodata-output th {
-                font-size: 9pt;
-                padding: 2px 4px;
-            }
-            
+            #biodata-output td, #biodata-output th { font-size: 9pt; padding: 2px 4px; }
             .output-header-info h3 { font-size: 28pt; padding: 2px 8px; }
-            .output-header-photo img {
-                width: 3.5cm;
-                height: 4.0cm;
-                border-width: 1px;
-            }
+            .output-header-photo img { width: 3.5cm; height: 4.0cm; border-width: 1px; }
             .output-right-column { width: 7.5cm; }
-            .output-right-column .full-photo {
-                width: 7cm; 
-                height: 9cm;
-                border-width: 3px;
-                margin-bottom: 5px;
-            }
-            
-            .output-main-content, .output-section-title, div[style*="margin-top"] {
-                margin-top: 5px !important;
-            }
+            .output-right-column .full-photo { width: 7cm; height: 9cm; border-width: 3px; margin-bottom: 5px; }
+            .output-main-content, .output-section-title, div[style*="margin-top"] { margin-top: 5px !important; }
             .output-header { padding-bottom: 5px; }
-
             table, tr, td, th, div { page-break-inside: avoid !important; }
-
             .output-header-info h3, .output-label-col, .output-arabic-col, .output-section-title, .output-food-table .shaded {
                 -webkit-print-color-adjust: exact !important;
                 print-color-adjust: exact !important;
@@ -335,13 +276,13 @@
             <div class="form-section">
                 <h2>Data Pribadi & Pekerjaan</h2>
                 <label for="post_applied">Posisi Dilamar</label>
-                <input type="text" id="post_applied" value="HOUSEMAID ONLY" required>
+                <input type="text" id="post_applied" placeholder="Contoh: HOUSEMAID ONLY" required>
 
                 <label for="salary">Gaji Bulanan</label>
-                <input type="text" id="salary" value="130 MR" required>
+                <input type="text" id="salary" placeholder="Contoh: 130 MR" required>
 
                 <label for="contract">Periode Kontrak</label>
-                <input type="text" id="contract" value="2 YEARS ONLY" required>
+                <input type="text" id="contract" placeholder="Contoh: 2 YEARS ONLY" required>
             </div>
             
             <div class="form-section">
@@ -361,19 +302,19 @@
             <div class="form-section">
                 <h2>Detail Pelamar</h2>
                 <label for="ref_no">No. Referensi</label>
-                <input type="text" id="ref_no">
+                <input type="text" id="ref_no" placeholder="Jika ada">
                 
                 <label for="name">Nama Lengkap</label>
-                <input type="text" id="name" value="KARSIH" required>
+                <input type="text" id="name" placeholder="Contoh: SITI AMINAH" required>
                 
                 <label for="father_name">Nama Ayah</label>
-                <input type="text" id="father_name" value="WADI">
+                <input type="text" id="father_name" placeholder="Contoh: WADI">
                 
                 <label for="grandfather_name">Nama Kakek</label>
-                <input type="text" id="grandfather_name" value="DASIM">
+                <input type="text" id="grandfather_name" placeholder="Contoh: DASIM">
                 
                 <label for="nationality">Kewarganegaraan</label>
-                <input type="text" id="nationality" value="INDONESIA">
+                <input type="text" id="nationality" placeholder="Contoh: INDONESIA">
                 
                 <label for="religion">Agama</label>
                 <select id="religion">
@@ -386,13 +327,13 @@
                 </select>
 
                 <label for="dob">Tanggal Lahir</label>
-                <input type="date" id="dob" value="1980-10-02">
+                <input type="date" id="dob">
 
                 <label for="pob">Tempat Lahir</label>
-                <input type="text" id="pob" value="KARAWANG">
+                <input type="text" id="pob" placeholder="Contoh: KARAWANG">
                 
                 <label for="living_town">Kota Tinggal</label>
-                <input type="text" id="living_town" value="KARAWANG">
+                <input type="text" id="living_town" placeholder="Contoh: KARAWANG">
                 
                 <label for="marital_status">Status Pernikahan</label>
                 <select id="marital_status">
@@ -402,31 +343,31 @@
                 </select>
                 
                 <label for="children">Jumlah Anak</label>
-                <input type="number" id="children" value="2">
+                <input type="number" id="children" placeholder="Contoh: 2">
                 
                 <label for="weight">Berat Badan (KG)</label>
-                <input type="number" id="weight" value="57">
+                <input type="number" id="weight" placeholder="Contoh: 57">
                 
                 <label for="height">Tinggi Badan (CM)</label>
-                <input type="number" id="height" value="158">
+                <input type="number" id="height" placeholder="Contoh: 158">
                 
                 <label for="age">Umur</label>
-                <input type="number" id="age" value="43">
+                <input type="number" id="age" placeholder="Contoh: 43">
                 
                 <label for="education">Pendidikan Terakhir</label>
-                <input type="text" id="education">
+                <input type="text" id="education" placeholder="Contoh: SD / SMP / SMA">
             </div>
 
             <div class="form-section">
-                <h2>Data Paspor</h2>
+                <h2>Data Paspor (Opsional)</h2>
                 <label for="passport_no">Nomor Paspor</label>
-                <input type="text" id="passport_no" value="E9359220">
+                <input type="text" id="passport_no" placeholder="Contoh: E9359220">
                 <label for="issue_date">Tanggal Dikeluarkan</label>
-                <input type="date" id="issue_date" value="2025-03-04">
+                <input type="date" id="issue_date">
                 <label for="expiry_date">Tanggal Kedaluwarsa</label>
-                <input type="date" id="expiry_date" value="2030-03-04">
+                <input type="date" id="expiry_date">
                 <label for="issue_place">Tempat Dikeluarkan</label>
-                <input type="text" id="issue_place" value="BEKASI">
+                <input type="text" id="issue_place" placeholder="Contoh: BEKASI">
             </div>
 
             <div class="form-section">
@@ -434,14 +375,14 @@
                 <label>Bahasa Inggris</label>
                 <select id="english_skill">
                     <option value="Poor">Poor</option>
-                    <option value="Fair" selected>Fair</option>
+                    <option value="Fair">Fair</option>
                     <option value="Fluent">Fluent</option>
                 </select>
                 <label>Bahasa Arab</label>
                 <select id="arabic_skill">
                     <option value="Poor">Poor</option>
                     <option value="Fair">Fair</option>
-                    <option value="Fluent" selected>Fluent</option>
+                    <option value="Fluent">Fluent</option>
                 </select>
             </div>
             
@@ -451,7 +392,7 @@
                 <div class="food-input-grid">
                     <div>
                         <label for="food_name">Nama Makanan</label>
-                        <input type="text" id="food_name">
+                        <input type="text" id="food_name" placeholder="Contoh: Ruz Briyani">
                     </div>
                     <div>
                         <label for="food_row">Baris</label>
@@ -472,7 +413,7 @@
             <div class="form-section">
                 <h2>Pengalaman Kerja</h2>
                 <label for="experience">Tulis pengalaman (pisahkan dengan baris baru)</label>
-                <textarea id="experience" rows="4" style="width: 100%; font-size: 1em; padding: 10px;">- SAUDI 3 YEAR&#10;- JORDAN 3 YEAR</textarea>
+                <textarea id="experience" rows="4" style="width: 100%; font-size: 1em; padding: 10px;" placeholder="Contoh:&#10;- SAUDI 3 YEAR&#10;- JORDAN 3 YEAR"></textarea>
             </div>
 
             <button type="submit" class="btn btn-primary">LIHAT HASIL BIODATA</button>
@@ -583,6 +524,7 @@
         
         <div id="output-controls">
             <button id="print-btn" class="btn btn-success">📄 Simpan sebagai PDF</button>
+            <button id="save-txt-btn" class="btn btn-info">💾 Simpan ke Notepad (.txt)</button>
             <button id="edit-btn" class="btn btn-secondary">✏️ Edit Lagi</button>
         </div>
     </div>
@@ -596,6 +538,7 @@
             const biodataForm = document.getElementById('biodata-form');
             const editBtn = document.getElementById('edit-btn');
             const printBtn = document.getElementById('print-btn');
+            const saveTxtBtn = document.getElementById('save-txt-btn'); // Tombol baru
 
             // --- Foto ---
             const photoHeadshotInput = document.getElementById('photo_headshot');
@@ -612,7 +555,6 @@
             let addedFoods = [];
 
             // === Inisialisasi ===
-            // Isi pilihan kolom makanan 1-12
             for (let i = 1; i <= 12; i++) {
                 const option = document.createElement('option');
                 option.value = i;
@@ -621,8 +563,6 @@
             }
 
             // === Event Listener ===
-
-            // Pratinjau Foto
             photoHeadshotInput.addEventListener('change', event => {
                 const file = event.target.files[0];
                 if (file) {
@@ -638,24 +578,19 @@
                 }
             });
 
-            // Tambah Makanan
             addFoodBtn.addEventListener('click', () => {
                 const name = foodNameInput.value.trim();
                 const row = foodRowSelect.value;
                 const col = foodColSelect.value;
-
                 if (!name) {
                     alert('Silakan masukkan nama makanan.');
                     return;
                 }
-
-                // Cek duplikat posisi
                 const isDuplicate = addedFoods.some(food => food.row === row && food.col === col);
                 if (isDuplicate) {
                     alert(`Posisi baris ${row} kolom ${col} sudah terisi.`);
                     return;
                 }
-
                 const foodData = { id: Date.now(), name, row, col };
                 addedFoods.push(foodData);
                 renderFoodList();
@@ -663,12 +598,37 @@
                 foodNameInput.focus();
             });
             
-            // Generate Biodata
             biodataForm.addEventListener('submit', event => {
                 event.preventDefault();
-                
-                // --- Kumpulkan semua data dari form ---
-                const data = {
+                displayBiodata();
+            });
+            
+            editBtn.addEventListener('click', () => {
+                outputContainer.style.display = 'none';
+                formContainer.style.display = 'block';
+            });
+            
+            printBtn.addEventListener('click', () => {
+                window.print();
+            });
+
+            // FUNGSI BARU: Simpan ke .txt
+            saveTxtBtn.addEventListener('click', () => {
+                saveDataAsText();
+            });
+
+            foodListDiv.addEventListener('click', event => {
+                if (event.target.classList.contains('food-item-delete')) {
+                    const foodId = parseInt(event.target.getAttribute('data-id'));
+                    addedFoods = addedFoods.filter(food => food.id !== foodId);
+                    renderFoodList();
+                }
+            });
+
+
+            // === Fungsi Bantuan ===
+            function getFormData() {
+                return {
                     post_applied: document.getElementById('post_applied').value,
                     salary: document.getElementById('salary').value,
                     contract: document.getElementById('contract').value,
@@ -685,9 +645,9 @@
                     living_town: document.getElementById('living_town').value,
                     marital_status: document.getElementById('marital_status').value,
                     children: document.getElementById('children').value,
-                    weight: document.getElementById('weight').value + ' KG',
-                    height: document.getElementById('height').value + ' CM',
-                    age: document.getElementById('age').value + ' YEAR',
+                    weight: document.getElementById('weight').value ? document.getElementById('weight').value + ' KG' : '',
+                    height: document.getElementById('height').value ? document.getElementById('height').value + ' CM' : '',
+                    age: document.getElementById('age').value ? document.getElementById('age').value + ' YEAR' : '',
                     education: document.getElementById('education').value,
                     passport_no: document.getElementById('passport_no').value,
                     issue_date: formatDate(document.getElementById('issue_date').value),
@@ -695,50 +655,98 @@
                     issue_place: document.getElementById('issue_place').value,
                     english_skill: document.getElementById('english_skill').value,
                     arabic_skill: document.getElementById('arabic_skill').value,
-                    experience: document.getElementById('experience').value.replace(/\n/g, '<br>'),
+                    experience: document.getElementById('experience').value, // Simpan sebagai teks mentah dulu
                 };
+            }
+
+            function displayBiodata() {
+                const data = getFormData();
                 
-                // --- Isi data ke template output ---
+                // Isi data ke template output
                 for (const key in data) {
                     const element = document.getElementById(`output_${key}`);
                     if (element) {
                         if (element.tagName === 'IMG') {
                             element.src = data[key];
                         } else {
-                            element.innerHTML = data[key];
+                            // Khusus untuk experience, ganti newline dengan <br> saat ditampilkan
+                            element.innerHTML = key === 'experience' ? data[key].replace(/\n/g, '<br>') : data[key];
                         }
                     }
                 }
                 
-                // Isi skill bahasa
                 document.querySelectorAll('#english_poor, #english_fair, #english_fluent, #arabic_poor, #arabic_fair, #arabic_fluent').forEach(el => el.textContent = '');
                 document.getElementById(`english_${data.english_skill.toLowerCase()}`).textContent = '✔';
                 document.getElementById(`arabic_${data.arabic_skill.toLowerCase()}`).textContent = '✔';
 
-                // Isi tabel makanan
                 document.querySelectorAll('.output-food-table td').forEach(td => td.textContent = '');
                 addedFoods.forEach(food => {
                     document.getElementById(`food-${food.row}-${food.col}`).textContent = food.name;
                 });
 
-                // --- Tampilkan hasil ---
                 formContainer.style.display = 'none';
                 outputContainer.style.display = 'block';
                 window.scrollTo(0, 0);
-            });
-            
-            // Tombol Edit
-            editBtn.addEventListener('click', () => {
-                outputContainer.style.display = 'none';
-                formContainer.style.display = 'block';
-            });
-            
-            // Tombol Print
-            printBtn.addEventListener('click', () => {
-                window.print();
-            });
+            }
 
-            // === Fungsi Bantuan ===
+            function saveDataAsText() {
+                const data = getFormData();
+                const applicantName = data.name.trim().replace(/ /g, '_') || 'biodata';
+                
+                let textContent = `
+--- DATA PRIBADI & PEKERJAAN ---
+Posisi Dilamar: ${data.post_applied}
+Gaji Bulanan: ${data.salary}
+Periode Kontrak: ${data.contract}
+
+--- DETAIL PELAMAR ---
+No. Referensi: ${data.ref_no}
+Nama Lengkap: ${data.name}
+Nama Ayah: ${data.father_name}
+Nama Kakek: ${data.grandfather_name}
+Kewarganegaraan: ${data.nationality}
+Agama: ${data.religion}
+Tanggal Lahir: ${data.dob}
+Tempat Lahir: ${data.pob}
+Kota Tinggal: ${data.living_town}
+Status Pernikahan: ${data.marital_status}
+Jumlah Anak: ${data.children}
+Berat Badan: ${data.weight}
+Tinggi Badan: ${data.height}
+Umur: ${data.age}
+Pendidikan: ${data.education}
+
+--- DATA PASPOR ---
+Nomor Paspor: ${data.passport_no}
+Tanggal Dikeluarkan: ${data.issue_date}
+Tanggal Kedaluwarsa: ${data.expiry_date}
+Tempat Dikeluarkan: ${data.issue_place}
+
+--- KEAHLIAN ---
+Bahasa Inggris: ${data.english_skill}
+Bahasa Arab: ${data.arabic_skill}
+
+--- KEAHLIAN MEMASAK ---
+`;
+                addedFoods.forEach(food => {
+                    textContent += `- ${food.name} (Posisi: Baris ${food.row}, Kolom ${food.col})\n`;
+                });
+
+                textContent += `
+--- PENGALAMAN KERJA ---
+${data.experience}
+`;
+                
+                const blob = new Blob([textContent.trim()], { type: 'text/plain;charset=utf-8' });
+                const link = document.createElement('a');
+                link.href = URL.createObjectURL(blob);
+                link.download = `${applicantName}.txt`;
+                
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+            }
+
             function renderFoodList() {
                 foodListDiv.innerHTML = '';
                 if (addedFoods.length > 0) {
@@ -757,18 +765,10 @@
                 });
             }
 
-            foodListDiv.addEventListener('click', event => {
-                if (event.target.classList.contains('food-item-delete')) {
-                    const foodId = parseInt(event.target.getAttribute('data-id'));
-                    addedFoods = addedFoods.filter(food => food.id !== foodId);
-                    renderFoodList();
-                }
-            });
-
             function formatDate(dateString) {
                 if (!dateString) return '';
                 const options = { day: 'numeric', month: 'short', year: 'numeric' };
-                const date = new Date(dateString + 'T00:00:00'); // Atasi masalah timezone
+                const date = new Date(dateString + 'T00:00:00'); 
                 return date.toLocaleDateString('en-GB', options).replace(/ /g, '-').toUpperCase();
             }
 
