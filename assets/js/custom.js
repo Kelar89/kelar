@@ -13,6 +13,15 @@
     }
   }
   
+  document.querySelectorAll('.scroll-link').forEach(link => {
+  link.addEventListener('click', e => {
+    e.preventDefault();
+    const target = document.querySelector(link.getAttribute('href'));
+    if (target) window.scrollTo({ top: target.offsetTop - 70, behavior: 'smooth' });
+  });
+});
+
+  
   // Optional: smooth scroll for links
 document.querySelectorAll('.scroll-link').forEach(link => {
   link.addEventListener('click', function (e) {
