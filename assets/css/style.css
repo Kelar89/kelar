@@ -14,14 +14,11 @@ Template Name: Nova -> Dikustomisasi untuk Kelar.my.id v6.0
   --star-color: #FFC107;
 }
 
-.offcanvas {
-  z-index: 9999;
-}
-
-.offcanvas .nav-link {
-  padding: 10px 0;
-  font-weight: 500;
-}
+html { scroll-behavior: smooth; }
+.hero { padding: 100px 0; background: #f8f9fa; }
+.btn-outline-primary:hover { background: #fff; color: #0d6efd; }
+footer input { border-radius: 0; }
+footer .btn-primary { background: #0d6efd; }
 
 
 body {
