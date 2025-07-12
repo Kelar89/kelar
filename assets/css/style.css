@@ -14,6 +14,16 @@ Template Name: Nova -> Dikustomisasi untuk Kelar.my.id v6.0
   --star-color: #FFC107;
 }
 
+.offcanvas {
+  z-index: 9999;
+}
+
+.offcanvas .nav-link {
+  padding: 10px 0;
+  font-weight: 500;
+}
+
+
 body {
   font-family: "Inter", sans-serif;
   font-size: 1rem;
