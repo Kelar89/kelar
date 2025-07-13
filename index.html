@@ -85,185 +85,488 @@
                 <div class="hero-img mb-4" data-aos="fade-down">
                     <img class="img-main img-fluid" src="assets/images/logo-dark.svg" alt="Kelar.my.id">
                 </div>
-                <h1 class="hero-title mb-3" data-aos="fade-up" data-aos-delay="100">Drowning in Deadlines & Document Chaos?</h1>
-                <p class="hero-description" data-aos="fade-up" data-aos-delay="200">Your focus is your most valuable asset. Stop wasting it on tasks you can delegate. Consider it done.</p>
-                <div class="cta d-flex gap-3 mt-4" data-aos="fade-up" data-aos-delay="300">
-                    <a class="btn btn-light" href="#pricing">See Pricing & Plans</a>
-                    <a class="btn btn-outline-light" href="#services">Explore Our Solutions</a>
-                </div>
+                <h1 class="hero-title mb-3" data-aos="fade-up" data-aos-delay="100">
+				  Dokumen Menumpuk? Deadline Ngejar? Kelar.in Aja!
+				</h1>
+				<p class="hero-description" data-aos="fade-up" data-aos-delay="200">
+				  Fokus kamu terlalu berharga untuk dihabiskan ngurusin hal teknis. Kirim tugasnya, biar kami yang beresin. Kamu tinggal fokus ke hal besar lainnya.
+				</p>
+				<div class="cta d-flex gap-3 mt-4" data-aos="fade-up" data-aos-delay="300">
+				  <a class="btn btn-light" href="#pricing">Lihat Paket & Harga</a>
+				  <a class="btn btn-outline-light" href="#services">Lihat Layanan</a>
+				</div>
             </div>
           </div>
         </section>
         
-        <section class="section services__v3" id="services" data-aos="fade-up">
-          <div class="container">
-            <div class="row mb-5">
-              <div class="col-md-8 mx-auto text-center">
-                  <span class="subtitle text-uppercase mb-3">What We Do</span>
-                <h2 class="mb-3">Delegate The Chaos. Reclaim Your Time.</h2>
-                <p>We don't just 'do tasks'. We deliver peace of mind. Here’s how we make your problems disappear.</p>
-              </div>
-            </div>
-            <div class="row g-4">
-              <div class="col-md-6 col-lg-4"><div class="service-card featured p-4 h-100"><div><span class="icon mb-4"><i class="bi bi-file-earmark-text fs-2"></i></span><h3 class="fs-5 mb-3">From Messy Drafts to Boardroom-Ready Reports</h3><p class="mb-4">That 100-page report due tomorrow? We'll handle the formatting, layout, and citations, turning your raw text into a professional masterpiece.</p></div><a class="btn btn-sm btn-white w-100 mt-auto" href="#contact">Fix My Document</a></div></div>
-              <div class="col-md-6 col-lg-4"><div class="service-card p-4 h-100"><div><span class="icon mb-4"><i class="bi bi-file-earmark-zip fs-2"></i></span><h3 class="fs-5 mb-3">Master Your PDFs, Instantly</h3><p class="mb-4">Merge, split, compress, or edit any PDF file without the usual software nightmare. We handle the digital grunt work, you get the credit.</p></div><a class="btn btn-sm btn-outline-primary w-100 mt-auto" href="#contact">Handle My PDFs</a></div></div>
-              <div class="col-md-6 col-lg-4"><div class="service-card p-4 h-100"><div><span class="icon mb-4"><i class="bi bi-palette fs-2"></i></span><h3 class="fs-5 mb-3">Designs That Open Doors</h3><p class="mb-4">Your CV and company profile are your first handshake. We design modern, compelling documents that ensure you make a great one.</p></div><a class="btn btn-sm btn-outline-primary w-100 mt-auto" href="#contact">Upgrade My Design</a></div></div>
-              <div class="col-md-6 col-lg-4"><div class="service-card p-4 h-100"><div><span class="icon mb-4"><i class="bi bi-input-cursor-text fs-2"></i></span><h3 class="fs-5 mb-3">Effortless Data Collection</h3><p class="mb-4">Need to run a survey, register attendees, or gather feedback? We build smart, user-friendly Google Forms that get you the data you need, faster.</p></div><a class="btn btn-sm btn-outline-primary w-100 mt-auto" href="#contact">Create My Form</a></div></div>
-              <div class="col-md-6 col-lg-4"><div class="service-card featured p-4 h-100"><div><span class="icon mb-4"><i class="bi bi-google fs-2"></i></span><h3 class="fs-5 mb-3">Build Local Trust & Visibility</h3><p class="mb-4">We help your local business shine on Google Maps with authentic reviews and presence management, turning searchers into customers.</p></div><a class="btn btn-sm btn-white w-100 mt-auto" href="#contact">Boost My Business</a></div></div>
-              <div class="col-md-6 col-lg-4"><div class="service-card p-4 h-100"><div><span class="icon mb-4"><i class="bi bi-patch-question fs-2"></i></span><h3 class="fs-5 mb-3">Got a Unique Task?</h3><p class="mb-4">Have a specific, time-consuming administrative challenge? Bring it on. We specialize in creating custom solutions for your unique problems.</p></div><a class="btn btn-sm btn-outline-primary w-100 mt-auto" href="#contact">Challenge Us</a></div></div>
-            </div>
-          </div>
-        </section>
+		<!-- ✅ TRACKING ORDER BY ID (SIMPLE) -->
+		<section class="section bg-light" id="tracking" data-aos="fade-up" x-data="{kode: '', status: ''}">
+		  <div class="container text-center">
+			<h3 class="fw-bold mb-3">🔍 Cek Status Order Kamu</h3>
+			<p class="text-muted">Masukkan kode order (contoh: AB123):</p>
+			<input type="text" class="form-control w-50 mx-auto mb-3" x-model="kode" placeholder="Masukkan kode kamu">
+			<button class="btn btn-primary" @click="status = kode === 'AB123' ? 'Sedang Dikerjakan (ETA 2 jam)' : 'Kode tidak ditemukan'">Cek Status</button>
+			<p class="mt-3" x-text="status"></p>
+		  </div>
+		</section>
+		
+		
+		<section class="section services__v3" id="services" data-aos="fade-up">
+		  <div class="container">
+			<div class="row mb-5">
+			  <div class="col-md-8 mx-auto text-center">
+				<span class="subtitle text-uppercase mb-3">Apa yang Kami Kerjakan</span>
+				<h2 class="mb-3">Kamu Fokus, Kami yang Beresin</h2>
+				<p>Kami bukan sekadar bantuin tugas. Kami bantu kamu bebas dari stres teknis. Ini cara kerja kami bantu kelarin masalah kamu.</p>
+			  </div>
+			</div>
+
+			<div class="row g-4">
+
+			  <div class="col-md-6 col-lg-4">
+				<div class="service-card featured p-4 h-100">
+				  <div>
+					<span class="icon mb-4"><i class="bi bi-file-earmark-text fs-2"></i></span>
+					<h3 class="fs-5 mb-3">Rapihin Dokumen, Biar Nggak Dimaluin di Meja Meeting</h3>
+					<p class="mb-4">Laporan 100 halaman dalam semalam? Kami atur layout, margin, halaman, daftar isi, sampai rapi jali.</p>
+				  </div>
+				  <a class="btn btn-sm btn-white w-100 mt-auto" href="javascript:void(0)" onclick="kirimPesanWA('dokumen')">Rapihin Sekarang</a>
+				</div>
+			  </div>
+
+			  <div class="col-md-6 col-lg-4">
+				<div class="service-card p-4 h-100">
+				  <div>
+					<span class="icon mb-4"><i class="bi bi-file-earmark-zip fs-2"></i></span>
+					<h3 class="fs-5 mb-3">PDF Ribet? Serahkan Aja</h3>
+					<p class="mb-4">Gabung, potong, edit, atau kompres PDF tanpa ribet. Kirim file → tunggu hasil beres.</p>
+				  </div>
+				  <a class="btn btn-sm btn-outline-primary w-100 mt-auto" href="javascript:void(0)" onclick="kirimPesanWA('pdf')">Beresin PDF Saya</a>
+				</div>
+			  </div>
+
+			  <div class="col-md-6 col-lg-4">
+				<div class="service-card p-4 h-100">
+				  <div>
+					<span class="icon mb-4"><i class="bi bi-palette fs-2"></i></span>
+					<h3 class="fs-5 mb-3">CV & Profil Usaha Bikin HRD & Klien Nengok</h3>
+					<p class="mb-4">Desain CV atau profil usaha yang modern dan meyakinkan. Cocok buat cari kerja atau presentasi klien.</p>
+				  </div>
+				  <a class="btn btn-sm btn-outline-primary w-100 mt-auto" href="javascript:void(0)" onclick="kirimPesanWA('cv')">Desain Ulang Sekarang</a>
+				</div>
+			  </div>
+
+			  <div class="col-md-6 col-lg-4">
+				<div class="service-card p-4 h-100">
+				  <div>
+					<span class="icon mb-4"><i class="bi bi-input-cursor-text fs-2"></i></span>
+					<h3 class="fs-5 mb-3">Formulir Digital yang Gampang Diisi & Diatur</h3>
+					<p class="mb-4">Butuh Google Form buat pendaftaran, survei, atau feedback? Kami desain yang rapi dan otomatis ke spreadsheet.</p>
+				  </div>
+				  <a class="btn btn-sm btn-outline-primary w-100 mt-auto" href="javascript:void(0)" onclick="kirimPesanWA('form')">Buatkan Formulir</a>
+				</div>
+			  </div>
+
+			  <div class="col-md-6 col-lg-4">
+				<div class="service-card featured p-4 h-100">
+				  <div>
+					<span class="icon mb-4"><i class="bi bi-google fs-2"></i></span>
+					<h3 class="fs-5 mb-3">Bantu Bisnismu Muncul di Google Maps</h3>
+					<p class="mb-4">Mau dapet ulasan asli dan tampil profesional di pencarian lokal? Kami bantu optimasi Google Maps kamu.</p>
+				  </div>
+				  <a class="btn btn-sm btn-white w-100 mt-auto" href="javascript:void(0)" onclick="kirimPesanWA('maps')">Naikkan Visibilitas Saya</a>
+				</div>
+			  </div>
+
+			  <div class="col-md-6 col-lg-4">
+				<div class="service-card p-4 h-100">
+				  <div>
+					<span class="icon mb-4"><i class="bi bi-patch-question fs-2"></i></span>
+					<h3 class="fs-5 mb-3">Ada Tugas Unik atau Ribet? Gaskeun Aja!</h3>
+					<p class="mb-4">Tugas admin unik yang nggak bisa kamu kerjain sendiri? Kami siap bantuin dengan solusi custom.</p>
+				  </div>
+				  <a class="btn btn-sm btn-outline-primary w-100 mt-auto" href="javascript:void(0)" onclick="kirimPesanWA('custom')">Coba Bantu Saya</a>
+				</div>
+			  </div>
+
+			</div>
+		  </div>
+		</section>
 
 
-<!-- WHY US SECTION -->
-<section class="section" id="why-us">
+
+		<!-- ✅ SIMULASI FORM PILIHAN TUGAS (Wizard Interaktif - FIXED WA LINK) -->
+		<section class="section bg-white" id="form-wizard" data-aos="fade-up">
+		  <div class="container text-center" x-data="{
+			  step: 1,
+			  jenis: '',
+			  detail: '',
+			  deadline: '',
+			  result: '',
+			  waLink: ''
+			}">
+			<h3 class="fw-bold mb-3">🔧 Simulasikan Tugasmu</h3>
+
+			<template x-if="step === 1">
+			  <div>
+				<p>Pilih jenis tugas kamu:</p>
+				<button class="btn btn-outline-primary m-1" @click="jenis = 'CV'; step++">Desain CV</button>
+				<button class="btn btn-outline-primary m-1" @click="jenis = 'PDF'; step++">Edit PDF</button>
+				<button class="btn btn-outline-primary m-1" @click="jenis = 'Laporan'; step++">Rapihin Laporan</button>
+				<button class="btn btn-outline-secondary m-1" @click="jenis = 'Custom'; step++">Tugas Lainnya</button>
+			  </div>
+			</template>
+
+			<template x-if="step === 2">
+			  <div>
+				<p>Tulis detail singkat tugas:</p>
+				<textarea class="form-control mb-2" x-model="detail" placeholder="Contoh: CV 1 halaman, edit PDF 10 file..."></textarea>
+				<button class="btn btn-secondary" @click="step--">Kembali</button>
+				<button class="btn btn-primary ms-2" @click="step++">Lanjut</button>
+			  </div>
+			</template>
+
+			<template x-if="step === 3">
+			  <div>
+				<p>Kapan paling lambat kamu butuhnya?</p>
+				<input type="date" class="form-control mb-2" x-model="deadline">
+				<button class="btn btn-secondary" @click="step--">Kembali</button>
+				<button class="btn btn-success ms-2" @click="step++">Lihat Estimasi</button>
+			  </div>
+			</template>
+
+			<template x-if="step === 4">
+			  <div x-init="
+				result = `Halo, saya ingin pesan jasa VA untuk:\nJenis: ${jenis}\nDetail: ${detail}\nDeadline: ${deadline}`;
+				waLink = 'https://wa.me/6285894448143?text=' + encodeURIComponent(result);
+			  ">
+				<p class="text-start">📋 Ringkasan Tugas Kamu:</p>
+				<pre class="bg-light p-3 text-start rounded">Jenis: <span x-text="jenis"></span>
+		Detail: <span x-text="detail"></span>
+		Deadline: <span x-text="deadline"></span></pre>
+				<a class="btn btn-success mt-2" :href="waLink" target="_blank">Kirim via WhatsApp</a>
+			  </div>
+			</template>
+		  </div>
+		</section>
+
+
+
+
+
+
+ <section class="section howitworks__clean" id="how-it-works" data-aos="fade-up">
   <div class="container">
     <div class="text-center mb-5">
-      <h2 class="fw-bold">Kenapa Pilih Kelar.my.id?</h2>
-      <p class="text-muted">Bukan sekadar jasa — ini solusi digital yang bikin hidup Anda lebih ringan.</p>
+      <span class="subtitle text-uppercase mb-2">CARA KERJANYA</span>
+      <h2 class="fw-bold">3 Langkah Cepat, Tugasmu Langsung Kelar</h2>
+      <p class="text-muted">Tanpa form ribet. Tanpa kontrak. Cukup kirim tugas, tunggu hasilnya. Gitu aja.</p>
     </div>
-    <div class="row text-center">
-      <div class="col-md-6 col-lg-3 mb-4">
-        <i class="bi bi-rocket-takeoff fs-2 text-success mb-3"></i>
-        <h5>Eksekusi Super Kilat</h5>
-        <p class="text-muted">Mayoritas tugas selesai dalam 24 jam. Nggak pake drama.</p>
+
+    <div class="row g-4 text-center">
+
+      <div class="col-md-4">
+        <div class="p-3 h-100">
+          <div class="mb-3">
+            <i class="bi bi-chat-dots-fill fs-1 text-primary"></i>
+          </div>
+          <h5 class="fw-bold mb-2">Kirim Tugasmu</h5>
+          <p class="text-muted small">Kasih tahu aja singkat: Mau edit PDF? Rapihin laporan? Cukup kirim file atau chat kebutuhannya.</p>
+        </div>
       </div>
-      <div class="col-md-6 col-lg-3 mb-4">
-        <i class="bi bi-shield-lock fs-2 text-info mb-3"></i>
-        <h5>Privasi Terjaga</h5>
-        <p class="text-muted">Data Anda aman. Kami hapus file setelah tugas selesai.</p>
+
+      <div class="col-md-4">
+        <div class="p-3 h-100">
+          <div class="mb-3">
+            <i class="bi bi-clipboard-check fs-1 text-success"></i>
+          </div>
+          <h5 class="fw-bold mb-2">Dapat Estimasi Cepat</h5>
+          <p class="text-muted small">Kami balas dengan harga dan durasi kerja. Jelas dari awal, tanpa biaya tersembunyi.</p>
+        </div>
       </div>
-      <div class="col-md-6 col-lg-3 mb-4">
-        <i class="bi bi-brush fs-2 text-warning mb-3"></i>
-        <h5>Desain Estetik</h5>
-        <p class="text-muted">CV & dokumen tampil modern — cocok untuk HRD & klien.</p>
+
+      <div class="col-md-4">
+        <div class="p-3 h-100">
+          <div class="mb-3">
+            <i class="bi bi-check-circle-fill fs-1 text-dark"></i>
+          </div>
+          <h5 class="fw-bold mb-2">Tugasmu? Kelar.</h5>
+          <p class="text-muted small">Hasil dikirim tepat waktu, kualitas terjamin. Kamu bisa lanjut fokus ke hal penting lainnya.</p>
+        </div>
       </div>
-      <div class="col-md-6 col-lg-3 mb-4">
-        <i class="bi bi-emoji-smile fs-2 text-danger mb-3"></i>
-        <h5>Responsif & Ramah</h5>
-        <p class="text-muted">Selalu fast response & jelas. Serasa ngobrol sama teman.</p>
-      </div>
+
+
     </div>
   </div>
 </section>
 
-<!-- MEET YOUR ASSISTANT SECTION -->
-<section class="section bg-light py-5" id="meet">
+		<section class="section bg-light" id="before-after" data-aos="fade-up">
+		  <div class="container text-center">
+			<h3 class="fw-bold mb-4">📂 Lihat Sebelum vs Sesudah</h3>
+			<div class="row justify-content-center">
+			  <div class="col-md-5 mb-3">
+				<div class="border p-3 bg-white shadow-sm">
+				  <p class="text-muted small mb-2">Sebelum</p>
+				  <img src="assets/images/before-cv.png" alt="Before" class="img-fluid rounded">
+				</div>
+			  </div>
+			  <div class="col-md-5 mb-3">
+				<div class="border p-3 bg-white shadow-sm">
+				  <p class="text-muted small mb-2">Sesudah</p>
+				  <img src="assets/images/after-cv.png" alt="After" class="img-fluid rounded">
+				</div>
+			  </div>
+			</div>
+		  </div>
+		</section>
+
+
+
+        
+	 <section class="section pricing__modern" id="pricing" data-aos="fade-up">
+	  <div class="container">
+		<div class="row mb-5 text-center">
+		  <div class="col-lg-8 mx-auto">
+			<span class="subtitle text-uppercase mb-2">PAKET HARGA</span>
+			<h2 class="fw-bold mb-3">Waktu Kamu Terlalu Berharga Buat Diurusin Tugas Teknis</h2>
+			<p class="text-muted">Pilih paket sesuai kebutuhanmu. Bebas ribet, transparan, dan hasilnya profesional.</p>
+		  </div>
+		</div>
+
+		<div class="row g-4 justify-content-center">
+
+		  <!-- Paket Proyek -->
+		  <div class="col-md-6 col-lg-4">
+			<div class="card border-0 shadow-sm h-100">
+			  <div class="card-body p-4">
+				<h5 class="fw-bold mb-1 text-primary">📝 Paket Proyek</h5>
+				<p class="small text-muted mb-3">Cocok untuk tugas satuan seperti CV, laporan, company profile.</p>
+				<ul class="list-unstyled small mb-4">
+				  <li>✔️ Desain CV / Portofolio</li>
+				  <li>✔️ Layout Laporan Skripsi</li>
+				  <li>✔️ Profil Usaha Profesional</li>
+				  <li>✔️ Harga Tetap, Tanpa Biaya Tambahan</li>
+				</ul>
+				<div class="mb-3 fw-semibold">Mulai <strong>Rp75.000</strong></div>
+				<a href="javascript:void(0)" onclick="kirimPesanWA('dokumen')" class="btn btn-outline-primary w-100">Minta Penawaran</a>
+			  </div>
+			</div>
+		  </div>
+
+		  <!-- Paket Langganan -->
+		  <div class="col-md-6 col-lg-4">
+			<div class="card border-0 shadow-sm h-100 bg-primary text-white">
+			  <div class="card-body p-4">
+				<h5 class="fw-bold mb-1">📆 Paket Langganan</h5>
+				<p class="small mb-3">Buat kamu yang butuh bantuan rutin setiap minggu atau bulan.</p>
+				<ul class="list-unstyled small mb-4">
+				  <li>✔️ Sampai 20 Jam Kerja/Bulan</li>
+				  <li>✔️ Prioritas Antrian Tugas</li>
+				  <li>✔️ Bisa Delegasi Banyak Tugas</li>
+				  <li>✔️ Laporan Progress Mingguan</li>
+				</ul>
+				<div class="mb-3 fw-semibold">Rp350.000 / bulan</div>
+				<a href="javascript:void(0)" onclick="kirimPesanWA('langganan')" class="btn btn-light w-100">Langganan Sekarang</a>
+			  </div>
+			</div>
+		  </div>
+
+		  <!-- Paket Kilat -->
+		  <div class="col-md-6 col-lg-4">
+			<div class="card border-0 shadow-sm h-100">
+			  <div class="card-body p-4">
+				<h5 class="fw-bold mb-1 text-success">⚡ Paket Kilat</h5>
+				<p class="small text-muted mb-3">Solusi cepat tanpa ribet. Cocok untuk tugas kecil yang mendadak.</p>
+				<ul class="list-unstyled small mb-4">
+				  <li>✔️ Edit PDF Cepat</li>
+				  <li>✔️ Input Data Ringan</li>
+				  <li>✔️ Convert File Dokumen</li>
+				  <li>✔️ Hasil Kilat, Anti Delay</li>
+				</ul>
+				<div class="mb-3 fw-semibold">Mulai <strong>Rp25.000</strong></div>
+				<a href="javascript:void(0)" onclick="kirimPesanWA('custom')" class="btn btn-outline-success w-100">Pesan Sekarang</a>
+			  </div>
+			</div>
+		  </div>
+
+
+	<!-- Paket Custom -->
+<div class="col-12">
+  <div class="card border-dashed border-2 border-dark-subtle text-center shadow-none">
+    <div class="card-body p-4">
+      <h5 class="fw-bold mb-2">🎯 Punya Kebutuhan Khusus?</h5>
+      <p class="text-muted mb-3">Butuh bantuan di luar paket yang ada? Jelaskan kebutuhan kamu, kami siap bantu sesuaikan.</p>
+      <a href="javascript:void(0)" onclick="kirimPesanWA('custom')" class="btn btn-dark">Tanya Paket Custom</a>
+    </div>
+  </div>
+</div>
+
+		</div>
+	  </div>
+	</section>
+
+<section class="section" id="ask-ai" data-aos="fade-up">
+  <div class="container text-center">
+    <h3 class="fw-bold mb-3">🤖 Bingung Mulai Dari Mana?</h3>
+    <p class="text-muted mb-4">Pilih situasi kamu, biar kita bantu arahkan:</p>
+    <div class="d-flex flex-wrap justify-content-center gap-3">
+      <button class="btn btn-outline-primary" onclick="kirimPesanWA('cv')">Saya Mau Bikin CV</button>
+      <button class="btn btn-outline-primary" onclick="kirimPesanWA('pdf')">Saya Pusing Sama File PDF</button>
+      <button class="btn btn-outline-primary" onclick="kirimPesanWA('form')">Mau Buat Google Form</button>
+      <button class="btn btn-outline-dark" onclick="kirimPesanWA('custom')">Saya Gak Tahu, Butuh Diskusi</button>
+    </div>
+  </div>
+</section>
+
+        
+      <section class="section testimonials__v2" id="testimonials" data-aos="fade-up">
+  <div class="container testimonial-container">
+    <div class="row mb-5">
+      <div class="col-lg-6 mx-auto text-center">
+        <span class="subtitle text-uppercase mb-3">Apa Kata Mereka</span>
+        <h2 class="mb-3">Klien Kami Nggak Cuma Puas — Mereka Jadi Langganan</h2>
+        <p>Cerita nyata dari orang-orang sibuk yang akhirnya bisa fokus ke hal besar setelah tugas teknisnya kami kelarin.</p>
+      </div>
+    </div>
+    <div class="row g-4 justify-content-center">
+
+      <!-- Testimoni 1 -->
+      <div class="col-md-6 col-lg-4">
+        <div class="testimonial text-center rounded-4 p-4 h-100">
+          <div class="testimonial-rating mb-3">★★★★★</div>
+          <blockquote class="mb-3">
+            “Laporan 50 halaman saya berantakan banget. Dalam waktu kurang dari 24 jam, Kelar.my.id ubah jadi dokumen profesional yang rapi. Weekend saya selamat.”
+          </blockquote>
+          <div class="testimonial-author">
+            <div class="author-img mx-auto mb-3">
+              <img class="rounded-circle img-fluid" src="assets/images/avatars/avatar-1.jpg" alt="Foto Klien">
+            </div>
+            <div class="lh-base">
+              <strong class="d-block">Mark S.</strong>
+              <span>Manajer Proyek</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Testimoni 2 -->
+      <div class="col-md-6 col-lg-4">
+        <div class="testimonial text-center rounded-4 p-4 h-100">
+          <div class="testimonial-rating mb-3">★★★★★</div>
+          <blockquote class="mb-3">
+            “Saya kirim 15 file PDF terpisah buat presentasi. Dalam 1 jam udah jadi 1 file rapi. Cepat, rapi, tinggal pakai. Saya nggak nyangka bisa sepraktis itu.”
+          </blockquote>
+          <div class="testimonial-author">
+            <div class="author-img mx-auto mb-3">
+              <img class="rounded-circle img-fluid" src="assets/images/avatars/avatar-2.jpg" alt="Foto Klien">
+            </div>
+            <div class="lh-base">
+              <strong class="d-block">Sarah L.</strong>
+              <span>Eksekutif Penjualan</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Testimoni 3 -->
+      <div class="col-md-6 col-lg-4">
+        <div class="testimonial text-center rounded-4 p-4 h-100">
+          <div class="testimonial-rating mb-3">★★★★★</div>
+          <blockquote class="mb-3">
+            “CV lama saya nggak pernah ditanggapi. Setelah didesain ulang sama Kelar.my.id, saya dipanggil interview 3 kali dalam seminggu. Desainnya memang beda.”
+          </blockquote>
+          <div class="testimonial-author">
+            <div class="author-img mx-auto mb-3">
+              <img class="rounded-circle img-fluid" src="assets/images/avatars/avatar-3.jpg" alt="Foto Klien">
+            </div>
+            <div class="lh-base">
+              <strong class="d-block">David C.</strong>
+              <span>Software Engineer</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+        
+  <section class="section faq__v2" id="faq" data-aos="fade-up">
   <div class="container">
-    <div class="row align-items-center">
-      <div class="col-md-5 mb-4 mb-md-0">
-        <img src="assets/images/hero-bg-2-min.jpg" alt="Foto Anda" class="img-fluid rounded shadow">
+    <div class="row mb-4">
+      <div class="col-md-8 mx-auto text-center">
+        <span class="subtitle text-uppercase mb-3">FAQ</span>
+        <h2 class="h2 fw-bold mb-3">Pertanyaan yang Sering Ditanyakan</h2>
+        <p>Kalau masih ada yang bikin kamu ragu, cek dulu jawaban di bawah ini. Atau langsung chat aja!</p>
       </div>
-      <div class="col-md-7">
-        <h2 class="fw-bold mb-3">Kenalan Yuk 👋</h2>
-        <p>Halo! Saya <strong>[Nama Anda]</strong>, orang di balik layar <strong>Kelar.my.id</strong>. Saya bantu banyak orang — dari mahasiswa, freelancer, sampai pemilik bisnis — beresin dokumen, edit PDF, dan bikin form yang proper. Semua berawal dari keinginan sederhana: bantu orang-orang sibuk biar bisa fokus ke hal yang lebih penting.</p>
-        <p>Kirim tugasmu, biar aku yang beresin. Kamu tinggal fokus, anggap aja... Kelar.</p>
-        <a href="#contact" class="btn btn-primary mt-3">Yuk Mulai Sekarang</a>
+    </div>
+    <div class="row">
+      <div class="col-md-8 mx-auto">
+        <div class="accordion custom-accordion" id="faqAccordion">
+
+          <!-- FAQ 1 -->
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faq-1" aria-expanded="true">
+                Apakah file dan data saya aman?
+              </button>
+            </h2>
+            <div class="accordion-collapse collapse show" id="faq-1" data-bs-parent="#faqAccordion">
+              <div class="accordion-body">
+                Sangat aman. Semua file dikirim lewat jalur pribadi dan kami punya kebijakan kerahasiaan 100%. Setelah tugas selesai, file akan kami hapus permanen — kecuali kalau kamu minta disimpan.
+              </div>
+            </div>
+          </div>
+
+          <!-- FAQ 2 -->
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-2">
+                Kalau saya kurang puas dengan hasilnya gimana?
+              </button>
+            </h2>
+            <div class="accordion-collapse collapse" id="faq-2" data-bs-parent="#faqAccordion">
+              <div class="accordion-body">
+                Tenang, semua layanan berbasis proyek kami termasuk revisi wajar. Kamu bisa kasih masukan, dan kami akan revisi sampai sesuai ekspektasi.
+              </div>
+            </div>
+          </div>
+
+          <!-- FAQ 3 -->
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-3">
+                Metode pembayaran yang diterima apa saja?
+              </button>
+            </h2>
+            <div class="accordion-collapse collapse" id="faq-3" data-bs-parent="#faqAccordion">
+              <div class="accordion-body">
+                Untuk klien Indonesia bisa transfer bank (BCA, BNI, dll) atau QRIS. Untuk luar negeri kami terima PayPal. Kami kirim invoice lengkap setelah kamu setuju dengan penawaran.
+              </div>
+            </div>
+          </div>
+
+          <!-- FAQ 4 -->
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-4">
+                Biasanya butuh waktu berapa lama sampai tugas selesai?
+              </button>
+            </h2>
+            <div class="accordion-collapse collapse" id="faq-4" data-bs-parent="#faqAccordion">
+              <div class="accordion-body">
+                Tergantung jenis tugas. Tugas ringan (seperti edit PDF) bisa selesai dalam hitungan jam. Tugas besar seperti profil usaha bisa butuh 2–4 hari. Kami selalu kasih estimasi waktu yang jelas sebelum mulai.
+              </div>
+            </div>
+          </div>
+
+        </div>
       </div>
     </div>
   </div>
 </section>
 
-
-        <section class="section howitworks__v1" id="how-it-works" data-aos="fade-up">
-          <div class="container">
-            <div class="row mb-5">
-              <div class="col-md-8 text-center mx-auto">
-                  <span class="subtitle text-uppercase mb-3">How It Works</span>
-                <h2>From Chaos to Complete in 3 Simple Steps</h2>
-                <p>No complicated onboarding. No confusing contracts. Just fast, simple, and effective results.</p>
-              </div>
-            </div>
-            <div class="row g-md-5">
-              <div class="col-lg-4">
-                <div class="step-card text-center h-100 d-flex flex-column justify-content-start">
-                  <div class="step-number-wrapper mx-auto mb-4"><i class="bi bi-chat-dots-fill"></i><span>1</span></div>
-                  <div>
-                    <h3 class="fs-5 mb-3">Submit Your Task</h3>
-                    <p>Briefly tell us what's on your plate. A messy report? A PDF puzzle? Just send a quick brief.</p>
-                  </div>
-                </div>
-              </div>
-              <div class="col-lg-4">
-                <div class="step-card text-center h-100 d-flex flex-column justify-content-start">
-                  <div class="step-number-wrapper mx-auto mb-4"><i class="bi bi-card-checklist"></i><span>2</span></div>
-                  <h3 class="fs-5 mb-3">Get a Clear Quote</h3>
-                  <p>We'll instantly get back to you with a transparent price and a realistic deadline. No surprises.</p>
-                </div>
-              </div>
-              <div class="col-lg-4">
-                <div class="step-card last text-center h-100 d-flex flex-column justify-content-start">
-                  <div class="step-number-wrapper mx-auto mb-4"><i class="bi bi-check2-circle"></i><span>3</span></div>
-                  <div>
-                    <h3 class="fs-5 mb-3">Consider It Done</h3>
-                    <p>We deliver the finished work on time, to the highest standard. You get your time and focus back.</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-        
-        <section class="section pricing__v2" id="pricing" data-aos="fade-up">
-            <div class="container">
-              <div class="row mb-5">
-                <div class="col-lg-7 mx-auto text-center">
-                    <span class="subtitle text-uppercase mb-3">Pricing</span>
-                  <h2 class="mb-3">Invest in Your Focus, Not in Friction.</h2>
-                  <p>Fair pricing for invaluable peace of mind. Choose the plan that frees up your time the most.</p>
-                </div>
-              </div>
-              <div class="row justify-content-center">
-                <div class="col-lg-10">
-                  <div class="row g-4 align-items-stretch">
-                    <div class="col-lg-4"><div class="price-card p-5 h-100"><div><h3 class="fw-bold">The Deep Dive</h3><p>Perfect for specific, one-time projects with a clear scope.</p><div class="price my-4"><strong>Custom</strong><span>/project</span></div><ul class="list-unstyled d-flex flex-column gap-3">
-                            <li class="d-flex gap-2"><i class="bi bi-check-circle-fill text-primary"></i><span>Full Report Formatting</span></li>
-                            <li class="d-flex gap-2"><i class="bi bi-check-circle-fill text-primary"></i><span>CV & Portfolio Design</span></li>
-                            <li class="d-flex gap-2"><i class="bi bi-check-circle-fill text-primary"></i><span>Company Profile Creation</span></li>
-                            <li class="d-flex gap-2"><i class="bi bi-check-circle-fill text-primary"></i><span>Fixed Price, No Surprises</span></li>
-                          </ul></div><div class="mt-4"><a class="btn w-100" href="#contact">Get a Project Quote</a></div></div></div>
-                    <div class="col-lg-4"><div class="price-card popular p-5 h-100"><div><h3 class="fw-bold">The Partner Plan</h3><p>Your dedicated VA for ongoing tasks. The best value for consistent support.</p><div class="price my-4"><strong>$299</strong><span>/month</span></div><ul class="list-unstyled d-flex flex-column gap-3">
-                              <li class="d-flex gap-2"><i class="bi bi-check-circle-fill"></i><span>Up to 20 Hours of Work</span></li>
-                              <li class="d-flex gap-2"><i class="bi bi-check-circle-fill"></i><span>Priority Service & Support</span></li>
-                              <li class="d-flex gap-2"><i class="bi bi-check-circle-fill"></i><span>Flexible Task Delegation</span></li>
-                              <li class="d-flex gap-2"><i class="bi bi-check-circle-fill"></i><span>Monthly Progress Report</span></li>
-                          </ul></div><div class="mt-4"><a class="btn btn-white hover-outline w-100" href="#contact">Become a Partner</a></div></div></div>
-                    <div class="col-lg-4"><div class="price-card p-5 h-100"><div><h3 class="fw-bold">The Quick Fix</h3><p>For small, urgent jobs that need to be cleared from your to-do list, fast.</p><div class="price my-4"><strong>Starts at $15</strong><span>/task</span></div><ul class="list-unstyled d-flex flex-column gap-3">
-                            <li class="d-flex gap-2"><i class="bi bi-check-circle-fill text-primary"></i><span>Quick PDF Edits</span></li>
-                            <li class="d-flex gap-2"><i class="bi bi-check-circle-fill text-primary"></i><span>Simple Data Entry</span></li>
-                            <li class="d-flex gap-2"><i class="bi bi-check-circle-fill text-primary"></i><span>Document Conversions</span></li>
-                            <li class="d-flex gap-2"><i class="bi bi-check-circle-fill text-primary"></i><span>Fast Turnaround</span></li>
-                          </ul></div><div class="mt-4"><a class="btn w-100" href="#contact">Quote My Task</a></div></div></div>
-                  </div>
-                </div>
-              </div>
-          </div>
-        </section>
-        
-        <section class="section testimonials__v2" id="testimonials" data-aos="fade-up">
-          <div class="container testimonial-container">
-            <div class="row mb-5"><div class="col-lg-6 mx-auto text-center"><span class="subtitle text-uppercase mb-3">Don't Just Take Our Word For It</span><h2 class="mb-3">What Our Clients Are Saying</h2><p>Real stories from busy professionals who reclaimed their time and focus.</p></div></div>
-            <div class="row g-4 justify-content-center">
-                <div class="col-md-6 col-lg-4"><div class="testimonial text-center rounded-4 p-4 h-100">
-                    <div class="testimonial-rating mb-3">★★★★★</div>
-                    <blockquote class="mb-3">“My 50-page report was a disaster. Kelar.my.id turned it into a polished, professional document in under 24 hours. They literally saved my weekend. Absolute lifesavers.”</blockquote><div class="testimonial-author"><div class="author-img mx-auto mb-3"><img class="rounded-circle img-fluid" src="assets/images/avatars/avatar-1.jpg" alt="Client photo"></div><div class="lh-base"><strong class="d-block">Mark S.</strong><span>Project Manager</span></div></div></div></div>
-                <div class="col-md-6 col-lg-4"><div class="testimonial text-center rounded-4 p-4 h-100">
-                    <div class="testimonial-rating mb-3">★★★★★</div>
-                    <blockquote class="mb-3">“I sent over 15 separate PDF files for a client presentation. An hour later, I got back one single, perfectly organized PDF. I didn't know this level of efficiency was possible.”</blockquote><div class="testimonial-author"><div class="author-img mx-auto mb-3"><img class="rounded-circle img-fluid" src="assets/images/avatars/avatar-2.jpg" alt="Client photo"></div><div class="lh-base"><strong class="d-block">Sarah L.</strong><span>Sales Executive</span></div></div></div></div>
-                <div class="col-md-6 col-lg-4"><div class="testimonial text-center rounded-4 p-4 h-100">
-                    <div class="testimonial-rating mb-3">★★★★★</div>
-                    <blockquote class="mb-3">“My old CV got zero responses. After Kelar.my.id redesigned it, I landed three interviews in one week. The design made all the difference. Highly, highly recommend.”</blockquote><div class="testimonial-author"><div class="author-img mx-auto mb-3"><img class="rounded-circle img-fluid" src="assets/images/avatars/avatar-3.jpg" alt="Client photo"></div><div class="lh-base"><strong class="d-block">David C.</strong><span>Software Engineer</span></div></div></div></div>
-            </div>
-          </div>
-        </section>
-        
-        <section class="section faq__v2" id="faq" data-aos="fade-up">
-          <div class="container">
-            <div class="row mb-4"><div class="col-md-8 mx-auto text-center"><span class="subtitle text-uppercase mb-3">FAQ</span><h2 class="h2 fw-bold mb-3">Your Questions, Answered.</h2><p>Here are some common questions we get. If yours isn't here, just ask!</p></div></div>
-            <div class="row"><div class="col-md-8 mx-auto"><div class="accordion custom-accordion" id="faqAccordion"><div class="accordion-item"><h2 class="accordion-header"><button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faq-1" aria-expanded="true">How secure is my data and my documents?</button></h2><div class="accordion-collapse collapse show" id="faq-1" data-bs-parent="#faqAccordion"><div class="accordion-body">Your privacy is our top priority. We use secure channels for all file transfers and operate under a strict confidentiality policy. Your data is never shared and is permanently deleted from our systems after project completion, unless you request otherwise.</div></div></div><div class="accordion-item"><h2 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-2">What if I'm not happy with the result?</button></h2><div class="accordion-collapse collapse" id="faq-2" data-bs-parent="#faqAccordion"><div class="accordion-body">We stand by our quality. All our project-based plans include a reasonable number of revisions to ensure you're 100% satisfied. Our goal is to get it right and make sure the final product meets your expectations perfectly.</div></div></div><div class="accordion-item"><h2 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-3">How do I pay for the service?</button></h2><div class="accordion-collapse collapse" id="faq-3" data-bs-parent="#faqAccordion"><div class="accordion-body">We accept payments through secure platforms like PayPal for international clients and bank transfers for local clients. We'll provide a clear invoice and payment instructions once you approve the project quote.</div></div></div><div class="accordion-item"><h2 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-4">What's the typical turnaround time?</button></h2><div class="accordion-collapse collapse" id="faq-4" data-bs-parent="#faqAccordion"><div class="accordion-body">Turnaround time depends on the task's complexity. A simple document format might take a few hours, while a full company profile design could take a few days. We will ALWAYS give you a clear and realistic deadline before we start any work.</div></div></div></div></div></div>
-          </div>
-        </section>
         
       
       </main>
@@ -290,16 +593,28 @@
 <footer class="footer bg-light text-dark py-5 border-top">
   <div class="container">
     <div class="row g-4">
+
+      <!-- Form Kontak -->
       <div class="col-md-6">
         <h5 class="fw-bold">Tinggalkan Pesan</h5>
-        <form>
-          <div class="mb-2"><input class="form-control" type="text" placeholder="Nama Anda" required></div>
-          <div class="mb-2"><input class="form-control" type="email" placeholder="Email Anda" required></div>
-          <div class="mb-2"><input class="form-control" type="tel" placeholder="WhatsApp (Opsional)"></div>
-          <div class="mb-2"><input class="form-control" type="text" placeholder="Masalah Anda?" required></div>
-          <button type="submit" class="btn btn-primary w-100">Kirim Sekarang</button>
+        <form id="contactForm">
+          <div class="mb-2">
+            <input class="form-control" type="text" id="name" placeholder="Nama Anda" required>
+          </div>
+          <div class="mb-2">
+            <input class="form-control" type="email" id="email" placeholder="Email Anda" required>
+          </div>
+          <div class="mb-2">
+            <input class="form-control" type="tel" id="phone" placeholder="WhatsApp (Opsional)">
+          </div>
+          <div class="mb-2">
+            <input class="form-control" type="text" id="subject" placeholder="Masalah Anda?" required>
+          </div>
+          <button type="button" class="btn btn-primary w-100" onclick="submitToWhatsApp()">Kirim Sekarang</button>
         </form>
       </div>
+
+      <!-- Info Kontak -->
       <div class="col-md-6">
         <h5 class="fw-bold">Kontak & Info</h5>
         <ul class="list-unstyled small mb-3">
@@ -309,9 +624,10 @@
         </ul>
         <div>
           <a href="#" class="text-dark me-3"><i class="bi bi-instagram fs-4"></i></a>
-          <a href="#" class="text-dark"><i class="bi bi-whatsapp fs-4"></i></a>
+          <a href="https://wa.me/6285894448143" class="text-dark"><i class="bi bi-whatsapp fs-4"></i></a>
         </div>
       </div>
+
     </div>
     <div class="text-center mt-4 small text-muted">
       &copy; <script>document.write(new Date().getFullYear());</script> Kelar.my.id. Semua Hak Dilindungi.
@@ -320,11 +636,37 @@
 </footer>
 
 
-
     <button id="back-to-top"><i class="bi bi-arrow-up-short"></i></button>
     
     <script src="assets/vendors/bootstrap/bootstrap.bundle.min.js"></script>
     <script src="assets/vendors/aos/aos.js"></script>
     <script src="assets/js/custom.js"></script>
+	
+	<div id="promo-banner" class="position-fixed bottom-0 start-0 end-0 bg-warning text-dark text-center py-3 d-none" style="z-index:1050;">
+  <strong>🎉 Promo Akhir Pekan:</strong> Diskon 10–15% sampai Minggu malam! Waktu tersisa: <span id="promo-timer" class="fw-bold"></span>
+  <a href="javascript:void(0)" onclick="kirimPesanWA('promo')" class="btn btn-sm btn-dark ms-3">Klaim Sekarang</a>
+  <button class="btn-close position-absolute end-0 top-0 m-3" onclick="document.getElementById('promo-banner').remove()"></button>
+</div>
+
+	
+		<div id="promo-banner" class="position-fixed bottom-0 start-0 end-0 bg-warning text-dark text-center py-3 shadow-lg" style="z-index:1050;">
+	  <strong>🎉 Diskon Akhir Pekan:</strong> Order sebelum Minggu malam, dapet <u>diskon 20%</u> untuk semua layanan!
+	  <a href="javascript:void(0)" onclick="kirimPesanWA('promo')" class="btn btn-sm btn-dark ms-3">Klaim Sekarang</a>
+	  <button class="btn-close position-absolute end-0 top-0 m-3" onclick="document.getElementById('promo-banner').remove()"></button>
+	</div>
+
+	<div id="exit-popup" class="position-fixed top-50 start-50 translate-middle bg-white shadow-lg border rounded p-4 text-center d-none" style="z-index: 1050; max-width: 350px;">
+  <h5 class="fw-bold">😲 Eh, Mau Pergi?</h5>
+  <p class="text-muted mb-3">Mumpung di sini... Klaim diskon 10% sekarang juga!</p>
+  <a href="javascript:void(0)" onclick="kirimPesanWA('promo')" class="btn btn-success">Klaim Diskon</a><br>
+  <button class="btn btn-sm btn-link text-muted mt-2" onclick="document.getElementById('exit-popup').remove()">Nanti aja</button>
+</div>
+
+<!-- ✅ Alpine.js CDN -->
+<script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+
+
+
+
   </body>
 </html>
