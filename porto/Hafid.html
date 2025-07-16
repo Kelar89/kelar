@@ -1,0 +1,778 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generator Biodata </title>
+    <style>
+        /* === GAYA UMUM & FORM === */
+        :root {
+            --primary-color: #007bff;
+            --secondary-color: #f8f9fa;
+            --border-color: #dee2e6;
+            --text-color: #212529;
+            --header-bg: #c00000;
+            --table-header-bg: #d9e2f3;
+            --info-color: #17a2b8; /* Warna baru untuk tombol info/notepad */
+        }
+
+        body {
+            margin: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background-color: #e9ecef;
+            color: var(--text-color);
+        }
+
+        .form-wrapper {
+            max-width: 800px;
+            margin: 15px auto;
+            padding: 15px;
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        h1, h2 {
+            color: var(--primary-color);
+            border-bottom: 2px solid var(--primary-color);
+            padding-bottom: 10px;
+            text-align: center;
+        }
+        
+        h1 { font-size: 1.8em; }
+        h2 { font-size: 1.4em; margin-top: 30px; }
+
+        .form-section {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        input[type="text"],
+        input[type="date"],
+        input[type="number"],
+        select,
+        textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid var(--border-color);
+            border-radius: 5px;
+            box-sizing: border-box;
+            font-size: 1em;
+        }
+
+        .btn {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.1em;
+            font-weight: bold;
+            cursor: pointer;
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        .btn-primary { background-color: var(--primary-color); color: white; }
+        .btn-secondary { background-color: #6c757d; color: white; }
+        .btn-success { background-color: #28a745; color: white; }
+        .btn-info { background-color: var(--info-color); color: white; } /* Gaya tombol baru */
+
+        .photo-upload-area {
+            border: 2px dashed var(--border-color);
+            padding: 20px;
+            text-align: center;
+            border-radius: 5px;
+            margin-bottom: 15px;
+        }
+
+        .photo-upload-area input[type="file"] { display: none; }
+        .photo-upload-area label {
+            cursor: pointer;
+            background-color: var(--secondary-color);
+            padding: 10px 15px;
+            border-radius: 5px;
+            border: 1px solid var(--border-color);
+        }
+
+        .photo-preview {
+            max-width: 100px;
+            max-height: 100px;
+            margin-top: 10px;
+            border-radius: 5px;
+            border: 1px solid var(--border-color);
+        }
+
+        .food-input-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 10px;
+        }
+        
+        @media (min-width: 600px) {
+            .food-input-grid {
+                grid-template-columns: 2fr 1fr 1fr auto;
+                align-items: end;
+            }
+        }
+
+        #food-list { margin-top: 15px; }
+        .food-item {
+            background-color: var(--secondary-color);
+            padding: 8px 12px;
+            border-radius: 5px;
+            margin-bottom: 5px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .food-item-delete { color: red; cursor: pointer; font-weight: bold; padding-left: 15px; }
+
+        /* === GAYA UNTUK HASIL BIODATA (OUTPUT) === */
+        #output-container {
+            display: none; /* Sembunyikan secara default */
+            font-family: Arial, sans-serif;
+            background: white;
+        }
+
+        #biodata-output {
+            border: 1px solid #ccc;
+            padding: 20px;
+            width: 850px;
+            background-color: #ffffff;
+            margin: 20px auto;
+        }
+
+        #biodata-output table { width: 100%; border-collapse: collapse; }
+        #biodata-output td, #biodata-output th {
+            border: 1px solid black;
+            padding: 4px 8px;
+            font-size: 12px;
+            vertical-align: middle;
+        }
+
+        .output-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            border-bottom: 5px solid #d9d9d9;
+            padding-bottom: 10px;
+            gap: 20px;
+        }
+
+        .output-header-info { flex-grow: 1; }
+        .output-header-info h3 {
+            background-color: var(--header-bg);
+            color: white;
+            padding: 5px 10px;
+            margin: 0;
+            font-size: 36px;
+            display: inline-block;
+        }
+        .output-header-photo img {
+            width: 150px;
+            height: 156px;
+            object-fit: cover;
+            border: 2px solid #555;
+            display: block;
+        }
+
+        .output-main-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-top: 15px;
+            gap: 20px;
+        }
+
+        .output-left-column { width: 100%; }
+        .output-right-column {
+            width: 336px;
+            flex-shrink: 0;
+        }
+        .output-right-column .full-photo {
+            width: 336px;
+            height: 495px;
+            object-fit: cover;
+            border: 5px solid var(--table-header-bg);
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .output-section-title {
+            background-color: var(--table-header-bg);
+            font-weight: bold;
+            text-align: center;
+            padding: 5px;
+            border: 1px solid black;
+            margin-top: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .output-label-col { font-weight: bold; background-color: var(--table-header-bg); width: 35%; }
+        .output-data-col, .output-food-table { font-weight: bold; }
+        .output-arabic-col { font-weight: bold; text-align: right; background-color: var(--table-header-bg); }
+
+        .output-food-table { font-size: 10px; text-align: center; }
+        .output-food-table td { padding: 2px; }
+        .output-food-table .shaded { background-color: var(--table-header-bg); }
+        .output-experience-content {
+            padding: 10px 8px;
+            border: 1px solid black;
+            border-top: 0;
+            font-weight: bold;
+            line-height: 1.5;
+        }
+        
+        #output-controls {
+            max-width: 850px;
+            margin: 20px auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr; /* Diubah untuk 3 tombol */
+            gap: 15px;
+        }
+
+        /* === GAYA CETAK A4 (SANGAT PENTING) === */
+        @media print {
+            @page { size: A4; margin: 15mm; }
+            body { background-color: #ffffff; padding: 0; margin: 0; }
+            #form-container, #output-controls { display: none !important; }
+            #output-container, #biodata-output {
+                display: block !important;
+                width: 100%;
+                border: none;
+                box-shadow: none;
+                padding: 0;
+                margin: 0;
+            }
+            #biodata-output td, #biodata-output th { font-size: 9pt; padding: 2px 4px; }
+            .output-header-info h3 { font-size: 28pt; padding: 2px 8px; }
+            .output-header-photo img { width: 3.5cm; height: 4.0cm; border-width: 1px; }
+            .output-right-column { width: 7.5cm; }
+            .output-right-column .full-photo { width: 7cm; height: 9cm; border-width: 3px; margin-bottom: 5px; }
+            .output-main-content, .output-section-title, div[style*="margin-top"] { margin-top: 5px !important; }
+            .output-header { padding-bottom: 5px; }
+            table, tr, td, th, div { page-break-inside: avoid !important; }
+            .output-header-info h3, .output-label-col, .output-arabic-col, .output-section-title, .output-food-table .shaded {
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="form-container" class="form-wrapper">
+        <form id="biodata-form">
+            <h1>Generator Biodata</h1>
+
+            <div class="form-section">
+                <h2>Data Pribadi & Pekerjaan</h2>
+                <label for="post_applied">Posisi Dilamar</label>
+                <input type="text" id="post_applied" placeholder="Contoh: HOUSEMAID ONLY" required>
+
+                <label for="salary">Gaji Bulanan</label>
+                <input type="text" id="salary" placeholder="Contoh: 130 MR" required>
+
+                <label for="contract">Periode Kontrak</label>
+                <input type="text" id="contract" placeholder="Contoh: 2 YEARS ONLY" required>
+            </div>
+            
+            <div class="form-section">
+                <h2>Upload Foto</h2>
+                <div class="photo-upload-area">
+                    <label for="photo_headshot">📷 Upload Foto Wajah (Close-up)</label>
+                    <input type="file" id="photo_headshot" accept="image/*">
+                    <img id="preview_headshot" class="photo-preview" src="" alt="Pratinjau Foto Wajah" style="display:none;">
+                </div>
+                <div class="photo-upload-area">
+                    <label for="photo_fullbody">🧍‍♀️ Upload Foto Seluruh Badan</label>
+                    <input type="file" id="photo_fullbody" accept="image/*">
+                    <img id="preview_fullbody" class="photo-preview" src="" alt="Pratinjau Foto Badan" style="display:none;">
+                </div>
+            </div>
+            
+            <div class="form-section">
+                <h2>Detail Pelamar</h2>
+                <label for="ref_no">No. Referensi</label>
+                <input type="text" id="ref_no" placeholder="Jika ada">
+                
+                <label for="name">Nama Lengkap</label>
+                <input type="text" id="name" placeholder="Contoh: SITI AMINAH" required>
+                
+                <label for="father_name">Nama Ayah</label>
+                <input type="text" id="father_name" placeholder="Contoh: WADI">
+                
+                <label for="grandfather_name">Nama Kakek</label>
+                <input type="text" id="grandfather_name" placeholder="Contoh: DASIM">
+                
+                <label for="nationality">Kewarganegaraan</label>
+                <input type="text" id="nationality" placeholder="Contoh: INDONESIA">
+                
+                <label for="religion">Agama</label>
+                <select id="religion">
+                    <option>ISLAM</option>
+                    <option>KRISTEN</option>
+                    <option>KATOLIK</option>
+                    <option>HINDU</option>
+                    <option>BUDDHA</option>
+                    <option>KONGHUCU</option>
+                </select>
+
+                <label for="dob">Tanggal Lahir</label>
+                <input type="date" id="dob">
+
+                <label for="pob">Tempat Lahir</label>
+                <input type="text" id="pob" placeholder="Contoh: KARAWANG">
+                
+                <label for="living_town">Kota Tinggal</label>
+                <input type="text" id="living_town" placeholder="Contoh: KARAWANG">
+                
+                <label for="marital_status">Status Pernikahan</label>
+                <select id="marital_status">
+                    <option>MARRIED</option>
+                    <option>SINGLE</option>
+                    <option>DIVORCED</option>
+                </select>
+                
+                <label for="children">Jumlah Anak</label>
+                <input type="number" id="children" placeholder="Contoh: 2">
+                
+                <label for="weight">Berat Badan (KG)</label>
+                <input type="number" id="weight" placeholder="Contoh: 57">
+                
+                <label for="height">Tinggi Badan (CM)</label>
+                <input type="number" id="height" placeholder="Contoh: 158">
+                
+                <label for="age">Umur</label>
+                <input type="number" id="age" placeholder="Contoh: 43">
+                
+                <label for="education">Pendidikan Terakhir</label>
+                <input type="text" id="education" placeholder="Contoh: SD / SMP / SMA">
+            </div>
+
+            <div class="form-section">
+                <h2>Data Paspor (Opsional)</h2>
+                <label for="passport_no">Nomor Paspor</label>
+                <input type="text" id="passport_no" placeholder="Contoh: E9359220">
+                <label for="issue_date">Tanggal Dikeluarkan</label>
+                <input type="date" id="issue_date">
+                <label for="expiry_date">Tanggal Kedaluwarsa</label>
+                <input type="date" id="expiry_date">
+                <label for="issue_place">Tempat Dikeluarkan</label>
+                <input type="text" id="issue_place" placeholder="Contoh: BEKASI">
+            </div>
+
+            <div class="form-section">
+                <h2>Keahlian Bahasa</h2>
+                <label>Bahasa Inggris</label>
+                <select id="english_skill">
+                    <option value="Poor">Poor</option>
+                    <option value="Fair">Fair</option>
+                    <option value="Fluent">Fluent</option>
+                </select>
+                <label>Bahasa Arab</label>
+                <select id="arabic_skill">
+                    <option value="Poor">Poor</option>
+                    <option value="Fair">Fair</option>
+                    <option value="Fluent">Fluent</option>
+                </select>
+            </div>
+            
+            <div class="form-section">
+                <h2>Keahlian Memasak</h2>
+                <p>Masukkan nama makanan dan pilih posisinya di tabel.</p>
+                <div class="food-input-grid">
+                    <div>
+                        <label for="food_name">Nama Makanan</label>
+                        <input type="text" id="food_name" placeholder="Contoh: Ruz Briyani">
+                    </div>
+                    <div>
+                        <label for="food_row">Baris</label>
+                        <select id="food_row">
+                            <option value="top">Atas</option>
+                            <option value="bottom">Bawah</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="food_col">Kolom</label>
+                        <select id="food_col"></select>
+                    </div>
+                    <button type="button" id="add-food-btn" class="btn btn-secondary">+ Tambah</button>
+                </div>
+                <div id="food-list"></div>
+            </div>
+
+            <div class="form-section">
+                <h2>Pengalaman Kerja</h2>
+                <label for="experience">Tulis pengalaman (pisahkan dengan baris baru)</label>
+                <textarea id="experience" rows="4" style="width: 100%; font-size: 1em; padding: 10px;" placeholder="Contoh:&#10;- SAUDI 3 YEAR&#10;- JORDAN 3 YEAR"></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-primary">LIHAT HASIL BIODATA</button>
+        </form>
+    </div>
+
+    <div id="output-container">
+        <div id="biodata-output">
+            <div class="output-header">
+                <div class="output-header-info">
+                    <h3>INDONESIA</h3>
+                    <table>
+                        <tbody><tr>
+                            <td class="output-label-col">POST APPLIED FOR</td>
+                            <td id="output_post_applied" class="output-data-col" style="text-align: center;"></td>
+                            <td class="output-arabic-col" dir="rtl">الوظيفة</td>
+                        </tr>
+                        <tr>
+                            <td class="output-label-col">MONTHLY SALARY</td>
+                            <td id="output_salary" class="output-data-col" style="text-align: center;"></td>
+                            <td class="output-arabic-col" dir="rtl">الراتب الشهري</td>
+                        </tr>
+                        <tr>
+                            <td class="output-label-col">CONTRACT PERIOD</td>
+                            <td id="output_contract" class="output-data-col" style="text-align: center;"></td>
+                            <td class="output-arabic-col" dir="rtl">مدة العقد</td>
+                        </tr>
+                    </tbody></table>
+                </div>
+                <div class="output-header-photo">
+                    <img id="output_photo_headshot" src="" alt="Applicant Photo">
+                </div>
+            </div>
+
+            <div class="output-main-content">
+                <div class="output-left-column">
+                    <table>
+                        <tbody><tr style="background-color: #d9e2f3;">
+                            <td style="font-weight: bold;">REF. NO.</td>
+                            <td id="output_ref_no"></td>
+                            <td class="output-arabic-col" dir="rtl">رقم الطلب</td>
+                        </tr>
+                        <tr><td class="output-label-col">Name</td><td id="output_name" class="output-data-col"></td><td class="output-arabic-col" dir="rtl">الاسم</td></tr>
+                        <tr><td class="output-label-col">Father's Name</td><td id="output_father_name" class="output-data-col"></td><td class="output-arabic-col" dir="rtl">اسم الأب</td></tr>
+                        <tr><td class="output-label-col">Grandfather's Name</td><td id="output_grandfather_name" class="output-data-col"></td><td class="output-arabic-col" dir="rtl">اسم الجد</td></tr>
+                    </tbody></table>
+
+                    <div class="output-section-title"><span>Passport Details</span><span dir="rtl">بيانات جواز السفر</span></div>
+                    <table>
+                        <tbody>
+                            <tr><td class="output-label-col">Passport No</td><td id="output_passport_no" class="output-data-col"></td><td class="output-arabic-col" dir="rtl">رقم جواز السفر</td></tr>
+                            <tr><td class="output-label-col">Date Of Issue</td><td id="output_issue_date" class="output-data-col"></td><td class="output-arabic-col" dir="rtl">تاريخ الإصدار</td></tr>
+                            <tr><td class="output-label-col">Date of Expiry</td><td id="output_expiry_date" class="output-data-col"></td><td class="output-arabic-col" dir="rtl">تاريخ الإنتهاء</td></tr>
+                            <tr><td class="output-label-col">Place of Issue</td><td id="output_issue_place" class="output-data-col"></td><td class="output-arabic-col" dir="rtl">مكان الإصدار</td></tr>
+                        </tbody>
+                    </table>
+
+                    <div class="output-section-title"><span>Details of Applicant</span><span dir="rtl">بيانات صاحب الطالب</span></div>
+                    <table>
+                        <tbody>
+                            <tr><td class="output-label-col">Nationality</td><td id="output_nationality" class="output-data-col"></td><td class="output-arabic-col" dir="rtl">الجنسية</td></tr>
+                            <tr><td class="output-label-col">Religion</td><td id="output_religion" class="output-data-col"></td><td class="output-arabic-col" dir="rtl">الديانة</td></tr>
+                            <tr><td class="output-label-col">Date of Birth</td><td id="output_dob" class="output-data-col"></td><td class="output-arabic-col" dir="rtl">تاريخ الميلاد</td></tr>
+                            <tr><td class="output-label-col">Place of Birth</td><td id="output_pob" class="output-data-col"></td><td class="output-arabic-col" dir="rtl">مكان الميلاد</td></tr>
+                            <tr><td class="output-label-col">Living Town</td><td id="output_living_town" class="output-data-col"></td><td class="output-arabic-col" dir="rtl">مكان السكن</td></tr>
+                            <tr><td class="output-label-col">Marital Status</td><td id="output_marital_status" class="output-data-col"></td><td class="output-arabic-col" dir="rtl">الحالة الإجتماعية</td></tr>
+                            <tr><td class="output-label-col">No. of Children</td><td id="output_children" class="output-data-col"></td><td class="output-arabic-col" dir="rtl">عدد الأطفال</td></tr>
+                            <tr><td class="output-label-col">Weight</td><td id="output_weight" class="output-data-col"></td><td class="output-arabic-col" dir="rtl">الوزن</td></tr>
+                            <tr><td class="output-label-col">Height</td><td id="output_height" class="output-data-col"></td><td class="output-arabic-col" dir="rtl">الطول</td></tr>
+                            <tr><td class="output-label-col">Age</td><td id="output_age" class="output-data-col"></td><td class="output-arabic-col" dir="rtl">العمر</td></tr>
+                            <tr><td class="output-label-col">Educational Qualification</td><td id="output_education" class="output-data-col"></td><td class="output-arabic-col" dir="rtl">الدرجة العلمية</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="output-right-column">
+                    <img id="output_photo_fullbody" src="" alt="Applicant Full Photo" class="full-photo">
+                    <div class="output-section-title"><span>Language</span><span dir="rtl">إجادة اللغات</span></div>
+                    <table>
+                        <thead><tr style="font-weight: bold;"><th style="font-size:12px">Language</th><th style="font-size:12px">Arabic</th><th style="font-size:12px">English</th><th style="text-align: center;" dir="rtl">اللغات العربية</th></tr></thead>
+                        <tbody>
+                            <tr><td style="font-weight: bold;">Poor</td><td id="arabic_poor" style="text-align: center;"></td><td id="english_poor" style="text-align: center;"></td><td class="output-arabic-col" dir="rtl">لاشيء</td></tr>
+                            <tr><td style="font-weight: bold;">Fair</td><td id="arabic_fair" style="text-align: center;"></td><td id="english_fair" style="text-align: center;"></td><td class="output-arabic-col" dir="rtl">وسط</td></tr>
+                            <tr><td style="font-weight: bold;">Fluent</td><td id="arabic_fluent" style="text-align: center;"></td><td id="english_fluent" style="text-align: center;"></td><td class="output-arabic-col" dir="rtl">ممتاز</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            
+            <div style="margin-top: 5px;">
+                <div class="output-section-title" style="text-align: left; justify-content: flex-start;"><span>ARABIAN MEALS / FOOD WHICH I CAN COOK ARE AS BELOW :</span></div>
+                <table class="output-food-table">
+                    <tbody>
+                        <tr>
+                            <td id="food-top-1" class="shaded"></td><td id="food-top-2"></td><td id="food-top-3"></td><td id="food-top-4" class="shaded"></td><td id="food-top-5"></td><td id="food-top-6" class="shaded"></td><td id="food-top-7"></td><td id="food-top-8" class="shaded"></td><td id="food-top-9"></td><td id="food-top-10" class="shaded"></td><td id="food-top-11"></td><td id="food-top-12" class="shaded"></td>
+                        </tr>
+                        <tr>
+                            <td id="food-bottom-1" class="shaded"></td><td id="food-bottom-2"></td><td id="food-bottom-3"></td><td id="food-bottom-4" class="shaded"></td><td id="food-bottom-5"></td><td id="food-bottom-6" class="shaded"></td><td id="food-bottom-7"></td><td id="food-bottom-8" class="shaded"></td><td id="food-bottom-9"></td><td id="food-bottom-10" class="shaded"></td><td id="food-bottom-11"></td><td id="food-bottom-12" class="shaded"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div style="margin-top: 5px;">
+                <div class="output-section-title"><span>EXPERIENCE :</span><span dir="rtl">العمل السابق</span></div>
+                <div id="output_experience" class="output-experience-content"></div>
+            </div>
+        </div>
+        
+        <div id="output-controls">
+            <button id="print-btn" class="btn btn-success">📄 Simpan sebagai PDF</button>
+            <button id="save-txt-btn" class="btn btn-info">💾 Simpan ke Notepad (.txt)</button>
+            <button id="edit-btn" class="btn btn-secondary">✏️ Edit Lagi</button>
+        </div>
+    </div>
+
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // === Referensi Elemen DOM ===
+            const formContainer = document.getElementById('form-container');
+            const outputContainer = document.getElementById('output-container');
+            const biodataForm = document.getElementById('biodata-form');
+            const editBtn = document.getElementById('edit-btn');
+            const printBtn = document.getElementById('print-btn');
+            const saveTxtBtn = document.getElementById('save-txt-btn'); // Tombol baru
+
+            // --- Foto ---
+            const photoHeadshotInput = document.getElementById('photo_headshot');
+            const previewHeadshot = document.getElementById('preview_headshot');
+            const photoFullbodyInput = document.getElementById('photo_fullbody');
+            const previewFullbody = document.getElementById('preview_fullbody');
+
+            // --- Makanan ---
+            const foodNameInput = document.getElementById('food_name');
+            const foodRowSelect = document.getElementById('food_row');
+            const foodColSelect = document.getElementById('food_col');
+            const addFoodBtn = document.getElementById('add-food-btn');
+            const foodListDiv = document.getElementById('food-list');
+            let addedFoods = [];
+
+            // === Inisialisasi ===
+            for (let i = 1; i <= 12; i++) {
+                const option = document.createElement('option');
+                option.value = i;
+                option.textContent = `Kolom ${i}`;
+                foodColSelect.appendChild(option);
+            }
+
+            // === Event Listener ===
+            photoHeadshotInput.addEventListener('change', event => {
+                const file = event.target.files[0];
+                if (file) {
+                    previewHeadshot.src = URL.createObjectURL(file);
+                    previewHeadshot.style.display = 'block';
+                }
+            });
+            photoFullbodyInput.addEventListener('change', event => {
+                const file = event.target.files[0];
+                if (file) {
+                    previewFullbody.src = URL.createObjectURL(file);
+                    previewFullbody.style.display = 'block';
+                }
+            });
+
+            addFoodBtn.addEventListener('click', () => {
+                const name = foodNameInput.value.trim();
+                const row = foodRowSelect.value;
+                const col = foodColSelect.value;
+                if (!name) {
+                    alert('Silakan masukkan nama makanan.');
+                    return;
+                }
+                const isDuplicate = addedFoods.some(food => food.row === row && food.col === col);
+                if (isDuplicate) {
+                    alert(`Posisi baris ${row} kolom ${col} sudah terisi.`);
+                    return;
+                }
+                const foodData = { id: Date.now(), name, row, col };
+                addedFoods.push(foodData);
+                renderFoodList();
+                foodNameInput.value = '';
+                foodNameInput.focus();
+            });
+            
+            biodataForm.addEventListener('submit', event => {
+                event.preventDefault();
+                displayBiodata();
+            });
+            
+            editBtn.addEventListener('click', () => {
+                outputContainer.style.display = 'none';
+                formContainer.style.display = 'block';
+            });
+            
+            printBtn.addEventListener('click', () => {
+                window.print();
+            });
+
+            // FUNGSI BARU: Simpan ke .txt
+            saveTxtBtn.addEventListener('click', () => {
+                saveDataAsText();
+            });
+
+            foodListDiv.addEventListener('click', event => {
+                if (event.target.classList.contains('food-item-delete')) {
+                    const foodId = parseInt(event.target.getAttribute('data-id'));
+                    addedFoods = addedFoods.filter(food => food.id !== foodId);
+                    renderFoodList();
+                }
+            });
+
+
+            // === Fungsi Bantuan ===
+            function getFormData() {
+                return {
+                    post_applied: document.getElementById('post_applied').value,
+                    salary: document.getElementById('salary').value,
+                    contract: document.getElementById('contract').value,
+                    photo_headshot: previewHeadshot.src,
+                    photo_fullbody: previewFullbody.src,
+                    ref_no: document.getElementById('ref_no').value,
+                    name: document.getElementById('name').value,
+                    father_name: document.getElementById('father_name').value,
+                    grandfather_name: document.getElementById('grandfather_name').value,
+                    nationality: document.getElementById('nationality').value,
+                    religion: document.getElementById('religion').value,
+                    dob: formatDate(document.getElementById('dob').value),
+                    pob: document.getElementById('pob').value,
+                    living_town: document.getElementById('living_town').value,
+                    marital_status: document.getElementById('marital_status').value,
+                    children: document.getElementById('children').value,
+                    weight: document.getElementById('weight').value ? document.getElementById('weight').value + ' KG' : '',
+                    height: document.getElementById('height').value ? document.getElementById('height').value + ' CM' : '',
+                    age: document.getElementById('age').value ? document.getElementById('age').value + ' YEAR' : '',
+                    education: document.getElementById('education').value,
+                    passport_no: document.getElementById('passport_no').value,
+                    issue_date: formatDate(document.getElementById('issue_date').value),
+                    expiry_date: formatDate(document.getElementById('expiry_date').value),
+                    issue_place: document.getElementById('issue_place').value,
+                    english_skill: document.getElementById('english_skill').value,
+                    arabic_skill: document.getElementById('arabic_skill').value,
+                    experience: document.getElementById('experience').value, // Simpan sebagai teks mentah dulu
+                };
+            }
+
+            function displayBiodata() {
+                const data = getFormData();
+                
+                // Isi data ke template output
+                for (const key in data) {
+                    const element = document.getElementById(`output_${key}`);
+                    if (element) {
+                        if (element.tagName === 'IMG') {
+                            element.src = data[key];
+                        } else {
+                            // Khusus untuk experience, ganti newline dengan <br> saat ditampilkan
+                            element.innerHTML = key === 'experience' ? data[key].replace(/\n/g, '<br>') : data[key];
+                        }
+                    }
+                }
+                
+                document.querySelectorAll('#english_poor, #english_fair, #english_fluent, #arabic_poor, #arabic_fair, #arabic_fluent').forEach(el => el.textContent = '');
+                document.getElementById(`english_${data.english_skill.toLowerCase()}`).textContent = '✔';
+                document.getElementById(`arabic_${data.arabic_skill.toLowerCase()}`).textContent = '✔';
+
+                document.querySelectorAll('.output-food-table td').forEach(td => td.textContent = '');
+                addedFoods.forEach(food => {
+                    document.getElementById(`food-${food.row}-${food.col}`).textContent = food.name;
+                });
+
+                formContainer.style.display = 'none';
+                outputContainer.style.display = 'block';
+                window.scrollTo(0, 0);
+            }
+
+            function saveDataAsText() {
+                const data = getFormData();
+                const applicantName = data.name.trim().replace(/ /g, '_') || 'biodata';
+                
+                let textContent = `
+--- DATA PRIBADI & PEKERJAAN ---
+Posisi Dilamar: ${data.post_applied}
+Gaji Bulanan: ${data.salary}
+Periode Kontrak: ${data.contract}
+
+--- DETAIL PELAMAR ---
+No. Referensi: ${data.ref_no}
+Nama Lengkap: ${data.name}
+Nama Ayah: ${data.father_name}
+Nama Kakek: ${data.grandfather_name}
+Kewarganegaraan: ${data.nationality}
+Agama: ${data.religion}
+Tanggal Lahir: ${data.dob}
+Tempat Lahir: ${data.pob}
+Kota Tinggal: ${data.living_town}
+Status Pernikahan: ${data.marital_status}
+Jumlah Anak: ${data.children}
+Berat Badan: ${data.weight}
+Tinggi Badan: ${data.height}
+Umur: ${data.age}
+Pendidikan: ${data.education}
+
+--- DATA PASPOR ---
+Nomor Paspor: ${data.passport_no}
+Tanggal Dikeluarkan: ${data.issue_date}
+Tanggal Kedaluwarsa: ${data.expiry_date}
+Tempat Dikeluarkan: ${data.issue_place}
+
+--- KEAHLIAN ---
+Bahasa Inggris: ${data.english_skill}
+Bahasa Arab: ${data.arabic_skill}
+
+--- KEAHLIAN MEMASAK ---
+`;
+                addedFoods.forEach(food => {
+                    textContent += `- ${food.name} (Posisi: Baris ${food.row}, Kolom ${food.col})\n`;
+                });
+
+                textContent += `
+--- PENGALAMAN KERJA ---
+${data.experience}
+`;
+                
+                const blob = new Blob([textContent.trim()], { type: 'text/plain;charset=utf-8' });
+                const link = document.createElement('a');
+                link.href = URL.createObjectURL(blob);
+                link.download = `${applicantName}.txt`;
+                
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+            }
+
+            function renderFoodList() {
+                foodListDiv.innerHTML = '';
+                if (addedFoods.length > 0) {
+                    const title = document.createElement('strong');
+                    title.textContent = 'Daftar Makanan Ditambahkan:';
+                    foodListDiv.appendChild(title);
+                }
+                addedFoods.forEach(food => {
+                    const itemDiv = document.createElement('div');
+                    itemDiv.className = 'food-item';
+                    itemDiv.innerHTML = `
+                        <span>${food.name} (Baris: ${food.row}, Kolom: ${food.col})</span>
+                        <span class="food-item-delete" data-id="${food.id}">X</span>
+                    `;
+                    foodListDiv.appendChild(itemDiv);
+                });
+            }
+
+            function formatDate(dateString) {
+                if (!dateString) return '';
+                const options = { day: 'numeric', month: 'short', year: 'numeric' };
+                const date = new Date(dateString + 'T00:00:00'); 
+                return date.toLocaleDateString('en-GB', options).replace(/ /g, '-').toUpperCase();
+            }
+
+        });
+    </script>
+</body>
+</html>
