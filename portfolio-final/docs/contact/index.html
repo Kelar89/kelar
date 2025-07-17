@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Portfolio Lauren Tsai, seorang desainer dan developer kreatif.">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Me | Lauren Tsai</title>
+    
+    <base href="function (...args) {
+      benchmark.before();
+      let ret = callback.call(this, ...args);
+      benchmark.after();
+      return ret;
+    }/">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="css/style.css">
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"/>
+</head>
+<body>
+    <div class="social-sidebar">
+        <a href="https://wa.me/6285894448143" target="_blank"><i class="fab fa-whatsapp"></i></a>
+    </div>
+    
+    <header class="container pt-3 pb-3" id="main-header">
+  <nav class="navbar navbar-expand-lg navbar-dark">
+    <div class="container-fluid p-0">
+      <a class="navbar-brand" href="">LAUREN <span class="text-accent">TSAI.</span></a>
+
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto align-items-center">
+          <li class="nav-item">
+            <a class="nav-link" href="">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="about/">About</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="portfolio/">Portfolio</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="reviews/">Reviews</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="faqs/">FAQs</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="contact/">Contact</a>
+          </li>
+          <li class="nav-item mt-3 mt-lg-0 ms-lg-3">
+            <a href="https://wa.me/6285894448143?text=Halo%2C%20saya%20menemukan%20portfolio%20Anda%20dan%20tertarik%20untuk%20berdiskusi%20lebih%20lanjut." class="btn-accent" target="_blank">Let's Talk</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</header>
+    
+    <main>
+        <div class="container py-5">
+    <div class="text-center" style="max-width: 600px; margin: auto;">
+        <h2 class="text-accent">Let's Collaborate</h2>
+        <h1 class="display-5 fw-bold mb-4">Have A Project In Mind Or Need Guidance? Let's Connect.</h1>
+    </div>
+<p><div class="contact-form-container mt-5">
+<form id="whatsapp-form">
+<input type="hidden" id="whatsapp-number" value="6285894448143"></p>
+<p><div class="row">
+<div class="col-md-6 mb-4">
+<input type="text" id="name" class="form-control-custom" placeholder="Full Name*" required>
+</div>
+<div class="col-md-6 mb-4">
+<input type="email" id="email" class="form-control-custom" placeholder="Email*" required>
+</div>
+<div class="col-md-6 mb-4">
+<input type="tel" id="phone" class="form-control-custom" placeholder="Phone">
+</div>
+<div class="col-md-6 mb-4">
+<input type="text" id="subject" class="form-control-custom" placeholder="Subject">
+</div>
+<div class="col-12 mb-4">
+<textarea id="message" class="form-control-custom" rows="6" placeholder="Message"></textarea>
+</div>
+<div class="col-12 text-center">
+<button type="submit" class="btn-accent">Send via WhatsApp →</button>
+</div>
+</div>
+</form>
+</div></p>
+</div>
+<script>
+document.getElementById('whatsapp-form').addEventListener('submit', function(event) {
+    event.preventDefault(); 
+
+    const phoneNumber = document.getElementById('whatsapp-number').value;
+
+    const name = document.getElementById('name').value;
+    const email = document.getElementById('email').value;
+    const phone = document.getElementById('phone').value;
+    const subject = document.getElementById('subject').value;
+    const message = document.getElementById('message').value;
+
+    // --- PERUBAHAN DIMULAI DI SINI ---
+
+    // 1. Kata-kata pembuka yang lebih profesional
+    const intro = `Halo, saya tertarik untuk berdiskusi lebih lanjut.`;
+
+    // 2. Susun detail kontak dengan format yang lebih rapi
+    const details = [
+        `*Nama:* ${name}`,
+        `*Email:* ${email}`,
+        `*Telepon:* ${phone || '-'}`, // Memberi tanda '-' jika kolom telepon kosong
+        `*Subjek:* ${subject || '-'}`  // Memberi tanda '-' jika subjek kosong
+    ].join('\n');
+
+    // 3. Gabungkan semua bagian menjadi pesan final
+    const finalMessage = 
+`${intro}
+
+Berikut adalah detail saya:
+-----------------------------------
+${details}
+-----------------------------------
+
+*Pesan:*
+${message}
+`;
+
+    // --- PERUBAHAN SELESAI DI SINI ---
+
+    const encodedMessage = encodeURIComponent(finalMessage);
+    const whatsappURL = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
+
+    window.open(whatsappURL, '_blank');
+});
+</script>
+    </main>
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    
+    
+</body>
+</html>

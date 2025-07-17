@@ -1,0 +1,544 @@
+/* ===================================================================
+   1. General & Root Variables
+=================================================================== */
+:root {
+    --bg-color: #100f14;
+    --primary-text-color: #ffffff;
+    --secondary-text-color: #adb5bd;
+    --accent-color: #10B981;
+    --card-bg-color: rgba(255, 255, 255, 0.05);
+}
+
+body {
+    background-color: var(--bg-color);
+    background-image: radial-gradient(circle at top left, rgba(20, 184, 131, 0.15), transparent 35%), 
+                      radial-gradient(circle at bottom right, rgba(88, 28, 135, 0.15), transparent 40%);
+    background-attachment: fixed;
+    color: var(--primary-text-color);
+    font-family: 'Poppins', sans-serif;
+}
+
+main {
+    padding-left: 100px;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-weight: 600;
+}
+
+.text-accent {
+    color: var(--accent-color) !important;
+}
+
+.text-secondary {
+    color: var(--secondary-text-color) !important;
+}
+
+.btn-accent {
+    background-color: transparent;
+    border: 1px solid var(--accent-color);
+    color: var(--accent-color);
+    padding: 10px 25px;
+    border-radius: 50px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.btn-accent:hover {
+    background-color: var(--accent-color);
+    color: var(--primary-text-color);
+}
+
+/* ===================================================================
+   2. Header & Navigation
+=================================================================== */
+#main-header {
+    position: relative;
+    z-index: 1000;
+    background-color: var(--bg-color);
+    padding-left: 100px;
+}
+
+.navbar-brand {
+    font-weight: 700;
+    font-size: 1.5rem;
+    color: var(--primary-text-color);
+    text-decoration: none;
+}
+
+.nav-link {
+    color: var(--secondary-text-color);
+    transition: color 0.3s ease;
+}
+
+.nav-link:hover {
+    color: var(--accent-color);
+}
+
+/* ===================================================================
+   3. Social Media Sidebar
+=================================================================== */
+.social-sidebar {
+    position: fixed;
+    top: 50%;
+    left: 40px;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+    z-index: 100;
+}
+
+.social-sidebar a {
+    color: var(--secondary-text-color);
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+.social-sidebar a:hover {
+    color: var(--accent-color);
+    transform: scale(1.2);
+}
+
+/* ===================================================================
+   4. Hero Section (Halaman Utama)
+=================================================================== */
+.hero-image-container {
+    position: relative;
+    display: inline-block;
+}
+
+.hero-image {
+    border-radius: 50%;
+    max-width: 350px;
+    padding: 10px;
+}
+
+.hero-image-container::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    border: 4px dashed var(--accent-color);
+    animation: rotate 30s linear infinite;
+}
+
+@keyframes rotate {
+    from { transform: translate(-50%, -50%) rotate(0deg); }
+    to { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+/* ===================================================================
+   5. Page: About Me (Tabs)
+=================================================================== */
+.card-custom {
+    background-color: var(--card-bg-color);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+}
+
+.tab-container {
+  display: flex;
+}
+
+.tab-sidebar {
+  flex: 0 0 25%;
+  max-width: 25%;
+  padding-right: 15px;
+}
+
+.tab-main-content {
+  flex: 0 0 75%;
+  max-width: 75%;
+  border-left: 1px solid rgba(255, 255, 255, 0.1);
+  padding-left: 30px;
+}
+
+.tab-button {
+    background-color: transparent;
+    border: 1px solid var(--secondary-text-color);
+    color: var(--secondary-text-color);
+    text-align: left;
+    padding: 15px 20px;
+    margin-bottom: 10px;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    font-weight: 600;
+}
+
+.tab-button:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+    color: var(--primary-text-color);
+    border-color: var(--primary-text-color);
+}
+
+.tab-button.active {
+    background-color: var(--accent-color);
+    color: var(--primary-text-color);
+    border-color: var(--accent-color);
+}
+
+.tab-content {
+    display: none;
+    animation: fadeIn 0.5s;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.tab-main-content .content-item {
+    margin-bottom: 2rem;
+}
+
+.tab-main-content .content-item .item-title {
+    color: var(--accent-color);
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+}
+
+.tab-main-content .content-item .item-meta {
+    color: var(--primary-text-color);
+    font-size: 0.9rem;
+    font-weight: 400;
+    margin-bottom: 0.5rem;
+    opacity: 0.9;
+}
+
+.tab-main-content .content-item .item-description {
+    color: var(--secondary-text-color);
+    font-size: 0.95rem;
+}
+
+
+/* ===================================================================
+   6. Page: Portfolio
+=================================================================== */
+.portfolio-filters {
+    list-style: none;
+    padding: 0;
+    margin: 0 auto 3rem auto;
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    position: relative;
+    z-index: 10;
+}
+
+.portfolio-filters li {
+    color: var(--secondary-text-color);
+    padding: 8px 20px;
+    font-weight: 600;
+    border: 1px solid transparent;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.portfolio-filters li:hover {
+    color: var(--primary-text-color);
+}
+
+.portfolio-filters li.active {
+    background-color: var(--accent-color);
+    color: var(--primary-text-color);
+    border-color: var(--accent-color);
+}
+
+.masonry-grid {
+    column-count: 3;
+    column-gap: 1.5rem;
+}
+
+.portfolio-item {
+    position: relative;
+    overflow: hidden;
+    border-radius: 10px;
+    display: block;
+    margin-bottom: 1.5rem;
+    transition: transform 0.4s ease, opacity 0.4s ease;
+}
+
+.portfolio-item img {
+    width: 100%;
+    transition: transform 0.4s ease;
+}
+
+.portfolio-item:hover img {
+    transform: scale(1.1);
+}
+
+.portfolio-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to top, rgba(0,0,0,0.9), transparent 60%);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 25px;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+}
+
+.portfolio-item:hover .portfolio-overlay {
+    opacity: 1;
+}
+
+.portfolio-title {
+    font-size: 1.2rem;
+    color: var(--primary-text-color);
+    transform: translateY(15px);
+    transition: transform 0.4s ease;
+}
+
+.portfolio-category {
+    font-size: 0.9rem;
+    color: var(--accent-color);
+    transform: translateY(15px);
+    transition: transform 0.4s ease;
+    transition-delay: 0.05s;
+}
+
+.portfolio-item:hover .portfolio-title,
+.portfolio-item:hover .portfolio-category {
+    transform: translateY(0);
+}
+
+.portfolio-item.hidden {
+    transform: scale(0.9);
+    opacity: 0;
+    pointer-events: none;
+    width: 0;
+    height: 0;
+    padding: 0;
+    margin: 0;
+    overflow: hidden;
+}
+
+/* ===================================================================
+   7. Page: Contact Form & Portfolio Detail
+=================================================================== */
+.contact-form-container {
+    max-width: 800px;
+    margin: auto;
+}
+
+.form-control-custom {
+    width: 100%;
+    padding: 15px 20px;
+    background-color: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    color: var(--primary-text-color);
+    transition: border-color 0.3s ease;
+}
+
+.form-control-custom::placeholder {
+    color: var(--secondary-text-color);
+}
+
+.form-control-custom:focus {
+    outline: none;
+    border-color: var(--accent-color);
+    background-color: rgba(255, 255, 255, 0.07);
+}
+
+.portfolio-detail-card {
+    background-color: var(--card-bg-color);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+}
+
+.portfolio-detail-card strong {
+    color: var(--primary-text-color);
+    font-weight: 600;
+}
+
+.portfolio-detail-card p {
+    color: var(--secondary-text-color);
+    margin-bottom: 0;
+}
+
+.project-description {
+    line-height: 1.8;
+    font-size: 1.1rem;
+}
+
+/* ===================================================================
+   8. Page: Reviews Slider
+=================================================================== */
+.review-slider {
+    padding-bottom: 50px;
+}
+
+.review-card {
+    background-color: var(--card-bg-color);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 30px;
+    border-radius: 15px;
+    min-height: 280px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.review-quote {
+    font-size: 1.2rem;
+    font-style: italic;
+    margin-bottom: 2rem;
+}
+
+.review-author-info {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.review-author-info img {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+}
+
+.author-name {
+    margin-bottom: 0;
+    color: var(--primary-text-color);
+    font-size: 1.1rem;
+}
+
+.author-location {
+    margin-bottom: 0;
+    color: var(--secondary-text-color);
+    font-size: 0.9rem;
+}
+
+.swiper-pagination-bullet {
+    background: var(--secondary-text-color);
+}
+
+.swiper-pagination-bullet-active {
+    background: var(--accent-color);
+}
+
+/* ===================================================================
+   9. Page: FAQs (Accordion)
+=================================================================== */
+.accordion-container {
+    max-width: 800px;
+    margin: auto;
+}
+
+.accordion-item {
+    background-color: var(--card-bg-color);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    margin-bottom: 1rem;
+    border-radius: 10px !important;
+}
+
+.accordion-button {
+    background-color: transparent;
+    color: var(--primary-text-color);
+    font-weight: 600;
+    border-radius: 10px;
+}
+
+.accordion-button:not(.collapsed) {
+    background-color: rgba(16, 185, 129, 0.1);
+    color: var(--accent-color);
+    box-shadow: none;
+}
+
+.accordion-button:focus {
+    box-shadow: none;
+    border-color: transparent;
+}
+
+.accordion-button::after {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23ffffff'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e");
+}
+
+.accordion-body {
+    color: var(--secondary-text-color);
+}
+
+/* ===================================================================
+   10. Aturan Responsif untuk Mobile
+=================================================================== */
+
+/* Untuk Tablet & HP (Layar lebih kecil dari 992px) */
+@media (max-width: 991px) {
+    main {
+        padding-left: 0;
+    }
+    #main-header {
+        padding-left: 0;
+    }
+
+    .navbar-nav {
+        padding-top: 1rem;
+        background-color: var(--card-bg-color);
+        border-radius: 10px;
+        margin-top: 1rem;
+    }
+    .navbar-nav .nav-item {
+        text-align: center;
+        margin-bottom: 0.5rem;
+    }
+
+    .social-sidebar {
+        display: none;
+    }
+
+    .masonry-grid {
+        column-count: 2;
+    }
+    
+    .hero-section-text {
+        text-align: center;
+        margin-top: 2rem;
+    }
+}
+
+/* Hanya untuk HP (Layar lebih kecil dari 768px) */
+@media (max-width: 767px) {
+    .masonry-grid {
+        column-count: 1;
+    }
+
+    .tab-container {
+        flex-direction: column;
+    }
+
+    .tab-sidebar,
+    .tab-main-content {
+        max-width: 100%;
+        flex: 0 0 100%;
+    }
+
+    .tab-main-content {
+        border-left: none;
+        padding-left: 0;
+        margin-top: 2rem;
+    }
+    
+    .hero-image {
+        max-width: 250px;
+    }
+    
+    .display-3.fw-bold {
+        font-size: 2.5rem;
+    }
+}
