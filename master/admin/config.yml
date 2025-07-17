@@ -1,0 +1,37 @@
+# Backend untuk menghubungkan ke GitHub
+backend:
+  name: github
+  repo: https://Kelar89.github.io/porto/ # <-- GANTI INI
+  branch: main # Branch utama Anda
+
+# Lokasi penyimpanan gambar yang di-upload melalui CMS
+media_folder: "img/uploads"
+public_folder: "/img/uploads"
+
+# "Collections" adalah kumpulan data yang bisa diedit
+collections:
+  - name: "pages"
+    label: "Pengaturan Halaman & Data"
+    files:
+      - file: "_data/site.json"
+        label: "Data Utama Website"
+        name: "main_data"
+        fields:
+          - { label: "Judul Website", name: "title", widget: "string" }
+          - { label: "Nama Anda", name: "author", widget: "string" }
+          - label: "Skills"
+            name: "skills"
+            widget: "list"
+            fields:
+              - { label: "Nama Skill", name: "name", widget: "string" }
+              - { label: "Deskripsi", name: "description", widget: "text" }
+          - label: "Experience"
+            name: "experience"
+            widget: "list"
+            fields:
+              - { label: "Posisi", name: "role", widget: "string" }
+              - { label: "Perusahaan", name: "company", widget: "string" }
+              - { label: "Periode", name: "period", widget: "string" }
+              - { label: "Deskripsi", name: "description", widget: "text" }
+          # Anda bisa menambahkan koleksi lain (portfolio, reviews, faqs) di sini
+          # dengan format yang sama seperti "skills" dan "experience".
